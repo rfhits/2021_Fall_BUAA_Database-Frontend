@@ -69,7 +69,7 @@ export default {
 
     handleSelect(row) {
       let selectForm = {
-        "userID": this.$store.user.userID,
+        "userID": this.$store.state.user.userID,
         "courseID": row.courseID,
       }
       request.post("/manage/select-course/select/", selectForm).then(res=>{
