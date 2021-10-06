@@ -103,11 +103,11 @@
         <a-result
             status="success"
             title="注册成功~"
-            sub-title="欢迎加入FigureHub!"
+            sub-title="欢迎新同学！"
         >
           <template #extra>
             <a-button key="console" type="primary" @click="goToLogin">
-              返回
+              马上登陆
             </a-button>
           </template>
         </a-result>

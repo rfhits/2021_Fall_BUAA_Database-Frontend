@@ -64,9 +64,8 @@
                         <br>
                         <el-link icon="el-icon-switch-button" @click="logout()">logout</el-link>
                       </template>
-                      <a-avatar :size="40">
-                        <template #icon><UserOutlined /></template>
-                      </a-avatar>
+                      <a-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+<!--                      <a-avatar src="../static/picture/default_avatar.jpg" />-->
                     </a-popover>
                 </div>
 
