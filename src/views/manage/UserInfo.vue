@@ -85,7 +85,6 @@ export default {
       rules: {
         pass: [{ validator: validatePass, trigger: 'blur' }],
         checkPass: [{ validator: validatePass2, trigger: 'blur' }],
-        age: [{ validator: checkAge, trigger: 'blur' }],
       },
     }
   },
@@ -96,7 +95,7 @@ export default {
         if (valid) {
           request.post("/change_password/", {
             "user": {
-              "userID": this.$store.state.user.userID,
+              "userID": _this.$store.state.user.userID,
               "password": _this.ruleForm.pass,
             }
           }).then((res) => {
