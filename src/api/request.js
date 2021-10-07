@@ -12,7 +12,7 @@ request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
 
     // config.headers['token'] = user.token;  // 设置请求头
-    config.headers['token'] = window.sessionStorage.getItem("token");
+    config.headers['token'] = window.localStorage.getItem("token");
     return config
 }, error => {
     return Promise.reject(error)
@@ -23,7 +23,7 @@ request.interceptors.request.use(config => {
 request.interceptors.response.use(
     response => {
         let res = response.data;
-        window.localStorage.setItem('token', res.token);
+        // window.localStorage.setItem('token', res.token);
         // 如果是返回的文件
         if (response.config.responseType === 'blob') {
             return res

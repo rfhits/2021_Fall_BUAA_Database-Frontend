@@ -47,10 +47,8 @@ export default {
       request.post("/login/", {
         "user": this.form
       }).then( res=> {
-        console.log(res)
         if (res.status === 0) {
-          // TODO
-          window.sessionStorage.setItem("token", res.data.token)
+          window.localStorage.setItem("token", res.data.token)
           this.$store.commit("login", res.data)
           this.$router.push("/manage")
         } else {

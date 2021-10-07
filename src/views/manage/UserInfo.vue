@@ -100,7 +100,7 @@ export default {
             }
           }).then((res) => {
             if (res.status === 0) {
-             this.$messsage.success("修改成功❤")
+             this.$message.success("修改成功❤")
             } else {
               this.$message.error(res.statusInfo.message);
             }
