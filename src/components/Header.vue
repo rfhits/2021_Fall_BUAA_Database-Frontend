@@ -172,6 +172,7 @@ export default {
         logout() {
               this.$store.commit('logout');
               this.$router.push('/login');
+              window.sessionStorage.remove('token');
               this.$message.success("退出成功");
         },
         user() {
