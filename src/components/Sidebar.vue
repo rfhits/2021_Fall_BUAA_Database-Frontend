@@ -14,6 +14,10 @@
         <i class="el-icon-menu" ></i>
           <span>已选课程</span>
       </el-menu-item>
+      <el-menu-item index="/manage/user-info">
+        <i class="el-icon-user-solid" ></i>
+        <span>个人信息</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

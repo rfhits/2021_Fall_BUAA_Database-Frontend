@@ -6,6 +6,7 @@ import Manage from "../views/Manage";
 import Sidebar from "../components/Sidebar";
 import SelectCourse from "../views/manage/SelectCourse";
 import QueryCourse from "../views/manage/QueryCourse";
+import UserInfo from "../views/manage/UserInfo";
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
         path: '/manage/query-course',
         name: 'QueryCourse',
         component: QueryCourse
+      },
+      {
+        path: '/manage/user-info',
+        name: 'UserInfo',
+        component: UserInfo
       }
     ]
   },

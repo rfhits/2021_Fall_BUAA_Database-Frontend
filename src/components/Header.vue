@@ -60,9 +60,11 @@
                 <div v-if=this.$store.state.loggedIn>
                     <a-popover>
                       <template #content>
-                        <el-link icon="el-icon-s-home" @click="goToPage('/home')">Home</el-link>
+                        <el-link icon="el-icon-s-home" @click="goToPage('/home')">首页</el-link>
                         <br>
-                        <el-link icon="el-icon-switch-button" @click="logout()">logout</el-link>
+                        <el-link icon="el-icon-switch-button" @click="logout()">退出</el-link>
+                        <br>
+                        <el-link icon="el-icon-edit-outline" @click="goToPage('/manage/user-info')">修改信息</el-link>
                       </template>
                       <a-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
 <!--                      <a-avatar src="../static/picture/default_avatar.jpg" />-->
@@ -176,6 +178,10 @@ export default {
             this.$router.push('/user/' + this.$store.state.user.userID);
             this.visible = false;
         },
+        editUserInfo() {
+            
+
+        }, 
         goToPage(link) {
           this.$router.push(link)
         },
