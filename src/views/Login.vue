@@ -44,20 +44,25 @@ export default {
   },
   methods: {
     login() {
-      request.post("/login/", {
-        "user": this.form
-      }).then( res=> {
-        if (res.status === 0) {
-          window.localStorage.setItem("token", res.data.token)
-          this.$store.commit("login", res.data)
-          this.$router.push("/manage")
-        } else {
-          console.log(res.status)
-          this.$message.error(res.statusInfo.message)
-        }
-      }).catch((err)=> { // cant post
-        console.log(err)
-      })
+      let isValidAccount = this.form.password.length >= 8 && this.form.userID !== ''
+      if (isValidAccount) {
+        request.post("/login/", {
+          "user": this.form
+        }).then( res=> {
+          if (res.status === 0) {
+            window.localStorage.setItem("token", res.data.token)
+            this.$store.commit("login", res.data)
+            this.$router.push("/manage")
+          } else {
+            console.log(res.status)
+            this.$message.error(res.statusInfo.message)
+          }
+        }).catch((err)=> { // cant post
+          console.log(err)
+        })
+      } else {
+        this.$message.error("不合法的用户名或密码")
+      }
     }
   }
 }

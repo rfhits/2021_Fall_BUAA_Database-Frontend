@@ -9,6 +9,13 @@
         class="demo-ruleForm"
 
     >
+      <el-form-item label="旧密码" prop="originPass">
+        <el-input
+            v-model="ruleForm.originPass"
+            type="password"
+            autocomplete="off"
+        ></el-input>
+      </el-form-item>
       <el-form-item label="新密码" prop="pass">
         <el-input
             v-model="ruleForm.pass"
@@ -16,7 +23,7 @@
             autocomplete="off"
         ></el-input>
       </el-form-item>
-      <el-form-item label="再输一次" prop="checkPass">
+      <el-form-item label="确认密码" prop="checkPass">
         <el-input
             v-model="ruleForm.checkPass"
             type="password"
@@ -39,22 +46,6 @@ import request from "../../api/request";
 export default {
   name: "UserInfo",
   data() {
-    const checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('Please input the age'))
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error('Please input digits'))
-        } else {
-          if (value < 18) {
-            callback(new Error('Age must be greater than 18'))
-          } else {
-            callback()
-          }
-        }
-      }, 1000)
-    };
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
@@ -69,20 +60,22 @@ export default {
     };
     const validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Please input the password again'))
+        callback(new Error('请再次输入密码'))
       } else if (value !== this.ruleForm.pass) {
-        callback(new Error("Two inputs don't match!"))
+        callback(new Error("两次输入密码不一致"))
       } else {
         callback()
       }
     }
     return {
       ruleForm: {
+        originPass: '',
         pass: '',
         checkPass: '',
         age: '',
       },
       rules: {
+        originPass: [{ validator: validatePass, trigger: 'blur' }],
         pass: [{ validator: validatePass, trigger: 'blur' }],
         checkPass: [{ validator: validatePass2, trigger: 'blur' }],
       },
@@ -96,6 +89,7 @@ export default {
           request.post("/change_password/", {
             "user": {
               "userID": _this.$store.state.user.userID,
+              "originPassword": _this.ruleForm.originPass,
               "password": _this.ruleForm.pass,
             }
           }).then((res) => {
