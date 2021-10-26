@@ -44,7 +44,7 @@
 import request from "../../api/request";
 
 export default {
-  name: "UserInfo",
+  name: "Edit",
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -88,7 +88,7 @@ export default {
         if (valid) {
           request.post("/change_password/", {
             "user": {
-              "userID": _this.$store.state.user.userID,
+              "userID": _this.$store.state.user.username,
               "originPassword": _this.ruleForm.originPass,
               "password": _this.ruleForm.pass,
             }

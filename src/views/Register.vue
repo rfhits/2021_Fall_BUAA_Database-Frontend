@@ -7,6 +7,7 @@
       <div class="steps">
         <a-steps :current="currentStep" align-center>
           <a-step title="账号设置"></a-step>
+          <a-step title="头像昵称"></a-step>
           <a-step title="完成"></a-step>
         </a-steps>
       </div>
@@ -20,8 +21,8 @@
         >
 <!--          current at 0-->
           <div v-if="currentStep === 0">
-            <el-form-item label="用户ID" prop="userID">
-              <el-input v-model="registerForm.userID" autocomplete="off"/>
+            <el-form-item label="用户名" prop="username">
+              <el-input v-model="registerForm.username" autocomplete="off"/>
             </el-form-item>
             <el-form-item label="密码" prop="pass">
               <el-input v-model="registerForm.pass" type="password" autocomplete="off"/>
@@ -30,28 +31,15 @@
               <el-input v-model="registerForm.checkPass" type="password" autocomplete="off"/>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="resetForm(resetForm('registerForm'))">重置</el-button>
-              <el-button type="primary" @click="submitForm(registerForm)">提交</el-button>
+              <el-button type="primary" @click="resetForm('registerForm')">重置</el-button>
+              <el-button type="primary" @click="nextStep()">下一步</el-button>
             </el-form-item>
           </div>
 
-<!--          注册用户类型-->
-          <template v-if="currentStep === -1">
+<!--          nickname and avatar-->
+          <template v-if="currentStep === 1">
             <el-form-item label="昵称" prop="nickname">
               <el-input v-model="registerForm.nickname"/>
-            </el-form-item>
-            <el-form-item label="类型" prop="type">
-              <a-radio-group default-value="1" button-style="solid" v-model="registerForm.type">
-                <a-radio-button value="1">
-                  注册用户
-                </a-radio-button>
-                <a-radio-button value="0">
-                  管理员
-                </a-radio-button>
-                <a-radio-button value="2">
-                  厂商用户
-                </a-radio-button>
-              </a-radio-group>
             </el-form-item>
             <el-form-item label="头像" prop="avatar">
               <a-upload
@@ -71,39 +59,19 @@
                 </div>
               </a-upload>
             </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="previousStep()">上一步</el-button>
+              <el-button type="primary" @click="submitForm(registerForm)">提交</el-button>
+            </el-form-item>
           </template>
 
-          <div class="button-container" v-if="false">
-            <el-form-item>
-              <div class="button-container">
-                <div>
-                  <a-button class="button" @click="previousStep" v-if="currentStep == 2">
-                    <a-icon type="left"/>
-                    后退
-                  </a-button>
-                </div>
-                <div>
-                  <a-button type="primary" class="button" @click="nextStep" v-if="currentStep == 0">
-                    下一步
-                    <a-icon type="right"/>
-                  </a-button>
-                </div>
-                <div class="submit">
-                  <a-button type="primary" class="button" @click="doSubmit" :loading="submitting" v-if="currentStep == 1">
-                    提交
-                    <a-icon type="right" v-if="!submitting"/>
-                  </a-button>
-                </div>
-              </div>
-            </el-form-item>
-          </div>
         </el-form>
       </div>
-      <div class="result" v-if="currentStep == 1">
+      <div class="result" v-if="currentStep === 2">
         <a-result
             status="success"
             title="注册成功~"
-            sub-title="欢迎新同学！"
+            sub-title="欢迎来到原神社区！"
         >
           <template #extra>
             <a-button key="console" type="primary" @click="goToLogin">
@@ -136,7 +104,7 @@ export default {
     Header,
   },
   data: function () {
-    let validateUserID = (rule, value, callback) => {
+    let validateUsername = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入用户ID'));
       } else {
@@ -167,12 +135,15 @@ export default {
     return {
       currentStep: 0,
       registerForm: {
-        userID: '',
+        imgurl: '',
+        nickname: '',
+        username: '',
         pass: '',
         checkPass: '',
       },
+      imageUrl: null,
       rules: {
-        userID: [{validator: validateUserID, trigger: 'change'}],
+        username: [{validator: validateUsername, trigger: 'change'}],
         pass: [{validator: validatePass, trigger: 'change'}],
         checkPass: [{validator: validatePass2, trigger: 'change'}],
       }
@@ -185,7 +156,7 @@ export default {
     nextStep() {
       this.$refs.registerForm.validate(valid => {
         if (valid) {
-          this.currentStep = 1;
+          this.currentStep += 1;
         } else {
           return false;
         }
@@ -197,8 +168,10 @@ export default {
         if (valid) {
           request.post("/user/register/", {
             "user": {
-              userID: _this.registerForm.userID,
+              username: _this.registerForm.username,
+              nickname: _this.registerForm.nickname,
               password: _this.registerForm.pass,
+              imgurl: _this.imageUrl,
             }
           }).then((res) => {
               if (res.status === 0) {
@@ -236,7 +209,7 @@ export default {
       });
     },
     goToLogin() {
-      this.$router.back();
+      this.$router.push("/login");
     },
   }
 }
@@ -277,7 +250,7 @@ export default {
   margin: 0 auto;
   text-align: left;
   border-radius: 16px;
-  border-color: hsv(0, 0, 85%);
+  /*border-color: hsv(0, 0, 85%);*/
   border-width: 1px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }

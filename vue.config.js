@@ -10,6 +10,7 @@ module.exports = {
                     '/api': ''                     //选择忽略拦截器里面的单词
                 }
             }
-        }
+        },
+        open: true
     }
 }

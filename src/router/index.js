@@ -2,11 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from "../views/Login";
 import Register from "../views/Register";
-import Manage from "../views/Manage";
+// import Manage from "../views/Manage";
 import Sidebar from "../components/Sidebar";
-import SelectCourse from "../views/manage/SelectCourse";
-import QueryCourse from "../views/manage/QueryCourse";
-import UserInfo from "../views/manage/UserInfo";
 
 const routes = [
   {
@@ -28,29 +25,64 @@ const routes = [
     name: 'Register',
     component: Register
   },
-  {
-    path: '/manage',
-    name: '/manage',
-    component: Manage,
-    redirect: "/manage/select-course",
-    children: [
-      {
-        path: '/manage/select-course',
-        name: 'SelectCourse',
-        component: SelectCourse
-      },
-      {
-        path: '/manage/query-course',
-        name: 'QueryCourse',
-        component: QueryCourse
-      },
-      {
-        path: '/manage/user-info',
-        name: 'UserInfo',
-        component: UserInfo
-      }
-    ]
-  },
+  // {
+  //   path: 'user/:username/',
+  //   name: 'User',
+  //   component: User,
+  //   children: [
+  //     {
+  //       path: 'posts',
+  //       name: 'Posts',
+  //       component: Posts,
+  //     },
+  //     {
+  //       path: 'followers',
+  //       name: 'Followers',
+  //       component: Posts,
+  //     },
+  //     {
+  //       path: 'following',
+  //       name: 'Following',
+  //       component: Following,
+  //     },
+  //     {
+  //       path: 'cart',
+  //       name: 'Cart',
+  //       component: Cart,
+  //     },
+  //     {
+  //       path: 'bought',
+  //       name: 'bought',
+  //       component: Bought,
+  //     },
+  //     {
+  //       path: 'eidt',
+  //       name: 'edit',
+  //       component: Edit,
+  //     },
+  //   ]
+  // },
+  // {
+  //   path: '/mall/good/:id',
+  //   name: 'Good',
+  //   component: Good,
+  // },
+  // {
+  //   path: 'article/:id',
+  //   name: 'Article',
+  //   component: Article,
+  // },
+  // {
+  //   path:'wiki',
+  //   name:'Wiki',
+  //   component:WikiItem,
+  // },
+  // {
+  //   path: 'wiki/:id',
+  //   name: 'Wiki-item',
+  //   component: WikiItem,
+  // },
+
   {
     path: '/sidebar',
     name: 'Sidebar',

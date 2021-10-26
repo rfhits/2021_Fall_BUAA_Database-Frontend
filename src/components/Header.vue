@@ -176,7 +176,7 @@ export default {
               this.$message.success("退出成功");
         },
         user() {
-            this.$router.push('/user/' + this.$store.state.user.userID);
+            this.$router.push('/user/' + this.$store.state.user.username);
             this.visible = false;
         },
         editUserInfo() {

@@ -6,17 +6,18 @@ export default createStore({
     loggedIn: false,
     searchItem: "",
     user: {
-      userID: "",
+      nickname: "",
+      username: "",
     }
   },
   mutations: {
     login(state,data) {
       state.loggedIn = true;
-      state.user.userID = data.userID;
+      state.user.username = data.username;
     },
     logout(state) {
       state.loggedIn = false;
-      state.user.userID = '';
+      state.user.username = '';
     }
   },
   actions: {

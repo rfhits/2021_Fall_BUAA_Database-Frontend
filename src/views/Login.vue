@@ -3,10 +3,10 @@
     <Header></Header>
     <div class="login-root">
       <div class="form" style="text-align: center; width: 250px; margin: 50px auto; margin-top: 50px">
-        <h1>welcome, traveller</h1>
+        <h1>Welcome, traveller</h1>
         <el-form ref="form" :model="form" >
           <el-form-item>
-            <el-input prefix-icon="el-icon-user-solid" v-model="form.userID"></el-input>
+            <el-input prefix-icon="el-icon-user-solid" v-model="form.username"></el-input>
           </el-form-item>
           <el-form-item>
             <el-input prefix-icon="el-icon-lock" show-password v-model="form.password"></el-input>
@@ -14,7 +14,6 @@
           <el-form-item>
             <div>
               <el-button  type="primary" @click="login">登陆</el-button>
-
             </div>
           </el-form-item>
         </el-form>
@@ -37,14 +36,14 @@ export default {
     return {
       name: "",
       form:{
-        userID: "",
+        username: "",
         password: ""
       }
     }
   },
   methods: {
     login() {
-      let isValidAccount = this.form.password.length >= 8 && this.form.userID !== ''
+      let isValidAccount = this.form.password.length >= 8 && this.form.username !== ''
       if (isValidAccount) {
         request.post("/login/", {
           "user": this.form
@@ -66,6 +65,4 @@ export default {
     }
   }
 }
-
-
 </script>
