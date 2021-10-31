@@ -6,6 +6,7 @@ import store from './store'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css' //引入的样式文件
 import ElementPlus from 'element-plus'
+import ElementIcon from '@element-plus/icons'
 import 'element-plus/dist/index.css'
 
 
