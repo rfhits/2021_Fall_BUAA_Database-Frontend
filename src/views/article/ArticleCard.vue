@@ -1,38 +1,37 @@
 <template>
   <el-card class="card">
-    <div class="card-header">
+    <div class="card-header" @click="goToPage">
       <div class="avatar_container">
-        <img src="https://img-static.mihoyo.com/avatar/avatar10014.png" class="avatar_img">
+        <img :src=cardData.avatarUrl class="avatar_img">
       </div>
-      <a style="margin-left: 10px;" href="">user_000</a>
-      <p style="font-size: 12px; margin: 0px 10px; ">7小时前·官方</p>
+      <a style="margin-left: 10px;">{{cardData.nickname}}</a>
+      <p style="font-size: 12px; margin: 0px 10px; color: #999">{{cardData.time}}</p>
     </div>
     <a class="card-content" style="display: block">
       <div style="display: flex">
-        <h3 style="margin: 10px 0px; color: #333; font-weight: bold">Hello, Hu Tao</h3>
+        <h3 style="margin: 10px 0px; color: #333; font-weight: bold">{{ cardData.title }}</h3>
       </div>
       <div class="brief">
-        活动期间，旅行者可以在活动祈愿中获得更多角色与武器，组建强大的队伍！
-        〓祈愿介绍〓●活动期间，限定五星角色「雪霁梅香·胡桃(火)」的祈愿获取概率将大幅提升！●活动期间，四星角色「渡来介者·托马
+        {{cardData.brief}}
       </div>
       <div class="preview" style="display: flex;">
-        <img style="border-radius: 6px" src="https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+        <img style="border-radius: 6px" :src=cardData.coverUrl>
       </div>
     </a>
     <div class="footer">
       <div class="data">
         <LikeOutlined />
-        <span>10+</span>
+        <span>{{cardData.likes}}</span>
       </div>
 
       <div class="data">
         <CommentOutlined/>
-        <span>10+</span>
+        <span>{{cardData.comments}}</span>
       </div>
 
       <div class="data">
         <EyeOutlined />
-        <span>10+</span>
+        <span>{{cardData.clicks}}</span>
       </div>
     </div>
   </el-card>
@@ -47,6 +46,14 @@ export default {
     LikeOutlined,
     EyeOutlined,
     CommentOutlined
+  },
+  props: {
+    cardData: {type: Object, required: true}
+  },
+  methods: {
+    goToPage() {
+      this.$router.push("/user/" + this.cardData.username)
+    }
   }
 }
 
@@ -57,7 +64,7 @@ export default {
 
 
 .card {
-  width: 700px;
+  width: 600px;
 }
 
 .card-header {
@@ -84,6 +91,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #999;
+  display: flex;
 }
 .preview {
   margin: 10px 0px;
@@ -93,6 +101,8 @@ export default {
 }
 
 .footer {
+  margin-top: 10px;
+  margin-bottom: 0px;
   display: flex;
   flex-direction: row-reverse;
 }

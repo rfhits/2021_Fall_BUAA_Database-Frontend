@@ -1,22 +1,37 @@
 <template>
   <div class="home">
     <Header head_index="1"></Header>
-    <h1 style="color: red">我❤BUAA</h1>
-    <p>谁来爱我？</p>
+    <ArticleCard :cardData="this.cardData"></ArticleCard>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
+import ArticleCard from "./article/ArticleCard";
 
 export default {
-    name: 'Home',
-    components: {
-        Header,
-    },
-  methods:{
-
-  }
+  name: 'Home',
+  components: {
+    ArticleCard,
+    Header,
+  },
+  data() {
+    return {
+      cardData: {
+        username: "username000",
+        nickname: "nickname000",
+        time: "7hours ago",
+        title: "Hello, Hu Tao",
+        brief: "Hu Tao will rerun",
+        likes: 100,
+        comments: 200,
+        clicks: 50,
+        coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
+        avatarUrl: "https://img-static.mihoyo.com/avatar/avatar10014.png"
+      }
+    }
+  },
+  methods: {}
 }
 </script>
