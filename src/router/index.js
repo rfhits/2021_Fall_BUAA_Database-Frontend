@@ -4,12 +4,24 @@ import Login from "../views/Login";
 import Register from "../views/Register";
 import ArticleCard from "../views/article/ArticleCard";
 import Sidebar from "../components/Sidebar";
+import ArticleEditor from "../components/editor/index"
+import NewArticle from "../views/article/NewArticle"
 
 const routes = [
+  {
+    path: '/new-article',
+    name: 'NewArticle',
+    component: NewArticle
+  },
   {
     path: '/card',
     name: 'Card',
     component: ArticleCard
+  },
+  {
+    path: '/editor',
+    name: 'Editor',
+    component: ArticleEditor
   },
   {
     path: '/',

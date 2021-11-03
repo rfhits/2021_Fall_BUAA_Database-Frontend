@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <Header head_index="1"></Header>
-    <ArticleCard :cardData="this.cardData"></ArticleCard>
+<!--    <ArticleCard :cardData="this.cardData"></ArticleCard>-->
+
   </div>
 </template>
 
