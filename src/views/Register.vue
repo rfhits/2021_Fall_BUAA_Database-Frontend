@@ -192,7 +192,6 @@ export default {
       this.$refs[formName].resetFields();
     },
 
-
     beforeUpload(file, fileList) {
       let _this = this;
       getBase64(file, imageUrl => {
@@ -200,6 +199,7 @@ export default {
       });
       return false;
     },
+
     handleChange(info) {
       console.log(info)
       let _this = this;

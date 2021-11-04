@@ -33,8 +33,6 @@ export default {
     return {
       init: {
         content: this.value,
-        // selector: "textarea",
-        // autoresize_on_init: true,
         plugins: 'preview paste code image imagetools textcolor wordcount',
         language: 'zh_CN',
         height:'600',
