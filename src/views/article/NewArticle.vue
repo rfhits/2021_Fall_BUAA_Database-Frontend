@@ -139,15 +139,16 @@ export default {
     post() {
       let topics = this.dynamicTags
       let _this = this
-      console.log(this.article)
-      console.log(topics)
+      // console.log(this.article)
+      // console.log(topics)
       request.post("/post-article/", {
         "username": _this.$store.state.username,
         "article": _this.article,
         "topics": topics
       }).then((res) => {
         if (res.status === 0) {
-          this.$router.push("home")
+          let articleId = res.data.articleId
+          this.$router.push("/article/" + articleId)
         } else {
           this.$message.error(res.statusInfo.message);
         }

@@ -6,8 +6,21 @@ import ArticleCard from "../views/article/ArticleCard";
 import Sidebar from "../components/Sidebar";
 import ArticleEditor from "../components/editor/index"
 import NewArticle from "../views/article/NewArticle"
+import ArticleDetail from "../views/article/ArticleDetail"
+import CommentCard from "@/components/comment/CommentCard"
+
 
 const routes = [
+  {
+    path: '/comment-card',
+    name: "cc",
+    component: CommentCard
+  },
+  {
+    path: '/article/:articleId',
+    name: 'Article',
+    component: ArticleDetail
+  },
   {
     path: '/new-article',
     name: 'NewArticle',
