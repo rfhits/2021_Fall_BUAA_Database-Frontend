@@ -7,7 +7,7 @@ export default createStore({
     searchItem: "",
     user: {
       nickname: "",
-      username: "",
+      username: '100',
     }
   },
   mutations: {

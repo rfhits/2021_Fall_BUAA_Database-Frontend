@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sidebar-container">
     <el-menu
         router
         :default-active=this.$route.path
@@ -10,6 +10,7 @@
         <i class="el-icon-location"></i>
         <span>我要选课</span>
       </el-menu-item >
+
       <el-menu-item index="/manage/query-course">
         <i class="el-icon-menu" ></i>
           <span>已选课程</span>
@@ -31,5 +32,9 @@ export default {
 </script>
 
 <style scoped>
-
+.sidebar-container {
+  border: 1px solid #e6e6e6;
+  width: 151px;
+  /*height*/
+}
 </style>

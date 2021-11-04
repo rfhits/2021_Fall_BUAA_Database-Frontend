@@ -7,7 +7,15 @@ import Sidebar from "../components/Sidebar";
 import ArticleEditor from "../components/editor/index"
 import NewArticle from "../views/article/NewArticle"
 import ArticleDetail from "../views/article/ArticleDetail"
+import User from "../views/user/User"
 import CommentCard from "@/components/comment/CommentCard"
+import PostComments from "@/views/user/PostComments"
+import PostArticles from "@/views/user/PostArticles"
+import Bought from "@/views/user/Bought"
+import Cart from "@/views/user/Cart"
+import Followers from "@/views/user/Followers"
+import Followings from "@/views/user/Followings"
+import Edit from "@/views/user/Edit"
 
 
 const routes = [
@@ -55,43 +63,45 @@ const routes = [
     name: 'Register',
     component: Register
   },
-  // {
-  //   path: 'user/:username/',
-  //   name: 'User',
-  //   component: User,
-  //   children: [
-  //     {
-  //       path: 'posts',
-  //       name: 'Posts',
-  //       component: Posts,
-  //     },
-  //     {
-  //       path: 'followers',
-  //       name: 'Followers',
-  //       component: Posts,
-  //     },
-  //     {
-  //       path: 'following',
-  //       name: 'Following',
-  //       component: Following,
-  //     },
-  //     {
-  //       path: 'cart',
-  //       name: 'Cart',
-  //       component: Cart,
-  //     },
-  //     {
-  //       path: 'bought',
-  //       name: 'bought',
-  //       component: Bought,
-  //     },
-  //     {
-  //       path: 'eidt',
-  //       name: 'edit',
-  //       component: Edit,
-  //     },
-  //   ]
-  // },
+  {
+    path: '/user/:username/',
+    name: 'User',
+    component: User,
+    redirect: "/user/:username/posts",
+    children: [
+      {
+        path: '/user/:username/posts',
+        name: 'Posts',
+        component: PostArticles,
+      },
+      {
+        path: 'followers',
+        name: 'Followers',
+        component: Followers,
+      },
+      {
+        path: 'following',
+        name: 'Following',
+        component: Followings,
+      },
+      {
+        path: 'cart',
+        name: 'Cart',
+        component: Cart,
+      },
+      {
+        path: 'bought',
+        name: 'bought',
+        component: Bought,
+      },
+      {
+        path: 'eidt',
+        name: 'edit',
+        component: Edit,
+      },
+    ]
+  },
+
   // {
   //   path: '/mall/good/:id',
   //   name: 'Good',
@@ -101,16 +111,6 @@ const routes = [
   //   path: 'article/:id',
   //   name: 'Article',
   //   component: Article,
-  // },
-  // {
-  //   path:'wiki',
-  //   name:'Wiki',
-  //   component:WikiItem,
-  // },
-  // {
-  //   path: 'wiki/:id',
-  //   name: 'Wiki-item',
-  //   component: WikiItem,
   // },
 
   {

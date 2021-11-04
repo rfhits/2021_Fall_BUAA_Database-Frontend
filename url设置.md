@@ -23,9 +23,6 @@
   |- /user/username/bought
   |- /user/username/edit
 
-/wiki
-  |- /item/id
-  |- 
 
 /manage
   |- /mall

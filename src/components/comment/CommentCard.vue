@@ -5,7 +5,6 @@
         <img :src=cardData.avatarUrl class="avatar_img">
       </div>
       <a style="margin-left: 10px;">{{ cardData.nickname }}</a>
-      <p style="font-size: 12px; margin: 0px 10px; color: #999">{{ cardData.time }}</p>
     </div>
 
     <div class="content">
@@ -13,6 +12,16 @@
     </div>
 
     <div class="footer">
+      <div class="comment-time" style="color: #999">
+        {{cardData.commentTime}}
+      </div>
+      <div style="width: 460px"></div>
+
+      <div style="display: flex; align-items: center; font-size: 16px">
+        <LikeOutlined :style="{color:likeColor}" @click="like()"></LikeOutlined>
+
+        <span style="color: #999; margin-left: 5px">{{cardData.likes}}</span>
+      </div>
 
     </div>
   </el-card>
@@ -20,22 +29,45 @@
 </template>
 
 <script>
+import {LikeOutlined} from '@ant-design/icons-vue'
+
 export default {
   name: "CommentCard",
+  components: {
+    LikeOutlined,
+  },
   props: {
     cardData: {type: Object, required: true}
   },
   methods: {
     goToPage() {
       this.$router.push("/user/" + this.cardData.username)
+    },
+    like() {
+      if (this.cardData.liked) {
+        // TODO: post dislike
+        this.cardData.liked = false;
+        this.cardData.likes -= 1;
+      } else {
+        // todo: post like
+        this.cardData.liked = true
+        this.cardData.likes += 1;
+      }
     }
+  },
+  computed: {
+    likeColor() {
+      if (this.cardData.liked) {
+        return "#05c4ff"
+      } else {
+        return "#999"
+      }
+    },
   }
 }
 </script>
 
 <style scoped>
-
-
 .card {
   width: 600px;
 }
@@ -59,7 +91,6 @@ export default {
 }
 
 .content {
-  color: #999;
   display: flex;
   margin-top: 20px;
 }
@@ -74,7 +105,8 @@ export default {
   margin-top: 10px;
   margin-bottom: 0px;
   display: flex;
-  flex-direction: row-reverse;
+  align-items: center;
+
 }
 
 .data {
