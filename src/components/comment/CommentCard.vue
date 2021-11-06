@@ -1,5 +1,14 @@
+<!--
+data: {
+  avataUrl,
+  nickname,
+  content,
+  date,
+  likes
+}
+-->
 <template>
-  <el-card class="card">
+  <el-card :body-style="{width: 'this.cardData.width'}">
     <div class="card-header" @click="goToPage">
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">
@@ -13,7 +22,7 @@
 
     <div class="footer">
       <div class="comment-time" style="color: #999">
-        {{cardData.commentTime}}
+        {{cardData.date}}
       </div>
       <div style="width: 460px"></div>
 
@@ -68,9 +77,6 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  width: 600px;
-}
 
 .card-header {
   display: flex;
@@ -116,6 +122,4 @@ export default {
   align-items: center;
   margin: 3px 20px;
 }
-
-
 </style>

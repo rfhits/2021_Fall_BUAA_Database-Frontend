@@ -41,12 +41,14 @@ export default {
       commentCardData: {
         username: "username000",
         nickname: "nickname000",
+        avatarUrl: "https://img-static.mihoyo.com/avatar/avatar10014.png",
+        date: "10-15",
         time: "7hours ago",
         content: "Hu Tao will rerun I love hutao, I lllllllllllllllllove hutao",
         likes: 100,
-        commentTime: "10-15",
+
         liked: true,
-        avatarUrl: "https://img-static.mihoyo.com/avatar/avatar10014.png"
+
       }
     }
   },

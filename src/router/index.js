@@ -27,7 +27,9 @@ const routes = [
   {
     path: '/article/:articleId',
     name: 'Article',
-    component: ArticleDetail
+    component: ArticleDetail,
+    meta: {title: "ArticleDetails"},
+    props: true,
   },
   {
     path: '/new-article',

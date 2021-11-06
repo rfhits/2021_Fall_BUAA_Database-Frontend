@@ -65,7 +65,15 @@ export default {
       posts: 200,
     }
   },
+  created() {
+    this.load();
+  },
+
   methods: {
+    load() {
+
+    },
+
     handleFollow() {
       console.log(this.$store.state.user.username)
       console.log(this.$store.state.loggedIn)
@@ -87,7 +95,8 @@ export default {
         return "已关注"
       }
     }
-  }
+  },
+
 }
 </script>
 
@@ -107,7 +116,7 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 1px solid #ebebeb;
+  border: 4px solid #ebebeb;
   vertical-align: top;
 }
 

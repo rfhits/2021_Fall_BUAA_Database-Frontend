@@ -51,7 +51,7 @@ export default {
           if (res.status === 0) {
             window.localStorage.setItem("token", res.data.token)
             this.$store.commit("login", res.data)
-            this.$router.push("/manage")
+            this.$router.push("/home")
           } else {
             console.log(res.status)
             this.$message.error(res.statusInfo.message)

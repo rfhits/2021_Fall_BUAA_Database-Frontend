@@ -8,12 +8,15 @@ export default createStore({
     user: {
       nickname: "",
       username: '100',
+      avatarUrl: "https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png"
     }
   },
   mutations: {
     login(state,data) {
       state.loggedIn = true;
       state.user.username = data.username;
+      state.user.nickname = data.nickname;
+      state.user.avatarUrl = data.avatarUrl;
     },
     logout(state) {
       state.loggedIn = false;
