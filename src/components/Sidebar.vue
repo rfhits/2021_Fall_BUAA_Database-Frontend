@@ -6,26 +6,95 @@
         class="el-menu-vertical-demo"
         style="width: 150px"
     >
-      <el-menu-item index="/manage/select-course">
-        <i class="el-icon-location"></i>
-        <span>我要选课</span>
-      </el-menu-item >
+      <el-menu-item :index=postsUrl>
+        <ProfileOutlined/>
+        <span>发帖</span>
+      </el-menu-item>
 
-      <el-menu-item index="/manage/query-course">
-        <i class="el-icon-menu" ></i>
-          <span>已选课程</span>
+      <el-menu-item :index=commentsUrl>
+        <CommentOutlined/>
+        <span>评论</span>
       </el-menu-item>
-      <el-menu-item index="/manage/user-info">
-        <i class="el-icon-user-solid" ></i>
-        <span>个人信息</span>
+
+      <el-menu-item :index=followersUrl>
+        <UsergroupAddOutlined/>
+        <span>粉丝</span>
       </el-menu-item>
+
+      <el-menu-item :index=followingsUrl>
+        <HeartOutlined/>
+        <span>关注</span>
+      </el-menu-item>
+
+      <el-menu-item :index=cartUrl>
+        <ShoppingCartOutlined />
+        <span>购物车</span>
+      </el-menu-item>
+
+      <el-menu-item :index=boughtUrl>
+        <i class="el-icon-user-solid"></i>
+        <span>已购</span>
+      </el-menu-item>
+
+      <el-menu-item :index=editUrl>
+        <EditOutlined />
+        <span>编辑资料</span>
+      </el-menu-item>
+
+      <el-menu-item @click="logout()">
+        <LogoutOutlined />
+        <span>退出登录</span>
+      </el-menu-item>
+
     </el-menu>
   </div>
 </template>
 
 <script>
+import {ProfileOutlined, CommentOutlined, HeartOutlined,
+  UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined}
+  from '@ant-design/icons-vue'
+
 export default {
   name: "Sidebar",
+  components: {
+    ProfileOutlined,
+    CommentOutlined,
+    HeartOutlined,
+    UsergroupAddOutlined,
+    ShoppingCartOutlined,
+    LogoutOutlined,
+    EditOutlined
+
+  },
+  computed: {
+    postsUrl() {
+      return "/user/" + this.$route.params.username + "/posts"
+    },
+    commentsUrl() {
+      return "/user/" + this.$route.params.username + "/comments"
+    },
+    followersUrl() {
+      return "/user/" + this.$route.params.username + "/followers"
+    },
+    followingsUrl() {
+      return "/user/" + this.$route.params.username + "/followings"
+    },
+    cartUrl() {
+      return "/user/" + this.$route.params.username + "/cart"
+    },
+    boughtUrl() {
+      return "/user/" + this.$route.params.username + "/bought"
+    },
+    editUrl() {
+      return "/user/" + this.$route.params.username + "/edit"
+    },
+  },
+  methods: {
+    logout() {
+
+    }
+  }
 }
 
 
