@@ -4,7 +4,7 @@
         router
         :default-active=this.$route.path
         class="el-menu-vertical-demo"
-        style="width: 150px"
+        style="width: 200px"
     >
       <el-menu-item :index=postsUrl>
         <ProfileOutlined/>

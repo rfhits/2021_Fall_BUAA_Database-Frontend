@@ -1,6 +1,6 @@
 <template>
-  <el-card class="card">
-    <div class="card-header" @click="goToPage">
+  <el-card :body-style="{width: 'this.cardData.width'}">
+    <div v-if="false" class="card-header" @click="goToPage">
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">
       </div>
@@ -47,7 +47,7 @@
 import {LikeOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
 
 export default {
-  name: "ArticleCard",
+  name: "PersonalArticleCard",
   components: {
     LikeOutlined,
     EyeOutlined,
@@ -72,11 +72,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-.card {
-  width: 600px;
-}
 
 .card-header {
   display: flex;
@@ -108,7 +103,7 @@ export default {
   margin: 10px 0px;
   height: 120px;
   width: 120px;
-  ;
+;
 }
 
 .footer {

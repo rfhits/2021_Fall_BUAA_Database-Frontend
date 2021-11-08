@@ -3,6 +3,7 @@
     <Header head_index="1"></Header>
 <!--    <ArticleCard :cardData="this.cardData"></ArticleCard>-->
 <!--    <CommentCard :cardData="this.commentCardData"></CommentCard>-->
+    <PersonalArticleCard :card-data="this.cardData"></PersonalArticleCard>
     <div class="sidebar-container">
       <sidebar></sidebar>
     </div>
@@ -13,6 +14,7 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import ArticleCard from "./article/ArticleCard";
+import PersonalArticleCard from "./article/PersonalArticleCard";
 import CommentCard from "@/components/comment/CommentCard"
 import sidebar from "@/components/Sidebar"
 
@@ -22,6 +24,7 @@ export default {
     Header,
     ArticleCard,
     CommentCard,
+    PersonalArticleCard,
     sidebar,
   },
   data() {
@@ -30,6 +33,7 @@ export default {
         username: "username000",
         nickname: "nickname000",
         time: "7hours ago",
+        articleId: 100,
         title: "Hello, Hu Tao",
         brief: "Hu Tao will rerun",
         likes: 100,

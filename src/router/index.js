@@ -77,6 +77,11 @@ const routes = [
         component: PostArticles,
       },
       {
+        path: '/user/:username/comments',
+        name: 'Comments',
+        component: PostComments,
+      },
+      {
         path: 'followers',
         name: 'Followers',
         component: Followers,

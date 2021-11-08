@@ -39,12 +39,19 @@
 
       </el-card>
     </div>
-    <div style="display: flex">
-      <div class="sidebar-container">
-        <sidebar/>
+
+    <div class="action-container">
+      <div style="display: flex">
+        <div class="sidebar-container">
+          <sidebar/>
+        </div>
+        <div class="router-container">
+          <router-view></router-view>
+        </div>
+
       </div>
-      <router-view></router-view>
     </div>
+
   </div>
 
 </template>
@@ -120,8 +127,18 @@ export default {
   vertical-align: top;
 }
 
+.action-container {
+  width: 1000px;
+  margin: 0 auto;
+}
+
 .sidebar-container {
+  margin-top: 10px;
+  margin-left: 0;
+  margin-right: 40px;
+}
+.router-container {
   margin-top: 20px;
-  margin-left: 30px;
+  width: 900px;
 }
 </style>
