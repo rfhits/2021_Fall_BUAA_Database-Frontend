@@ -69,7 +69,13 @@ const routes = [
     path: '/user/:username/',
     name: 'User',
     component: User,
-    redirect: "/user/:username/posts",
+    redirect: to => {
+      const {hash, params, query} = to
+      if (params.username) {
+        return '/user/'+params.username+'/posts'
+      }
+    },
+    // redirect: '/user/'+params.username+'/posts',
     children: [
       {
         path: '/user/:username/posts',
@@ -82,27 +88,27 @@ const routes = [
         component: PostComments,
       },
       {
-        path: 'followers',
+        path: '/user/:username/followers',
         name: 'Followers',
         component: Followers,
       },
       {
-        path: 'following',
+        path: '/user/:username/followings',
         name: 'Following',
         component: Followings,
       },
       {
-        path: 'cart',
+        path: '/user/:username/cart',
         name: 'Cart',
         component: Cart,
       },
       {
-        path: 'bought',
+        path: '/user/:username/bought',
         name: 'bought',
         component: Bought,
       },
       {
-        path: 'eidt',
+        path: '/user/:username/edit',
         name: 'edit',
         component: Edit,
       },

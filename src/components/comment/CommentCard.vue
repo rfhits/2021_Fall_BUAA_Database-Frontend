@@ -54,11 +54,25 @@ export default {
     },
     like() {
       if (this.cardData.liked) {
-        // TODO: post dislike
+        request.get("/comment/dislike/", {
+          params: {
+            username: this.$store.state.user.username,
+            commentId:  this.cardData.commentId
+          }
+        }).then(res => {
+
+        })
         this.cardData.liked = false;
         this.cardData.likes -= 1;
       } else {
-        // todo: post like
+        request.get("/comment/like/", {
+          params: {
+            username: this.$store.state.user.username,
+            commentId:  this.cardData.commentId
+          }
+        }).then(res => {
+
+        })
         this.cardData.liked = true
         this.cardData.likes += 1;
       }

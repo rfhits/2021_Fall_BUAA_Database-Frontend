@@ -8,42 +8,43 @@ data: {
 }
 -->
 <template>
-  <el-card :body-style="{width: 'this.cardData.width'}">
-    <div class="card-header" @click="goToPage">
-      <h4>{{this.cardData.date}}</h4>
+  <el-card :body-style="{width: 'this.cardWidth'}">
+    <div class="comment-time" style="color: #999">
+      <ClockCircleOutlined />
+      {{ cardData.date }}
     </div>
 
     <div class="content">
       {{ cardData.content }}
     </div>
 
-    <div class="footer">
-      <div class="comment-time" style="color: #999">
-        {{cardData.date}}
-      </div>
-      <div style="width: 460px"></div>
-
-      <div style="display: flex; align-items: center; font-size: 16px">
-        <LikeOutlined :style="{color:likeColor}" @click="like()"></LikeOutlined>
-
-        <span style="color: #999; margin-left: 5px">{{cardData.likes}}</span>
-      </div>
-
+    <div class="reply-article">
+      回复帖子：{{this.cardData.articleTitle}}
     </div>
+
+    <div style="display: flex; align-items: center; font-size: 16px">
+      <LikeOutlined :style="{color:likeColor}" @click="like()"></LikeOutlined>
+
+      <span style="color: #999; margin-left: 5px">{{ cardData.likes }}</span>
+    </div>
+
   </el-card>
 
 </template>
 
 <script>
-import {LikeOutlined} from '@ant-design/icons-vue'
+import {LikeOutlined, ClockCircleOutlined} from '@ant-design/icons-vue'
+import request from "../../api/request";
 
 export default {
   name: "PersonalCommentCard",
   components: {
     LikeOutlined,
+    ClockCircleOutlined
   },
   props: {
-    cardData: {type: Object, required: true}
+    cardData: {type: Object, required: true},
+    cardWidth: {type: Object, required: true}
   },
   methods: {
     goToPage() {
@@ -51,11 +52,25 @@ export default {
     },
     like() {
       if (this.cardData.liked) {
-        // TODO: post dislike
+        request.get("/comment/dislike/", {
+          params: {
+            username: this.$store.state.user.username,
+            commentId:  this.cardData.commentId
+          }
+        }).then(res => {
+
+        })
         this.cardData.liked = false;
         this.cardData.likes -= 1;
       } else {
-        // todo: post like
+        request.get("/comment/like/", {
+          params: {
+            username: this.$store.state.user.username,
+            commentId:  this.cardData.commentId
+          }
+        }).then(res => {
+          console.log(res)
+        })
         this.cardData.liked = true
         this.cardData.likes += 1;
       }
@@ -75,48 +90,23 @@ export default {
 
 <style scoped>
 
-.card-header {
-  display: flex;
-  align-items: center;
-}
-
-.avatar_container {
-  width: 35px;
-  height: 35px;
-}
-
-.avatar_img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 1px solid #ebebeb;
-  vertical-align: top;
-}
-
 .content {
   display: flex;
-  margin-top: 20px;
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.preview {
-  margin: 10px 0px;
-  height: 120px;
-  width: 120px;;
+.comment-time {
+  text-align: left;
 }
 
-.footer {
-  margin-top: 10px;
-  margin-bottom: 0px;
-  display: flex;
-  align-items: center;
-
-}
-
-.data {
-  display: flex;
-  font-size: 14px;
+.reply-article {
+  text-align: left;
+  background-color: #f7f8fc;
   color: #999;
-  align-items: center;
-  margin: 3px 20px;
+  margin: 10px 0;
+  padding: 10px;
 }
+
 </style>
