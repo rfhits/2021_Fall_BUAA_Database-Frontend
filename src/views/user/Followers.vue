@@ -7,10 +7,13 @@
         <img :src='follower.avatarUrl' class="avatar_img">
       </div>
       <el-link style="margin-left: 15px;" :href="'/user/' + follower.username">{{ follower.nickname }}</el-link>
-      <div class="follow-action" style="margin-left: 440px">
+      <div class="follow-action" style="margin-left: 460px">
 <!--        todo: followed and follow switch-->
-        <el-button type="primary" round @click="follow(follower.username)">
-          关注
+        <el-button
+            :type="buttonFollowType(follower.followed)"
+            round
+            @click="handleFollow(follower)">
+          {{followText(follower.followed)}}
         </el-button>
       </div>
     </div>
@@ -30,18 +33,42 @@ export default {
           username: "233",
           nickname: "nickname007",
           avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
+          followed: true,
         }
       ]
+    }
+  },
+  computed: {
+    followText() {
+      return function (followed) {
+        if (followed) {
+          return "已关注"
+        } else {
+          return "关注"
+        }
+      }
+    },
+    buttonFollowType() {
+      return function (followed) {
+        if (followed) {
+          return "info"
+        } else {
+          return "primary"
+        }
+      }
+
     }
   },
   methods: {
     goTo(url) {
       this.$router.push(url)
     },
-    follow(username) {
-      request.post("/user/follow-user", {
+    handleFollow(follower) {
+      let url = (follower.followed)? "/user/unfollow-user": "/user/follow-user";
+      follower.followed = !follower.followed
+      request.post(url, {
         "selfUsername": this.$store.state.user.username,
-        "followedUsername": username
+        "otherUsername": follower.username
       }).then( res=> {
         if (res.status === 0) {
 
@@ -52,7 +79,7 @@ export default {
       }).catch((err)=> { // cant post
         console.log(err)
       })
-    }
+    },
 
   }
 }

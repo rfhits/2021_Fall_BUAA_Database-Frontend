@@ -1,5 +1,5 @@
 <template>
-  <div class="_form" style="padding: 100px 550px 100px 200px; text-align:center">
+  <div class="page-container" style="; text-align:center">
     <el-form
         ref="ruleForm"
         :model="ruleForm"
@@ -7,6 +7,7 @@
         :rules="rules"
         label-width="120px"
         class="demo-ruleForm"
+        style="padding: 20px"
 
     >
       <el-form-item label="旧密码" prop="originPass">
@@ -116,8 +117,7 @@ export default {
 
 <style scoped>
 
-/*._form /deep/ .el-input__inner {*/
-/*  width: 200px;*/
-/*}*/
-
+.page-container {
+  background-color: white;
+}
 </style>

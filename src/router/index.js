@@ -15,7 +15,8 @@ import Bought from "@/views/user/Bought"
 import Cart from "@/views/user/Cart"
 import Followers from "@/views/user/Followers"
 import Followings from "@/views/user/Followings"
-import Edit from "@/views/user/Edit"
+import ChangePassword from "@/views/user/ChangePassword"
+import EditInfo from "@/views/user/EditInfo"
 
 
 const routes = [
@@ -108,9 +109,14 @@ const routes = [
         component: Bought,
       },
       {
-        path: '/user/:username/edit',
-        name: 'edit',
-        component: Edit,
+        path: '/user/:username/edit-info',
+        name: 'editInfo',
+        component: EditInfo,
+      },
+      {
+        path: '/user/:username/change-password',
+        name: 'changePassword',
+        component: ChangePassword,
       },
     ]
   },

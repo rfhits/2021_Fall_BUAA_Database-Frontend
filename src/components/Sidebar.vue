@@ -36,6 +36,11 @@
         <span>已购</span>
       </el-menu-item>
 
+      <el-menu-item :index=changePasswordUrl>
+        <EditOutlined />
+        <span>修改密码</span>
+      </el-menu-item>
+
       <el-menu-item :index=editUrl>
         <EditOutlined />
         <span>编辑资料</span>
@@ -87,8 +92,11 @@ export default {
       return "/user/" + this.$route.params.username + "/bought"
     },
     editUrl() {
-      return "/user/" + this.$route.params.username + "/edit"
+      return "/user/" + this.$route.params.username + "/edit-info"
     },
+    changePasswordUrl() {
+      return "/user/" + this.$route.params.username + "/change-password"
+    }
   },
   methods: {
     logout() {
