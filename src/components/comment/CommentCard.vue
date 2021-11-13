@@ -8,7 +8,7 @@ data: {
 }
 -->
 <template>
-  <el-card :body-style="{width: 'this.cardData.width'}">
+  <el-card :style="{width: this.cardData.width}">
     <div class="card-header" @click="goToPage">
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">

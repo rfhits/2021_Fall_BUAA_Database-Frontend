@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      cardWidth: "500px",
+      cardWidth: "600px",
       comments: [
         {
           articleId: 233,

@@ -27,3 +27,8 @@
 1. [米游社的展示](https://bbs.mihoyo.com/ys/article/11509350?create=1)
 2. [米游社的编辑](https://bbs.mihoyo.com/ys/newArticle/0/1)
 
+## 路由传参
+
+https://blog.csdn.net/mf_717714/article/details/81945218
+
+https://blog.csdn.net/m0_46217225/article/details/119808510?spm=1001.2014.3001.5501

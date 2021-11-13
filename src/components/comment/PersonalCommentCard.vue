@@ -8,7 +8,7 @@ data: {
 }
 -->
 <template>
-  <el-card :body-style="{width: 'this.cardWidth'}">
+  <el-card :style="{width: 'this.cardWidth'}">
     <div class="comment-time" style="color: #999">
       <ClockCircleOutlined />
       {{ cardData.date }}
@@ -44,7 +44,7 @@ export default {
   },
   props: {
     cardData: {type: Object, required: true},
-    cardWidth: {type: Object, required: true}
+    cardWidth: {type: String, required: true}
   },
   methods: {
     goToPage() {

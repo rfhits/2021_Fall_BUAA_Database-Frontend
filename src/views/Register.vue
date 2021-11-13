@@ -171,7 +171,7 @@ export default {
               username: _this.registerForm.username,
               nickname: _this.registerForm.nickname,
               password: _this.registerForm.pass,
-              imgurl: _this.imageUrl,
+              avB: _this.imageUrl,
             }
           }).then((res) => {
               if (res.status === 0) {

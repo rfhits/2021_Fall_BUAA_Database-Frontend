@@ -100,7 +100,8 @@ export default {
   },
   methods: {
     logout() {
-
+      this.$router.push('/home');
+      this.$store.commit('logout')
     }
   }
 }

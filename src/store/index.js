@@ -6,8 +6,9 @@ export default createStore({
     loggedIn: false,
     searchItem: "",
     user: {
-      nickname: "",
-      username: '100',
+      nickname: "DefaultNickname",
+      username: 'DefaultUsername',
+      gender: '0',
       avatarUrl: "https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png"
     }
   },
@@ -21,6 +22,13 @@ export default createStore({
     logout(state) {
       state.loggedIn = false;
       state.user.username = '';
+    },
+    setAvatarUrl(state, data) {
+      state.user.avatarUrl = data.avatarUrl;
+    },
+    setInfo(state, data) {
+      state.user.nickname = data.nickname;
+      state.user.gender = data.gender.toString();
     }
   },
   actions: {

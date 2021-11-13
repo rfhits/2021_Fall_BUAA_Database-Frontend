@@ -1,45 +1,48 @@
 <template>
-  <el-card :body-style="{width: 'this.cardData.width'}">
-    <div v-if="false" class="card-header" @click="goToPage">
-      <div class="avatar_container">
-        <img :src=cardData.avatarUrl class="avatar_img">
-      </div>
-      <a style="margin-left: 10px;">{{cardData.nickname}}</a>
-      <p style="font-size: 12px; margin: 0px 10px; color: #999">{{cardData.time}}</p>
-    </div>
-
-    <a class="card-content" style="display: block">
-      <div style="display: flex">
-        <el-link
-            :href="articleUrl"
-            :underline="false"
-            style="font-weight: bold; font-size: 18px"
-        >{{ cardData.title }}</el-link>
-      </div>
-      <div class="brief">
-        {{cardData.brief}}
-      </div>
-      <div class="preview" style="display: flex;">
-        <img style="border-radius: 6px" :src=cardData.coverUrl>
-      </div>
-    </a>
-    <div class="footer">
-      <div class="data">
-        <LikeOutlined />
-        <span>{{cardData.likes}}</span>
+  <div :style="{width: cardData.width}">
+    <el-card  @click="debug()">
+      <div v-if="false" class="card-header" @click="goToPage">
+        <div class="avatar_container">
+          <img :src=cardData.avatarUrl class="avatar_img">
+        </div>
+        <a style="margin-left: 10px;">{{cardData.nickname}}</a>
+        <p style="font-size: 12px; margin: 0px 10px; color: #999">{{cardData.time}}</p>
       </div>
 
-      <div class="data">
-        <CommentOutlined/>
-        <span>{{cardData.comments}}</span>
-      </div>
+      <a class="card-content" style="display: block">
+        <div style="display: flex">
+          <el-link
+              :href="articleUrl"
+              :underline="false"
+              style="font-weight: bold; font-size: 18px"
+          >{{ cardData.title }}</el-link>
+        </div>
+        <div class="brief">
+          {{cardData.brief}}
+        </div>
+        <div class="preview" style="display: flex;">
+          <img style="border-radius: 6px" :src=cardData.coverUrl>
+        </div>
+      </a>
+      <div class="footer">
+        <div class="data">
+          <LikeOutlined />
+          <span>{{cardData.likes}}</span>
+        </div>
 
-      <div class="data">
-        <EyeOutlined />
-        <span>{{cardData.clicks}}</span>
+        <div class="data">
+          <CommentOutlined/>
+          <span>{{cardData.comments}}</span>
+        </div>
+
+        <div class="data">
+          <EyeOutlined />
+          <span>{{cardData.clicks}}</span>
+        </div>
       </div>
-    </div>
-  </el-card>
+    </el-card>
+  </div>
+
 
 </template>
 
@@ -64,6 +67,9 @@ export default {
   methods: {
     goToPage() {
       this.$router.push("/user/" + this.cardData.username)
+    },
+    debug() {
+      console.log(this.cardData.width)
     }
   }
 }

@@ -4,7 +4,7 @@
     <div class="avatar_editor">
       <div class="avatar_container">
         <img class="avatar_img" :src="this.$store.state.user.avatarUrl">
-        <el-link style="margin-top: 15px">修改头像</el-link>
+        <el-link style="margin-top: 15px" @click="dialogVisible = true">修改头像</el-link>
       </div>
     </div>
 
@@ -21,38 +21,118 @@
       <div class="gender-selector">
         <div style="padding-right: 20px">性别</div>
         <el-radio-group v-model="this.infoForm.gender">
-          <el-radio label="0">男</el-radio>
-          <el-radio label="1">女</el-radio>
-          <el-radio label="2">保密</el-radio>
+          <el-radio label='0'>男</el-radio>
+          <el-radio label='1'>女</el-radio>
+          <el-radio label='2'>保密</el-radio>
         </el-radio-group>
       </div>
 
-      <el-button @click="submitForm()">保存</el-button>
+      <el-button @click="submitInfo()">保存</el-button>
     </div>
 
     <div class="footer" style="height: 30px">
-
     </div>
   </div>
+
+  <el-dialog v-model="dialogVisible" title="上传头像" style="display: block;">
+    <div class = "upload-container">
+      <a-upload
+          name="avatar"
+          list-type="picture-card"
+          class="avatar-uploader"
+          :show-upload-list="false"
+          :before-upload="beforeUpload"
+          @change="handleChange"
+      >
+        <div v-if="uploadB64" class="upload-img-container">
+          <img :src="uploadB64" alt="avatar" class="avatar_img"/>
+        </div>
+        <div v-else style=" width: 200px; height: 200px; margin: 0 auto;">
+          <PlusOutlined :style="{fontSize: '30px', color: '#08c'}"/>
+        </div>
+
+      </a-upload>
+
+
+    </div>
+    <el-button @click="saveNewAvatar()">保存头像</el-button>
+  </el-dialog>
 </template>
 
 <script>
 import {defineComponent, ref} from 'vue'
+import {getBase64} from "../../api/utils";
+import request from "../../api/request";
+import {PlusOutlined} from '@ant-design/icons-vue'
 
 export default {
   name: "EditInfo",
+  components: {
+    PlusOutlined
+  },
   data() {
     return {
+      dialogVisible: false,
+      uploadB64: null,
       infoForm: {
-        nickname: 'hello',
-        gender: ref('0'),
+        nickname: this.$store.state.user.nickname,
+        gender: ref(this.$store.state.user.gender)
       },
     }
   },
   methods: {
-    // todo: submit change, including avatar and info
-    submitForm() {
+    beforeUpload(file, fileList) {
+      let _this = this;
+      getBase64(file, imageUrl => {
+        _this.uploadB64 = imageUrl;
+      });
+      return false;
+    },
 
+    handleChange(info) {
+      console.log(info)
+      let _this = this;
+      this.file = info.file;
+      getBase64(info.file, imageUrl => {
+        _this.uploadB64 = imageUrl;
+      });
+    },
+    saveNewAvatar() {
+      request.post("/user/change-avatar/", {
+        "user": {
+          username: this.$store.state.user.username,
+          avatarB64: this.uploadB64,
+        }
+      }).then((res) => {
+        if (res.status === 0) {
+          this.$store.commit('setAvatarUrl', res.data);
+          this.dialogVisible = false;
+          this.$message.success("save success")
+        } else {
+          this.$message.error(res.statusInfo.message);
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+    },
+    // todo: submit change, including avatar and info
+    submitInfo() {
+      request.post("/user/change-info/", {
+        "user": {
+          username: this.$store.state.user.username,
+          nickname: this.infoForm.nickname,
+          gender: this.infoForm.gender
+        }
+      }).then((res) => {
+        if (res.status === 0) {
+          this.$store.commit('setInfo', res.data);
+          this.$message.success("save success")
+        } else {
+          this.$message.error(res.statusInfo.message);
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
     }
   },
   setup() {
@@ -83,6 +163,23 @@ export default {
   border-radius: 50%;
   border: 3px solid #ebebeb;
   vertical-align: top;
+}
+
+.upload-container /deep/  .ant-upload-picture-card-wrapper {
+  display: flex;
+}
+
+.avatar-uploader /deep/ .ant-upload {
+  width: 160px;
+  height: 160px;
+  margin: 20px auto;
+}
+
+.upload-img-container {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  background-color: white;
 }
 
 

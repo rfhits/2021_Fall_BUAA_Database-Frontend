@@ -87,7 +87,7 @@ export default {
       let _this = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          request.post("/change_password/", {
+          request.post("/change-password/", {
             "user": {
               "userID": _this.$store.state.user.username,
               "originPassword": _this.ruleForm.originPass,

@@ -3,10 +3,7 @@
     <Header head_index="1"></Header>
 <!--    <ArticleCard :cardData="this.cardData"></ArticleCard>-->
 <!--    <CommentCard :cardData="this.commentCardData"></CommentCard>-->
-    <PersonalArticleCard :card-data="this.cardData"></PersonalArticleCard>
-    <div class="sidebar-container">
-      <sidebar></sidebar>
-    </div>
+<!--    <PersonalArticleCard :cardData="this.cardData"></PersonalArticleCard>-->
   </div>
 </template>
 
@@ -40,7 +37,8 @@ export default {
         comments: 200,
         clicks: 50,
         coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-        avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png'
+        avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
+        width: "600px"
       },
       commentCardData: {
         username: "username000",
@@ -51,7 +49,7 @@ export default {
         content: "Hu Tao will rerun I love hutao, I lllllllllllllllllove hutao",
         likes: 100,
         liked: true,
-
+        width: "600px",
       }
     }
   },
