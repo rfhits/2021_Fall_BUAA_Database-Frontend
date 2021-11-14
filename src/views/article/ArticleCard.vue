@@ -1,5 +1,5 @@
 <template>
-  <el-card class="card">
+  <el-card :style="{width: cardData.width}">
     <div class="card-header" @click="goToPage">
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">
