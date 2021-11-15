@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header></Header>
     <div class="login-root">
       <div class="form" style="text-align: center; width: 250px; margin: 50px auto; margin-top: 50px">
         <h1>Welcome, traveller</h1>
@@ -45,7 +44,7 @@ export default {
     login() {
       let isValidAccount = this.form.password.length >= 8 && this.form.username !== ''
       if (isValidAccount) {
-        request.post("/login/", {
+        request.post("/user/login/", {
           "user": this.form
         }).then( res=> {
           if (res.status === 0) {

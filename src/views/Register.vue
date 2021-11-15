@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div style="margin-bottom: 50px">
-      <Header></Header>
-    </div>
+    <div style="height: 30px"></div>
     <div class="register-root">
       <div class="steps">
         <a-steps :current="currentStep" align-center>

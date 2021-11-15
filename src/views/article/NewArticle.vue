@@ -1,5 +1,4 @@
 <template>
-  <Header head_index="1"></Header>
   <div style="display: flex; padding-top: 50px; background-color: rgb(240, 241, 245)">
     <div class="page-container">
       <div class="title-input">

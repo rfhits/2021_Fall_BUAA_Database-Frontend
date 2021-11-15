@@ -4,8 +4,12 @@
     <div class="avatar_editor">
       <div class="avatar_container">
         <img class="avatar_img" :src="this.$store.state.user.avatarUrl">
-        <el-link style="margin-top: 15px" @click="dialogVisible = true">修改头像</el-link>
+        <div style="width: 80px; margin: 0 auto">
+          <el-link style="margin-top: 15px" @click="dialogVisible = true">修改头像</el-link>
+        </div>
+
       </div>
+
     </div>
 
     <div class="text-editor">
@@ -27,10 +31,10 @@
         </el-radio-group>
       </div>
 
-      <el-button @click="submitInfo()">保存</el-button>
-    </div>
+      <div style="width: 100px; margin:0 auto">
+        <el-button @click="submitInfo()">保存</el-button>
+      </div>
 
-    <div class="footer" style="height: 30px">
     </div>
   </div>
 
@@ -117,7 +121,7 @@ export default {
     },
     // todo: submit change, including avatar and info
     submitInfo() {
-      request.post("/user/change-info/", {
+      request.post("/user/edit-info/", {
         "user": {
           username: this.$store.state.user.username,
           nickname: this.infoForm.nickname,
@@ -155,6 +159,7 @@ export default {
   width: 160px;
   height: 160px;
   margin: 20px auto;
+  display: block;
 }
 
 .avatar_img {

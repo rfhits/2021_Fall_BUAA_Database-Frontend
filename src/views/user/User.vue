@@ -1,12 +1,10 @@
 <template>
-  <Header></Header>
   <div class="root" style="background-color: #f0f1f5; display: block">
     <div class="user-card-container">
       <el-card :body-style="{display: 'flex', alignItems: 'center'}">
         <div class="avatar_container">
           <img :src=this.avatarUrl class="avatar_img">
         </div>
-
         <div style="margin-left: 20px">
           <h2 style="font-weight: bold">{{this.nickname}}</h2>
           <div v-if="this.$store.state.user.username===this.$route.params.username">
@@ -45,6 +43,7 @@
         <div class="sidebar-container">
           <sidebar/>
         </div>
+
         <div class="router-container">
           <router-view></router-view>
         </div>
@@ -52,6 +51,7 @@
       </div>
     </div>
 
+    <div class="footer"></div>
   </div>
 
 </template>
@@ -140,5 +140,9 @@ export default {
 .router-container {
   margin-top: 20px;
   width: 900px;
+}
+
+.footer {
+  height: 30px;
 }
 </style>

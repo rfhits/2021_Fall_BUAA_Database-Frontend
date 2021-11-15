@@ -4,8 +4,8 @@
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">
       </div>
-      <a style="margin-left: 10px;">{{cardData.nickname}}</a>
-      <p style="font-size: 12px; margin: 0px 10px; color: #999">{{cardData.time}}</p>
+      <a style="margin-left: 10px;">{{ cardData.nickname }}</a>
+      <p style="font-size: 12px; margin: 0px 10px; color: #999">{{ cardData.time }}</p>
     </div>
 
     <a class="card-content" style="display: block">
@@ -14,30 +14,42 @@
             :href="articleUrl"
             :underline="false"
             style="font-weight: bold; font-size: 18px"
-        >{{ cardData.title }}</el-link>
+        >{{ cardData.title }}
+        </el-link>
       </div>
       <div class="brief">
-        {{cardData.brief}}
+        {{ cardData.brief }}
       </div>
       <div class="preview" style="display: flex;">
         <img style="border-radius: 6px" :src=cardData.coverUrl>
       </div>
     </a>
     <div class="footer">
-      <div class="data">
-        <LikeOutlined />
-        <span>{{cardData.likes}}</span>
+      <div class="tags">
+        <el-check-tag v-for="topic in tagSlice"
+                      checked
+                      size="small"
+                      style="margin-right: 8px">{{ topic }}
+        </el-check-tag>
       </div>
 
-      <div class="data">
-        <CommentOutlined/>
-        <span>{{cardData.comments}}</span>
+      <div class="datas">
+        <div class="data">
+          <LikeOutlined/>
+          <span>{{ cardData.likes }}</span>
+        </div>
+
+        <div class="data">
+          <CommentOutlined/>
+          <span>{{ cardData.comments }}</span>
+        </div>
+
+        <div class="data">
+          <EyeOutlined/>
+          <span>{{ cardData.clicks }}</span>
+        </div>
       </div>
 
-      <div class="data">
-        <EyeOutlined />
-        <span>{{cardData.clicks}}</span>
-      </div>
     </div>
   </el-card>
 
@@ -59,7 +71,18 @@ export default {
   computed: {
     articleUrl() {
       return "/article/" + this.cardData.articleId;
+    },
+    tagSlice() {
+      if (this.cardData.topics) {
+        return this.cardData.topics.slice(0, 3)
+      } else {
+
+      }
     }
+  },
+  created() {
+
+
   },
   methods: {
     goToPage() {
@@ -104,17 +127,29 @@ export default {
   color: #999;
   display: flex;
 }
+
 .preview {
   margin: 10px 0px;
   height: 120px;
-  width: 120px;
-  ;
+  width: 120px;;
 }
 
 .footer {
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: 0px;
   display: flex;
+  align-items: center;
+  /*flex-direction: row-reverse;*/
+}
+
+.tags {
+  width: 400px;
+}
+
+.datas {
+  display: flex;
+  width: 100%;
+  /*align-items: center;*/
   flex-direction: row-reverse;
 }
 

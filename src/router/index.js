@@ -17,9 +17,16 @@ import Followers from "@/views/user/Followers"
 import Followings from "@/views/user/Followings"
 import ChangePassword from "@/views/user/ChangePassword"
 import EditInfo from "@/views/user/EditInfo"
+import DevLjj from "@/DevLjj"
+import Topic from '@/views/Topic'
 
 
 const routes = [
+  {
+    path: '/dev-ljj',
+    name: "DevLjj",
+    component: DevLjj
+  },
   {
     path: '/comment-card',
     name: "cc",
@@ -120,16 +127,22 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/topic/:topicId',
+    name: 'TopicId',
+    component: Topic
+  },
+  {
+    path: '/admin/login',
+    name: 'AdminLogin',
+    component: () => import('@/views/admin/Login')
+
+  },
 
   // {
   //   path: '/mall/good/:id',
   //   name: 'Good',
   //   component: Good,
-  // },
-  // {
-  //   path: 'article/:id',
-  //   name: 'Article',
-  //   component: Article,
   // },
 
   {
