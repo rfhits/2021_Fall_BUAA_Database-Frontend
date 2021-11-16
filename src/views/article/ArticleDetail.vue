@@ -46,7 +46,7 @@
       </div>
 
       <el-input
-          v-model="textarea"
+          v-model="commentContent"
           :autosize="{ minRows: 4, maxRows: 8 }"
           type="textarea"
           placeholder="请开始你的表演..."
@@ -122,7 +122,7 @@ export default {
       articleId: this.$route.params.articleId,
       liked: false,
       likeColor: "#999",
-      textarea: "",
+      commentContent: "",
       testUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
     }
   },
@@ -156,8 +156,20 @@ export default {
     },
 
     postComment() {
-      alert("post")
-    }
+      request.post("/comment/post/", {
+        params: {
+          username: this.$store.state.user.username,
+          articleId: this.articleId,
+          content: this.commentContent
+        }
+      }).then(res => {
+        if (res.status === 0) {
+          this.load()
+        } else {
+          alert("comment post failed")
+        }
+      })
+    },
   }
 }
 </script>
