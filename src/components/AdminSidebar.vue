@@ -6,28 +6,29 @@
         class="el-menu-vertical-demo"
         style="width: 200px"
     >
-      <el-menu-item :index=postsUrl>
-        <ProfileOutlined/>
-        <span>文章</span>
-      </el-menu-item>
 
-      <el-menu-item :index=commentsUrl>
-        <CommentOutlined/>
-        <span>评论</span>
-      </el-menu-item>
-
-
-      <el-menu-item :index=followingsUrl>
+      <el-menu-item :index=usersUrl>
         <HeartOutlined/>
         <span>用户</span>
       </el-menu-item>
 
-      <el-menu-item :index=cartUrl>
-        <ShoppingCartOutlined />
+      <el-menu-item index="/admin/manage/posts">
+        <ProfileOutlined/>
+        <span>文章</span>
+      </el-menu-item>
+
+      <el-menu-item index="/admin/manage/goods">
+        <ShoppingCartOutlined/>
         <span>商品</span>
       </el-menu-item>
+
+      <el-menu-item index="/admin/manage/comments">
+        <CommentOutlined/>
+        <span>评论</span>
+      </el-menu-item>
+
       <el-menu-item @click="logout()">
-        <LogoutOutlined />
+        <LogoutOutlined/>
         <span>退出登录</span>
       </el-menu-item>
 
@@ -36,8 +37,10 @@
 </template>
 
 <script>
-import {ProfileOutlined, CommentOutlined, HeartOutlined,
-  UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined}
+import {
+  ProfileOutlined, CommentOutlined, HeartOutlined,
+  UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined
+}
   from '@ant-design/icons-vue'
 
 export default {
@@ -59,24 +62,9 @@ export default {
     commentsUrl() {
       return "/user/" + this.$route.params.username + "/comments"
     },
-    followersUrl() {
-      return "/user/" + this.$route.params.username + "/followers"
+    usersUrl() {
+      return "/admin/manage/users"
     },
-    followingsUrl() {
-      return "/user/" + this.$route.params.username + "/followings"
-    },
-    cartUrl() {
-      return "/user/" + this.$route.params.username + "/cart"
-    },
-    boughtUrl() {
-      return "/user/" + this.$route.params.username + "/bought"
-    },
-    editUrl() {
-      return "/user/" + this.$route.params.username + "/edit-info"
-    },
-    changePasswordUrl() {
-      return "/user/" + this.$route.params.username + "/change-password"
-    }
   },
   methods: {
     logout() {
@@ -92,7 +80,6 @@ export default {
 <style scoped>
 .sidebar-container {
   border: 1px solid #e6e6e6;
-  width: 151px;
-  /*height*/
+  width: 150px;
 }
 </style>

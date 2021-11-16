@@ -84,9 +84,6 @@
 </template>
 
 <script>
-
-// import axios_service from "../../../api/request"
-import Header from "@/components/Header";
 import request from "../api/request";
 
 
@@ -99,7 +96,6 @@ function getBase64(img, callback) {
 export default {
   name: "Register",
   components: {
-    Header,
   },
   data: function () {
     let validateUsername = (rule, value, callback) => {
@@ -173,7 +169,7 @@ export default {
             }
           }).then((res) => {
               if (res.status === 0) {
-                _this.currentStep++;
+                this.$router.push("/home")
               } else {
                 this.$message.error(res.statusInfo.message);
               }

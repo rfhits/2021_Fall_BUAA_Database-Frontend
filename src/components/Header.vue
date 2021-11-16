@@ -69,11 +69,11 @@
               <br>
               <el-link icon="el-icon-edit-outline" @click="goToPage('/manage/user-info')">个人中心</el-link>
             </template>
-            <a-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
+            <a-avatar :src=this.$store.state.user.avatarUrl />
           </a-popover>
         </div>
 
-        <!--              gonna sign in or loggin in button-->
+        <!--              gonna sign in or login in button-->
         <div v-else>
           <a-menu
               id="gtcbml"

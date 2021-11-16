@@ -140,7 +140,7 @@ export default {
       let _this = this
       // console.log(this.article)
       // console.log(topics)
-      request.post("/post-article/", {
+      request.post("/article/post-article/", {
         "username": _this.$store.state.username,
         "article": _this.article,
         "topics": topics

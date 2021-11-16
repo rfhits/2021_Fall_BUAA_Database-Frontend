@@ -26,6 +26,7 @@
       <div class="footer"></div>
     </div>
   </div>
+  <img src="http://localhost:8000/pic/kiko.jpg">
 </template>
 
 <script>

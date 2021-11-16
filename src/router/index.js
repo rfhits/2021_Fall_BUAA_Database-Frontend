@@ -83,7 +83,6 @@ const routes = [
         return '/user/'+params.username+'/posts'
       }
     },
-    // redirect: '/user/'+params.username+'/posts',
     children: [
       {
         path: '/user/:username/posts',
@@ -145,8 +144,32 @@ const routes = [
       },
       {
         path: '/admin/manage',
+        redirect: '/admin/manage/posts/',
         name: 'AdminManage',
-        component: () => import('@/views/admin/Manage')
+        component: () => import('@/views/admin/Manage'),
+        children: [
+          {
+            path: '/admin/manage/posts',
+            name: 'ManagePosts',
+            component: () => import('@/views/admin/Posts')
+          },
+          {
+            path: '/admin/manage/users',
+            name: 'ManageUsers',
+            component: () => import('@/views/admin/Users')
+          },
+          {
+            path: '/admin/manage/goods',
+            name: 'ManageGoods',
+            component: () => import('@/views/admin/Goods')
+          },
+          {
+            path: '/admin/manage/comments',
+            name: 'ManageComments',
+            component: () => import('@/views/admin/Comments')
+          }
+
+        ]
       }
     ]
   },

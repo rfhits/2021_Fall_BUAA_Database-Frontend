@@ -1,13 +1,18 @@
 <template>
   <div class="root">
-    <Sidebar style="margin: 20px"/>
-    <router-view style="flex: 1" />
+    <div class="sidebar-container">
+      <Sidebar/>
+    </div>
+    <div>
+      <router-view />
+    </div>
+
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
-import Sidebar from "@/components/admin/Sidebar";
+import Sidebar from "@/components/AdminSidebar";
 export default {
   name: "Manage",
   components: {Sidebar, Header}
@@ -15,5 +20,14 @@ export default {
 </script>
 
 <style scoped>
-
+.root {
+  display: flex;
+}
+.sidebar-container {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 40px;
+  width: 202px;
+  border-color: #999;
+}
 </style>
