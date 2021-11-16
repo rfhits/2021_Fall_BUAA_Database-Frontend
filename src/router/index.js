@@ -133,11 +133,24 @@ const routes = [
     component: Topic
   },
   {
-    path: '/admin/login',
-    name: 'AdminLogin',
-    component: () => import('@/views/admin/Login')
-
+    path: '/admin/',
+    name: 'Admin',
+    component: () => import('@/views/admin/Admin'),
+    redirect: '/admin/login/',
+    children: [
+      {
+        path: '/admin/login',
+        name: 'AdminLogin',
+        component: () => import('@/views/admin/Login')
+      },
+      {
+        path: '/admin/manage',
+        name: 'AdminManage',
+        component: () => import('@/views/admin/Manage')
+      }
+    ]
   },
+
 
   // {
   //   path: '/mall/good/:id',
@@ -145,11 +158,6 @@ const routes = [
   //   component: Good,
   // },
 
-  {
-    path: '/sidebar',
-    name: 'Sidebar',
-    component: Sidebar
-  }
 ]
 
 const router = createRouter({

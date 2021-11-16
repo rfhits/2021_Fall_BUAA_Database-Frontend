@@ -22,13 +22,12 @@
 </template>
 
 <script>
-import Header from "../components/Header";
 import request from "../api/request";
 
 
 export default {
   components: {
-    Header,
+
   },
   name: "login",
   data() {

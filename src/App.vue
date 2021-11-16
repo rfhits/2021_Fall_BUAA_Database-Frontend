@@ -1,6 +1,6 @@
 <template>
   <div style="display: block">
-    <div class="header-container">
+    <div v-if="headerVisiable" class="header-container">
       <Header></Header>
     </div>
     <div style="height: 50px"></div>
@@ -26,6 +26,15 @@ export default {
     window.addEventListener("beforeunload", () => {
       sessionStorage.setItem("store", JSON.stringify(this.$store.state))
     })
+  },
+  computed: {
+    headerVisiable() {
+      if (this.$route.path.indexOf("/admin/") !== -1) {
+        return false
+      } else {
+        return true
+      }
+    }
   }
 }
 </script>
@@ -34,8 +43,8 @@ export default {
 <style>
 .header-container {
   width: 100%;
-  position:fixed;
+  position: fixed;
   z-index: 9999;
-  top:0;
+  top: 0;
 }
 </style>
