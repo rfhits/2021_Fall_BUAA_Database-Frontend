@@ -21,6 +21,7 @@ import DevLjj from "@/DevLjj"
 import Topic from '@/views/Topic'
 
 
+
 const routes = [
   {
     path: '/dev-ljj',
@@ -62,6 +63,11 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import('@/views/Search'),
   },
   {
     path: '/login',
@@ -173,7 +179,6 @@ const routes = [
       }
     ]
   },
-
 
   // {
   //   path: '/mall/good/:id',

@@ -39,6 +39,9 @@ export default {
     }
   },
   computed: {
+    selfUsername(){
+      return this.$store.state.user.username
+    },
     followText() {
       return function (followed) {
         if (followed) {
@@ -60,6 +63,18 @@ export default {
     }
   },
   methods: {
+    load() {
+      request.post('/user/view-followers/', {
+        selfUsername: this.selfUsername,
+        viewedUsername: this.$route.params.username
+      }).then(res => {
+        if (res.status === 0) {
+          this.followers = res.data.followers
+        } else {
+          alert('get followers failed')
+        }
+      })
+    },
     goTo(url) {
       this.$router.push(url)
     },
@@ -81,6 +96,9 @@ export default {
       })
     },
 
+  },
+  created() {
+    this.load();
   }
 }
 </script>

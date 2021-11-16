@@ -22,14 +22,14 @@ data: {
 
     <div class="footer">
       <div class="comment-time" style="color: #999">
-        {{cardData.date}}
+        {{ cardData.date }}
       </div>
       <div style="width: 460px"></div>
 
       <div style="display: flex; align-items: center; font-size: 16px">
         <LikeOutlined :style="{color:likeColor}" @click="like()"></LikeOutlined>
 
-        <span style="color: #999; margin-left: 5px">{{cardData.likes}}</span>
+        <span style="color: #999; margin-left: 5px">{{ cardData.likes }}</span>
       </div>
 
     </div>
@@ -38,6 +38,7 @@ data: {
 </template>
 
 <script>
+import request from "@/api/request";
 import {LikeOutlined} from '@ant-design/icons-vue'
 
 export default {
@@ -54,22 +55,22 @@ export default {
     },
     like() {
       if (this.cardData.liked) {
-        request.get("/comment/dislike/", {
-          params: {
-            username: this.$store.state.user.username,
-            commentId:  this.cardData.commentId
-          }
+        request.post("/comment/dislike/", {
+
+          username: this.$store.state.user.username,
+          commentId: this.cardData.commentId
+
         }).then(res => {
 
         })
         this.cardData.liked = false;
         this.cardData.likes -= 1;
       } else {
-        request.get("/comment/like/", {
-          params: {
-            username: this.$store.state.user.username,
-            commentId:  this.cardData.commentId
-          }
+        request.post("/comment/like/", {
+
+          username: this.$store.state.user.username,
+          commentId: this.cardData.commentId
+
         }).then(res => {
 
         })

@@ -26,27 +26,27 @@
         <span>关注</span>
       </el-menu-item>
 
-      <el-menu-item :index=cartUrl>
+      <el-menu-item v-if="isSelf" :index=cartUrl>
         <ShoppingCartOutlined />
         <span>购物车</span>
       </el-menu-item>
 
-      <el-menu-item :index=boughtUrl>
+      <el-menu-item v-if="isSelf" :index=boughtUrl>
         <i class="el-icon-user-solid"></i>
         <span>已购</span>
       </el-menu-item>
 
-      <el-menu-item :index=changePasswordUrl>
+      <el-menu-item v-if="isSelf" :index=changePasswordUrl>
         <EditOutlined />
         <span>修改密码</span>
       </el-menu-item>
 
-      <el-menu-item :index=editUrl>
+      <el-menu-item v-if="isSelf" :index=editUrl>
         <EditOutlined />
         <span>编辑资料</span>
       </el-menu-item>
 
-      <el-menu-item @click="logout()">
+      <el-menu-item v-if="isSelf" @click="logout()">
         <LogoutOutlined />
         <span>退出登录</span>
       </el-menu-item>
@@ -96,6 +96,9 @@ export default {
     },
     changePasswordUrl() {
       return "/user/" + this.$route.params.username + "/change-password"
+    },
+    isSelf() {
+      return this.$store.state.user.username == this.$route.params.username
     }
   },
   methods: {

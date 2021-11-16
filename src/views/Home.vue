@@ -26,11 +26,12 @@
       <div class="footer"></div>
     </div>
   </div>
-  <img src="http://localhost:8000/pic/kiko.jpg">
+<!--  <img src="http://localhost:8000/pic/kiko.jpg">-->
 </template>
 
 <script>
 // @ is an alias to /src
+import request from "@/api/request";
 import ArticleCard from "./article/ArticleCard";
 import PersonalArticleCard from "./article/PersonalArticleCard";
 import CommentCard from "@/components/comment/CommentCard"
@@ -102,7 +103,21 @@ export default {
     goTo() {
 
     }
+  },
+  created() {
+    request.get('/article/search/', {
+      params: {
+        searchText: "",
+      }
+    }).then(res=>{
+      if (res.status === 0) {
+        console.log(res);
+        this.articleCards = res.data.articleList;
+      } else {
+        alert("get articles failed")
+      }
 
+    })
   }
 }
 </script>

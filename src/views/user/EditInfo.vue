@@ -3,7 +3,7 @@
 
     <div class="avatar_editor">
       <div class="avatar_container">
-        <img class="avatar_img" :src="this.$store.state.user.avatarUrl">
+        <img class="avatar_img" :src=this.$store.state.user.avatarUrl>
         <div style="width: 80px; margin: 0 auto">
           <el-link style="margin-top: 15px" @click="dialogVisible = true">修改头像</el-link>
         </div>
@@ -79,10 +79,17 @@ export default {
       dialogVisible: false,
       uploadB64: null,
       infoForm: {
-        nickname: this.$store.state.user.nickname,
+        nickname: "",
+        genderIndex: '',
         gender: ref(this.$store.state.user.gender)
       },
     }
+  },
+  computed: {
+    copiedNickname() {
+      return this.$store.state.user.nickname
+    },
+
   },
   methods: {
     beforeUpload(file, fileList) {
@@ -129,7 +136,10 @@ export default {
         }
       }).then((res) => {
         if (res.status === 0) {
-          this.$store.commit('setInfo', res.data);
+          this.$store.commit('setInfo', {
+            nickname: this.nickname,
+            gender: this.gender
+          });
           this.$message.success("save success")
         } else {
           this.$message.error(res.statusInfo.message);
@@ -139,9 +149,10 @@ export default {
       })
     }
   },
-  setup() {
-    return {}
-  },
+  created() {
+    this.infoForm.nickname = this.$store.state.user.nickname;
+    this.genderIndex = this.$store.state.user.gender;
+  }
 }
 </script>
 

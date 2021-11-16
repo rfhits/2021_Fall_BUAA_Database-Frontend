@@ -49,7 +49,7 @@
       <a-col span="5">
         <a-input-search
             v-if="true"
-            placeholder=""
+            placeholder="search keyword"
             style="width: 400px; color: #f5f5f5;"
             @search="onSearch"
         />
@@ -67,7 +67,7 @@
               <br>
               <el-link icon="el-icon-switch-button" @click="logout()">退出</el-link>
               <br>
-              <el-link icon="el-icon-edit-outline" @click="goToPage('/manage/user-info')">个人中心</el-link>
+              <el-link icon="el-icon-edit-outline" @click="goToPage('/user/' + this.username)">个人中心</el-link>
             </template>
             <a-avatar :src=this.$store.state.user.avatarUrl />
           </a-popover>
@@ -159,13 +159,23 @@ export default {
       nickName: '',
     }
   },
+  computed: {
+    username() {
+      return this.$store.state.user.username
+    }
+  },
   methods: {
     onSearch(value) {
       if (value == null || value == "") {
         value = "Fate";
       }
-      this.$store.commit('commitSearch', value);
-      this.$router.push('/market');
+      // this.$store.commit('commitSearch', value);
+      this.$router.push({
+        name: 'Search',
+        params: {
+          keyword: value
+        }
+      });
     },
     hide() {
       this.$router.push('/home');

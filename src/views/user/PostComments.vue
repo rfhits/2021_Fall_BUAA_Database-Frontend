@@ -11,7 +11,7 @@
 
 <script>
 import PersonalCommentCard from "../../components/comment/PersonalCommentCard"
-import request from "../../api/request";
+import request from "@/api/request";
 
 export default {
   name: "PostComments",
@@ -39,11 +39,11 @@ export default {
   },
   methods: {
     load() {
-      request.get("/user/comments/", {
-        params: {
-          viewedUsername: this.$route.params.username,
-          selfUsername: this.$store.state.user.username
-        }
+      request.post("/user/comments/", {
+
+        otherUsername: this.$route.params.username,
+        selfUsername: this.$store.state.user.username
+
       }).then(res => {
         console.log(res);
         this.commentList = res.data.comments;

@@ -3,10 +3,9 @@
     <div style="height: 40px"></div>
 
     <div class="article">
-      <div class="article-header">
-        <h1>article no.{{ this.articleId }}</h1>
+      <div class="article-header" align="center">
+        <h1 >{{ this.article.title }}</h1>
       </div>
-
 
       <div class="article-data">
         <div>
@@ -26,17 +25,14 @@
       </div>
 
       <div class="article-content">
-        <div v-html="this.article.content">
-        </div>
+        <div v-html="this.article.content"></div>
       </div>
 
       <div class="article-footer">
         <div class="article-action">
           <LikeOutlined :style="{color: likeColor}" @click="like()"/>
         </div>
-
       </div>
-
     </div>
 
 
@@ -77,7 +73,6 @@ import Header from "../../components/Header"
 import {LikeOutlined, StarOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
 import CommentCard from "../../components/comment/CommentCard";
 import request from "@/api/request";
-
 
 export default {
   name: "ArticleDetail",
@@ -149,9 +144,29 @@ export default {
       if (this.liked === false) {
         this.liked = true;
         this.likeColor = "#00c3ff"
+        request.post("/article/like-article/", {
+          username: this.$store.state.user.username,
+          articleId: this.articleId
+        }).then(res=> {
+          if (res.status === 0) {
+
+          } else {
+            alert("like failed")
+          }
+        })
       } else {
         this.liked = false;
         this.likeColor = '#999'
+        request.post("/article/cancel-like-article/", {
+          username: this.$store.state.user.username,
+          articleId: this.articleId
+        }).then(res=> {
+          if (res.status === 0) {
+
+          } else {
+            alert("cancel like failed")
+          }
+        })
       }
     },
 
@@ -162,7 +177,10 @@ export default {
           content: this.commentContent
       }).then(res => {
         if (res.status === 0) {
-          this.load()
+          console.log("comment post success")
+          this.load(),
+          this.commentContent= '';
+          this.$message.success("评论成功❤")
         } else {
           alert("comment post failed")
         }
@@ -183,7 +201,6 @@ export default {
 .article {
   /*display: block;*/
   width: 800px;
-  height: 500px;
   margin: 0px auto;
   background-color: white;
 }
@@ -191,6 +208,7 @@ export default {
 .article-header {
   /*margin: 30px;*/
   padding-top: 30px;
+  margin: 30px auto;
 }
 
 .article-data {
@@ -206,13 +224,13 @@ export default {
 }
 
 .article-content {
-  height: 300px;
+  margin: 30px;
 }
 
 .article-footer {
   display: flex;
   align-items: center;
-
+  padding: 40px;
 }
 
 .article-action {

@@ -28,7 +28,7 @@ export default createStore({
     },
     setInfo(state, data) {
       state.user.nickname = data.nickname;
-      state.user.gender = data.gender.toString();
+      state.user.gender = data.gender;
     }
   },
   actions: {

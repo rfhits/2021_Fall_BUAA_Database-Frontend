@@ -1,6 +1,6 @@
 <template>
   <el-card
-      v-for="follower in this.followers"
+      v-for="follower in this.followings"
   >
     <div class="card-container">
       <div class="avatar_container">
@@ -28,7 +28,7 @@ export default {
   name: "Followings",
   data() {
     return {
-      followers: [
+      followings: [
         {
           username: "233",
           nickname: "nickname007",
@@ -60,6 +60,18 @@ export default {
     }
   },
   methods: {
+    load() {
+      request.post('user/view-leaders/', {
+        selfUsername: this.$store.state.user.username,
+        viewedUsername: this.$route.params.username
+      }).then(res => {
+        if (res.status === 0) {
+          this.followings = res.data.leaders
+        } else {
+          alert("get followings failed")
+        }
+      })
+    },
     goTo(url) {
       this.$router.push(url)
     },
@@ -81,6 +93,9 @@ export default {
       })
     },
 
+  },
+  created() {
+    this.load()
   }
 }
 </script>

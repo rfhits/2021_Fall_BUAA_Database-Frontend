@@ -87,15 +87,15 @@ export default {
       let _this = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          request.post("/change-password/", {
+          request.post("/user/change-password/", {
             "user": {
-              "userID": _this.$store.state.user.username,
+              "username": _this.$store.state.user.username,
               "originPassword": _this.ruleForm.originPass,
               "password": _this.ruleForm.pass,
             }
           }).then((res) => {
             if (res.status === 0) {
-             this.$message.success("修改成功❤")
+             this.$message.success("密码修改成功❤")
             } else {
               this.$message.error(res.statusInfo.message);
             }

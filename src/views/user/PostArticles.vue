@@ -10,6 +10,7 @@
 <script>
 import request from "../../api/request";
 import PersonalArticleCard from "../article/PersonalArticleCard";
+
 export default {
   name: "PostArticles",
   components: {PersonalArticleCard},
@@ -36,17 +37,17 @@ export default {
   },
   methods: {
     getPosts() {
-      request.get("/user/posts-info/" , {
+      request.get("/user/posts-info/", {
         params: {
-          username: this.$store.state.username
+          username: this.$store.state.user.username
         }
-      }).then(res=>{
+      }).then(res => {
         this.articleList = res.data.articleList;
       })
     },
   },
   created() {
-
+    this.getPosts()
   }
 }
 </script>
