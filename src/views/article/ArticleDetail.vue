@@ -157,11 +157,9 @@ export default {
 
     postComment() {
       request.post("/comment/post/", {
-        params: {
           username: this.$store.state.user.username,
           articleId: this.articleId,
           content: this.commentContent
-        }
       }).then(res => {
         if (res.status === 0) {
           this.load()
