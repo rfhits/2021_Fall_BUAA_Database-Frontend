@@ -141,7 +141,7 @@ export default {
       // console.log(this.article)
       // console.log(topics)
       request.post("/article/post-article/", {
-        "username": _this.$store.state.username,
+        "username": this.$store.state.user.username,
         "article": _this.article,
         "topics": topics
       }).then((res) => {

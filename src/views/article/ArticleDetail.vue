@@ -1,5 +1,4 @@
 <template>
-  <Header></Header>
   <div class="page-container">
     <div style="height: 40px"></div>
 
@@ -7,6 +6,7 @@
       <div class="article-header">
         <h1>article no.{{ this.articleId }}</h1>
       </div>
+
 
       <div class="article-data">
         <div>
@@ -27,7 +27,6 @@
 
       <div class="article-content">
         <div v-html="this.article.content">
-
         </div>
       </div>
 
@@ -129,7 +128,7 @@ export default {
     }
   },
   created() {
-    // this.load()
+    this.load()
   },
 
   methods: {
