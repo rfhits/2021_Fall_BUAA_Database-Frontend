@@ -76,8 +76,7 @@
 import Header from "../../components/Header"
 import {LikeOutlined, StarOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
 import CommentCard from "../../components/comment/CommentCard";
-
-const request = require("../../api/request");
+import request from "@/api/request";
 
 
 export default {
