@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import ArticleCard from "@/views/article/ArticleCard"
+import ArticleCard from "@/components/ArticleCard"
 import PersonalArticleCard from "@/views/article/PersonalArticleCard";
 import CommentCard from "@/components/comment/CommentCard"
 import sidebar from "@/components/Sidebar"

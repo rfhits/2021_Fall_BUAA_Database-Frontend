@@ -5,17 +5,16 @@
       <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
     </div>
 
-    <el-table :data="tableData" border >
-      <el-table-column prop="username" label="用户名" sortable> </el-table-column>
-      <el-table-column prop="nickname" label="昵称"> </el-table-column>
-      <el-table-column prop="gender" label="性别"> </el-table-column>
-      <el-table-column prop="age" label="年龄"> </el-table-column>
+    <el-table :data="tableData" border>
+      <el-table-column prop="username" label="用户名"></el-table-column>
+      <el-table-column prop="nickname" label="昵称"></el-table-column>
+      <el-table-column prop="gender" label="性别"></el-table-column>
+      <el-table-column prop="age" label="年龄"></el-table-column>
 
       <el-table-column fixed="right" label="操作" width="100">
         <template #default="scope">
           <el-button @click="handleDrop(scope.row)" type="text" size="small">删除</el-button>
-          <el-button @click="handleDrop(scope.row)" type="text" size="small">编辑</el-button>
-
+          <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -32,6 +31,8 @@
     >
     </el-pagination>
   </div>
+
+
 </template>
 
 <script>
@@ -39,16 +40,19 @@ import request from "@/api/request";
 
 export default {
   name: "Users",
+  components: {},
   data() {
     return {
-      form: {
-
-      },
+      form: {},
       searchText: "",
-      tableData: [
-
-      ],
+      tableData: [{
+        username: 'username',
+        nickname: 'nickname',
+        gender: 'nan',
+        age: 16
+      }],
       currentPage: 1,
+      editTableVisiable: false,
     }
   },
   created() {
@@ -58,40 +62,47 @@ export default {
   methods: {
     load() {
       console.log(this.searchText)
-      request.get("/admin/manage/users/" , {
+      request.get("/admin/manage/users/", {
         params: {
           searchText: this.searchText
         }
-      }).then(res=>{
+      }).then(res => {
         console.log(res);
-        this.tableData = res.data.courseTable
+        if (res.status === 0) {
+          this.tableData = res.data.userList
+        } else {
+          alert("search user failed")
+        }
+      }).catch(err => {
+        console.log("err: " + err);
       })
     },
 
     handleDrop(row) {
       let dropForm = {
-        "userID": this.$store.userID,
-        "courseID": row.courseID,
+        "username": row.username,
       }
-      request.post("/admin/manage/delete-user/", dropForm).then(res=>{
+      request.post("/admin/manage/delete-user/", dropForm).then(res => {
         if (res.status === 0) {
-          this.$message.success("退课成功")
+          this.$message.success("删除成功")
           this.load()
         } else {
           this.$message.error(res.statusInfo.message)
         }
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err)
       })
     },
-    handleSizeChange() {},
-    handleCurrentChange() {},
+
+    handleSizeChange() {
+    },
+    handleCurrentChange() {
+    },
+    handleEdit(row) {
+      this.editTableVisiable = true
+    }
 
   },
-  components: {
-
-  },
-
 
 
 

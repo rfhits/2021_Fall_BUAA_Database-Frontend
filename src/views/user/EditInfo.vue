@@ -54,10 +54,7 @@
         <div v-else style=" width: 200px; height: 200px; margin: 0 auto;">
           <PlusOutlined :style="{fontSize: '30px', color: '#08c'}"/>
         </div>
-
       </a-upload>
-
-
     </div>
     <el-button @click="saveNewAvatar()">保存头像</el-button>
   </el-dialog>
@@ -126,7 +123,6 @@ export default {
         console.log(err);
       })
     },
-    // todo: submit change, including avatar and info
     submitInfo() {
       request.post("/user/edit-info/", {
         "user": {

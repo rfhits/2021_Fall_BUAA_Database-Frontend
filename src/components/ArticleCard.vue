@@ -1,3 +1,14 @@
+<!-- props:
+ {
+   width,
+   title
+   nickname,
+   username,
+   avatarUrl,
+
+ }-->
+
+
 <template>
   <el-card :style="{width: cardData.width}">
     <div class="card-header" @click="goToPage">

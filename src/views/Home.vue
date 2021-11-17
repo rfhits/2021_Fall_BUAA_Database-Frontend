@@ -32,7 +32,7 @@
 <script>
 // @ is an alias to /src
 import request from "@/api/request";
-import ArticleCard from "./article/ArticleCard";
+import ArticleCard from "../components/ArticleCard";
 import PersonalArticleCard from "./article/PersonalArticleCard";
 import CommentCard from "@/components/comment/CommentCard"
 import sidebar from "@/components/Sidebar"
@@ -107,7 +107,7 @@ export default {
   created() {
     request.get('/article/search/', {
       params: {
-        searchText: "",
+        keyword: "",
       }
     }).then(res=>{
       if (res.status === 0) {

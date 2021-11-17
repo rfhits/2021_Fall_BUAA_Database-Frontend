@@ -171,8 +171,8 @@ export default {
       }
       // this.$store.commit('commitSearch', value);
       this.$router.push({
-        name: 'Search',
-        params: {
+        path: '/search/article/',
+        query: {
           keyword: value
         }
       });
