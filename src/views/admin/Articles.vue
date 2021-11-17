@@ -1,8 +1,7 @@
 <template>
   <div class="root">
     <div class="op_on_table">
-      <el-button type="primary" style="margin-right: 20px">新增商品</el-button>
-      <el-input v-model="searchText" placeholder="搜索商品" style="width: 40%;"></el-input>
+      <el-input v-model="searchText" placeholder="搜索文章" style="width: 40%; margin-left: 0"></el-input>
       <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
     </div>
 
@@ -35,16 +34,14 @@
       </el-pagination>
     </div>
   </div>
-
-
 </template>
 
 <script>
 import request from "@/api/request";
-
+import {defineComponent, ref} from 'vue'
 
 export default {
-  name: "Goods",
+  name: "Articles",
   components: {},
   data() {
     return {

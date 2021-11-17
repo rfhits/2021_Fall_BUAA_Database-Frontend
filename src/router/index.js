@@ -166,14 +166,14 @@ const routes = [
             },
             {
                 path: '/admin/manage',
-                redirect: '/admin/manage/posts/',
+                redirect: '/admin/manage/articles/',
                 name: 'AdminManage',
                 component: () => import('@/views/admin/Manage'),
                 children: [
                     {
-                        path: '/admin/manage/posts',
-                        name: 'ManagePosts',
-                        component: () => import('@/views/admin/Posts')
+                        path: '/admin/manage/articles',
+                        name: 'ManageArticles',
+                        component: () => import('@/views/admin/Articles')
                     },
                     {
                         path: '/admin/manage/users',

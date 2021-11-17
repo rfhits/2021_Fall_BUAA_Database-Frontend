@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     postsUrl() {
-      return "/user/" + this.$route.params.username + "/posts"
+      return "/user/" + this.$route.params.username + "/articles"
     },
     commentsUrl() {
       return "/user/" + this.$route.params.username + "/comments"
