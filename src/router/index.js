@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Login from "../views/Login";
 import Register from "../views/Register";
 import ArticleCard from "@/components/ArticleCard";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/UserSidebar";
 import ArticleEditor from "../components/editor/index"
 import NewArticle from "../views/article/NewArticle"
 import ArticleDetail from "../views/article/ArticleDetail"
@@ -22,6 +22,12 @@ import Topic from '@/views/Topic'
 
 
 const routes = [
+    {
+        path: '/good-card',
+        name: 'GoodCard',
+        component: () => import('@/components/GoodCard')
+    },
+
     {
         path: '/dev-ljj',
         name: "DevLjj",
@@ -195,12 +201,11 @@ const routes = [
             }
         ]
     },
-
-    // {
-    //   path: '/mall/good/:id',
-    //   name: 'Good',
-    //   component: Good,
-    // },
+    {
+      path: '/mall/good/:id',
+      name: 'Good',
+      component: () => import('@/views/mall/Good'),
+    },
 
 ]
 

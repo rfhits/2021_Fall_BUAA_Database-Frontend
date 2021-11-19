@@ -1,48 +1,47 @@
 <template>
   <div class="content-container">
-    <div class="carousel-container">
-      <el-carousel :interval="4000" type="card" class="el-carousel">
-        <el-carousel-item
-            v-for="imgUrl in carouselImg"
-            :key="imgUrl"
-        >
-          <div >
-            <img
-                :src="imgUrl"
-                style="height: 100%; width: 100%; border-radius: 10px"
-                @click="goTo()">
-          </div>
-        </el-carousel-item>
-      </el-carousel>
-    </div>
-    <div class="article-cards">
-      <ArticleCard v-for="articleCard in this.articleCards"
-                   :card-data="articleCard"
-      >
-      </ArticleCard>
-
-    </div>
+<!--    <GoodCard :card-data="this.goodCardData"></GoodCard>-->
+    <CartGoodCard :card-data="this.cartGoodCard"></CartGoodCard>
     <div class="footer"></div>
+
   </div>
-  <!--    <ArticleCard :cardData="this.cardData"></ArticleCard>-->
-  <!--    <CommentCard :cardData="this.commentCardData"></CommentCard>-->
-  <!--    <PersonalArticleCard :cardData="this.cardData"></PersonalArticleCard>-->
 </template>
 
 <script>
 import ArticleCard from "@/components/ArticleCard"
 import PersonalArticleCard from "@/views/article/PersonalArticleCard";
 import CommentCard from "@/components/comment/CommentCard"
-import sidebar from "@/components/Sidebar"
+import sidebar from "@/components/UserSidebar"
+import GoodCard from "@/components/GoodCard";
+import CartGoodCard from '@/components/CartGoodCard'
+
 export default {
   name: "DevLjj",
-  components :{ArticleCard,
+  components :{
+    GoodCard, ArticleCard,
     CommentCard,
     PersonalArticleCard,
-    sidebar,},
+    sidebar,
+    CartGoodCard,
+  },
 
     data() {
       return {
+        cartGoodCard: {
+          goodId: 233,
+          imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg',
+          width: '800px',
+          name: 'good-name',
+          storeQuantity: 20,
+          price: 520,
+        },
+        goodCardData: {
+          goodId: 233,
+          imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg',
+          width: '250px',
+          name: 'good-name',
+          price: 520,
+        },
         carouselImg: [
           "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
           "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",

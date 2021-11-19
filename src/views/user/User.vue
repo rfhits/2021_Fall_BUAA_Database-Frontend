@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/UserSidebar";
 import Header from "../../components/Header";
 import request from "@/api/request";
 

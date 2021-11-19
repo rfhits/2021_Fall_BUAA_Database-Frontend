@@ -35,7 +35,7 @@ import request from "@/api/request";
 import ArticleCard from "../components/ArticleCard";
 import PersonalArticleCard from "./article/PersonalArticleCard";
 import CommentCard from "@/components/comment/CommentCard"
-import sidebar from "@/components/Sidebar"
+import sidebar from "@/components/UserSidebar"
 
 export default {
   name: 'Home',
