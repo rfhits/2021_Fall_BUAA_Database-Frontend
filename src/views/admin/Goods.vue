@@ -1,26 +1,30 @@
 <template>
   <div class="root">
     <div class="op_on_table">
-      <el-button type="primary" style="margin-right: 20px">新增商品</el-button>
+      <el-button type="primary" style="margin-right: 20px" @click="showAddForm">新增商品</el-button>
       <el-input v-model="searchText" placeholder="搜索商品" style="width: 40%;"></el-input>
       <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
     </div>
 
     <div class="table-container">
       <el-table :data="tableData" border style="width: 100%">
-        <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="author" label="作者"></el-table-column>
-        <el-table-column prop="date" label="发布时间"></el-table-column>
-        <el-table-column label="链接"></el-table-column>
+        <el-table-column prop="name" label="商品名称"></el-table-column>
+        <el-table-column prop="price" label="单价"></el-table-column>
+        <el-table-column prop="quantity" label="库存"></el-table-column>
 
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <el-button @click="handleDrop(scope.row)" type="text" size="small">删除</el-button>
+            <el-button @click="handleEdit(scope.row)" type="primary" size="mini">编辑</el-button>
+            <el-popconfirm title="确认删除吗？" @confirm="deleteGood(scope.row)">
+              <template #reference>
+                <el-button  type="danger" size="mini">删除</el-button>
+              </template>
+            </el-popconfirm>
           </template>
+
         </el-table-column>
       </el-table>
     </div>
-
     <div class="pagination-container">
       <el-pagination
           @size-change="handleSizeChange"
@@ -34,6 +38,57 @@
       >
       </el-pagination>
     </div>
+
+    <el-dialog v-model="this.newGoodFormVisible" title="新增商品">
+      <div class="new-good-form">
+        <div class="upload-container">
+          <a-upload
+              name="avatar"
+              list-type="picture-card"
+              class="avatar-uploader"
+              :show-upload-list="false"
+              :before-upload="beforeUpload"
+              @change="handleChange"
+          >
+            <div v-if="this.newGoodForm.imgB64" class="upload-img-container">
+              <img :src="this.newGoodForm.imgB64" alt="avatar" class="avatar_img"/>
+            </div>
+            <div v-else style=" width: 200px; height: 200px; margin: 0 auto;">
+              <PlusOutlined :style="{fontSize: '30px', color: '#08c'}"/>
+            </div>
+          </a-upload>
+        </div>
+
+        <el-input v-model="newGoodForm.name" placeholder="商品名称"></el-input>
+        <el-input v-model="newGoodForm.price" placeholder="商品单价"></el-input>
+        <el-input v-model="newGoodForm.quantity" placeholder="商品库存"></el-input>
+        <el-input
+            v-model="newGoodForm.content"
+            placeholder="商品描述"
+            :autosize="{ minRows: 5, maxRows: 10 }"
+            type="textarea"
+            style="width: 400px; margin: 0 auto 10px auto;"
+        ></el-input>
+        <el-button @click="saveNewGood()">保存</el-button>
+      </div>
+    </el-dialog>
+
+<!--    编辑商品-->
+    <el-dialog v-model="this.editGoodFormVisible" title="编辑商品">
+      <div class="new-good-form">
+        <el-input v-model="editGoodForm.name" placeholder="商品名称"></el-input>
+        <el-input v-model="editGoodForm.price" placeholder="商品单价"></el-input>
+        <el-input v-model="editGoodForm.quantity" placeholder="商品库存"></el-input>
+        <el-input
+            v-model="editGoodForm.content"
+            placeholder="商品描述"
+            :autosize="{ minRows: 5, maxRows: 10 }"
+            type="textarea"
+            style="width: 400px; margin: 0 auto 10px auto;"
+        ></el-input>
+        <el-button @click="saveEditGood()">保存</el-button>
+      </div>
+    </el-dialog>
   </div>
 
 
@@ -41,35 +96,51 @@
 
 <script>
 import request from "@/api/request";
-
+import {getBase64} from "@/api/utils";
 
 export default {
   name: "Goods",
   components: {},
   data() {
     return {
-      form: {},
-      searchText: "",
+      keyword: "",
+      newGoodFormVisible: false,
+      newGoodForm: {
+        name: "",
+        imgB64: "",
+        price: "",
+        quantity: "",
+        content: "",
+      },
+      editGoodFormVisible: false,
+      editGoodForm: {
+        name: "",
+        imgB64: "",
+        price: "",
+        quantity: "",
+        content: "",
+      },
       currentPage: 1,
       pageSize: 10,
       total: 10,
-      tableData: [{
-        id: 'articleId',
-        title: 'title',
-        authorName: 'authorName',
-        date: "date:2021",
-      }],
+      tableData: [
+        {
+          id: 233,
+          name: "fury toy",
+          price: 251,
+          quantity: 233,
+          imgUrl: "",
+          content: "good content"
+        }
+      ],
     }
   },
   computed: {},
   methods: {
     load() {
-      console.log(this.searchText)
-      request.get("/admin/manage/articles/", {
+      request.get("/good/search", {
         params: {
-          searchText: this.searchText,
-          pageNumber: this.currentPage,
-          pageSize: this.pageSize
+          keyword: this.keyword,
         }
       }).then(res => {
         console.log(res);
@@ -77,9 +148,6 @@ export default {
           this.tableData = res.data.articleList
           this.total = res.data.articleList.length
           let i = 0, length = this.tableData.length
-          for (; i < length; i++) {
-            this.tableData[i].link = '/article/' + this.tableData[i].id
-          }
         } else {
           alert("search article failed")
         }
@@ -111,11 +179,73 @@ export default {
       this.load()
     },
     handleEdit(row) {
-      this.editTableVisible = true
-      this.editUser = row
-      this.editUser.gender = row.gender.toString()
-      this.editUser.refGender = ref(this.editUser.gender)
+      this.editGoodFormVisible = true
+      this.editGoodForm = row
     },
+    showAddForm() {
+      this.newGoodFormVisible = true
+    },
+    beforeUpload(file, fileList) {
+      let _this = this;
+      getBase64(file, imageUrl => {
+        _this.newGoodForm.imgB64 = imageUrl;
+      });
+      return false;
+    },
+    handleChange(info) {
+      console.log(info)
+      let _this = this;
+      this.file = info.file;
+      getBase64(info.file, imageUrl => {
+        _this.uploadB64 = imageUrl;
+      });
+    },
+    saveNewGood() {
+      request.post('/admin/manage/post-good/', {
+        good: this.newGoodForm
+      }).then(res => {
+        if (res.status === 0) {
+          this.$message.success('商品发布成功')
+          this.load()
+        } else {
+          alert("good add failed")
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+      this.newGoodForm = {}
+      this.newGoodFormVisible = false
+    },
+    saveEditGood() {
+      request.post('/admin/manage/edit-good/', {
+        good: this.editGoodForm
+      }).then(res => {
+        if (res.status === 0) {
+          this.$message.success('商品编辑成功')
+          this.load()
+        } else {
+          alert("good edit failed")
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+      this.editGoodForm = {}
+      this.editGoodFormVisible = false
+    },
+    deleteGood(row) {
+      request.post('/admin/manage/delete-good', {
+        id: row.id
+      }).then(res => {
+        if (res.status === 0) {
+          this.$message.success("delete success")
+          this.load()
+        } else {
+          alert("delete failed")
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   },
   created() {
     this.load();
@@ -136,4 +266,33 @@ export default {
 .table-container {
   width: 800px;
 }
+
+.new-good-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0px auto;
+}
+
+
+.avatar_img {
+  width: 100%;
+  height: 100%;
+  border: 3px solid #ebebeb;
+  vertical-align: top;
+}
+
+
+.upload-img-container {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  background-color: white;
+}
+
+.new-good-form .el-input {
+  margin: 0 auto 10px auto;
+  width: 400px;
+}
+
 </style>

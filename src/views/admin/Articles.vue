@@ -1,7 +1,7 @@
 <template>
   <div class="root">
     <div class="op_on_table">
-      <el-input v-model="searchText" placeholder="搜索文章" style="width: 40%; margin-left: 0"></el-input>
+      <el-input v-model="keyword" placeholder="搜索文章" style="width: 40%; margin-left: 0"></el-input>
       <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
     </div>
 
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       form: {},
-      searchText: "",
+      keyword: "",
       currentPage: 1,
       pageSize: 10,
       total: 10,
@@ -61,10 +61,10 @@ export default {
   computed: {},
   methods: {
     load() {
-      console.log(this.searchText)
-      request.get("/admin/manage/articles/", {
+      console.log(this.keyword)
+      request.get("/article/search/", {
         params: {
-          searchText: this.searchText,
+          keyword: this.keyword,
           pageNumber: this.currentPage,
           pageSize: this.pageSize
         }
@@ -123,7 +123,8 @@ export default {
 <style scoped>
 
 .root {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .op_on_table {

@@ -10,7 +10,7 @@
         <div class="good-quantity">
           <el-input-number v-model="this.orderQuantity" :min="1" :max="this.stockQuantity"/>
 
-          <span style="margin-left: 20px; color: #999">库存：{{this.stockQuantity}}</span>
+          <span style="margin-left: 20px; color: #999">库存：{{this.storeQuantity}}</span>
         </div>
         <div class="good-action">
           <el-button type="danger" @click="handleOrder()" style="width: 140px">立即购买</el-button>
@@ -40,6 +40,7 @@ export default {
       good: {
         name: "毛绒玩具",
         price: 30,
+        storeQuantity: 200,
         imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg'
       },
       orderQuantity: 0,

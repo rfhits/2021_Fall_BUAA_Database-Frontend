@@ -12,7 +12,7 @@
         <span>用户</span>
       </el-menu-item>
 
-      <el-menu-item index="/admin/manage/posts">
+      <el-menu-item index="/admin/manage/articles">
         <ProfileOutlined/>
         <span>文章</span>
       </el-menu-item>
@@ -22,7 +22,7 @@
         <span>商品</span>
       </el-menu-item>
 
-      <el-menu-item index="/admin/manage/comments">
+      <el-menu-item v-if="false" index="/admin/manage/comments">
         <CommentOutlined/>
         <span>评论</span>
       </el-menu-item>

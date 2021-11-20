@@ -9,7 +9,7 @@
  }-->
 
 <template>
-  <el-card :style="{width: cardData.width}">
+  <el-card :style="{width: this.width}">
     <div class="card-header" @click="goToPage">
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">
@@ -76,7 +76,8 @@ export default {
     CommentOutlined
   },
   props: {
-    cardData: {type: Object, required: true}
+    cardData: {type: Object, required: true},
+    width: {type: String}
   },
   computed: {
     articleUrl() {

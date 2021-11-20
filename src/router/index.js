@@ -18,7 +18,7 @@ import Followings from "@/views/user/Followings"
 import ChangePassword from "@/views/user/ChangePassword"
 import EditInfo from "@/views/user/EditInfo"
 import DevLjj from "@/DevLjj"
-import Topic from '@/views/Topic'
+import Topic from '@/views/topic/Topic'
 
 
 const routes = [
@@ -155,8 +155,8 @@ const routes = [
         ]
     },
     {
-        path: '/topic/:topicId',
-        name: 'TopicId',
+        path: '/topic/:id',
+        name: 'Topic',
         component: Topic
     },
     {
@@ -200,6 +200,11 @@ const routes = [
                 ]
             }
         ]
+    },
+    {
+      path: '/mall/',
+      name: 'Mall',
+      component: () => import('@/views/mall/Mall')
     },
     {
       path: '/mall/good/:id',
