@@ -30,7 +30,7 @@
 
       <div class="article-footer">
         <div class="article-action">
-          <LikeOutlined :style="{color: likeColor}" @click="like()"/>
+          <LikeOutlined :style="{color: articleLikeColor}" @click="like()"/>
         </div>
       </div>
     </div>
@@ -138,6 +138,7 @@ export default {
           this.user = res.data.user;
           this.article = res.data.article;
           this.comments = res.data.comments;
+          this.articleLikeColor = (this.article.liked)?  "#00c3ff":"#999"
         } else {
           alert("load failed")
         }

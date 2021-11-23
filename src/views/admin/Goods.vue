@@ -138,7 +138,7 @@ export default {
   computed: {},
   methods: {
     load() {
-      request.get("/good/search", {
+      request.get("/good/search/", {
         params: {
           keyword: this.keyword,
         }
