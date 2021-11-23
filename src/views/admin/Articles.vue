@@ -8,10 +8,9 @@
     <div class="table-container">
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="author" label="作者"></el-table-column>
-        <el-table-column prop="date" label="发布时间"></el-table-column>
-        <el-table-column label="链接"></el-table-column>
-
+        <el-table-column prop="username" label="作者"></el-table-column>
+        <el-table-column prop="postDate" label="发布时间"></el-table-column>
+        <el-table-column prop="link" label="文章链接"></el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template #default="scope">
             <el-button @click="handleDrop(scope.row)" type="text" size="small">删除</el-button>
@@ -51,10 +50,10 @@ export default {
       pageSize: 10,
       total: 10,
       tableData: [{
-        id: 'articleId',
+        articleId: 'articleId',
         title: 'title',
-        authorName: 'authorName',
-        date: "date:2021",
+        username: 'username',
+        postDate: "date:2021",
       }],
     }
   },
@@ -75,7 +74,7 @@ export default {
           this.total = res.data.articleList.length
           let i = 0, length = this.tableData.length
           for (; i < length; i++) {
-            this.tableData[i].link = '/article/' + this.tableData[i].id
+            this.tableData[i].link = '/article/' + this.tableData[i].articleId
           }
         } else {
           alert("search article failed")

@@ -157,7 +157,7 @@ export default {
     },
     handleDrop(row) {
       request.post("/admin/manage/delete-good/", {
-        goodId: row.id,
+        id: row.id,
       }).then(res => {
         if (res.status === 0) {
           this.$message.success("删除成功")
