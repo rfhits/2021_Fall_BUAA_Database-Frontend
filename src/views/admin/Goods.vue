@@ -157,9 +157,9 @@ export default {
     },
     handleDrop(row) {
       let dropForm = {
-        "articleId": row.id
+        "goodId": row.id
       }
-      request.post("/admin/manage/delete-article/", dropForm).then(res => {
+      request.post("/admin/manage/delete-good/", dropForm).then(res => {
         if (res.status === 0) {
           this.$message.success("删除成功")
           this.load()
