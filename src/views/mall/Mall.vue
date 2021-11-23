@@ -43,7 +43,7 @@ export default {
     }
   },
   created() {
-    load(),
+    this.load(),
   }
 }
 </script>
