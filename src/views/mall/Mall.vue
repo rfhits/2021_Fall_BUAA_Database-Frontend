@@ -41,6 +41,9 @@ export default {
         console.log(err)
       })
     }
+  },
+  created() {
+    load(),
   }
 }
 </script>

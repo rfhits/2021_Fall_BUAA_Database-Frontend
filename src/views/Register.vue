@@ -39,6 +39,12 @@
             <el-form-item label="昵称" prop="nickname">
               <el-input v-model="registerForm.nickname"/>
             </el-form-item>
+            <el-form-item label="性别" prop="gender">
+              <el-input v-model="registerForm.gender"/>
+            </el-form-item>
+            <el-form-item label="年龄" prop="age">
+              <el-input v-model="registerForm.age"/>
+            </el-form-item>
             <el-form-item label="头像" prop="avatar">
               <a-upload
                   name="avatar"
@@ -134,6 +140,8 @@ export default {
         username: '',
         pass: '',
         checkPass: '',
+        age: 0,
+        gender: 0,
       },
       imageUrl: null,
       rules: {

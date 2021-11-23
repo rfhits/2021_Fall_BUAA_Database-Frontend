@@ -21,20 +21,7 @@
       </el-table>
     </div>
 
-    <div class="pagination-container">
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[10, 20, 30]"
-          :page-size="10"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="this.total"
-          style="margin: 10px"
-      >
-      </el-pagination>
-    </div>
-
+<!--    edit user-->
     <div class="dialog-container">
       <el-dialog
           v-model="this.editTableVisible"
@@ -174,7 +161,7 @@ export default {
     handleConfirm() {
       console.log(this.editUser);
       this.editTableVisible = false
-      request.post('@/admin/manage/user/', {
+      request.post('@/admin/manage/edit-user/', {
         username: this.editUser.username,
         nickname: this.editUser.nickname,
         age: this.editUser.age,
