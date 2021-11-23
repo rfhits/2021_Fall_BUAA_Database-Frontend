@@ -2,7 +2,7 @@
   <div class="root">
     <div class="op_on_table">
       <el-button type="primary" style="margin-right: 20px" @click="showAddForm">新增商品</el-button>
-      <el-input v-model="searchText" placeholder="搜索商品" style="width: 40%;"></el-input>
+      <el-input v-model="keyword" placeholder="搜索商品" style="width: 40%;"></el-input>
       <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
     </div>
 
