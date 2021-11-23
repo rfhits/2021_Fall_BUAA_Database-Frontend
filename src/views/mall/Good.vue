@@ -67,7 +67,7 @@ export default {
     },
     handleOrder() {
       if (this.$store.state.loggedIn) {
-        request.post('/good/order', {
+        request.post('/order/add-order', {
           goodId: this.goodId,
           orderQuantity: this.orderQuantity,
         }).then(res => {
