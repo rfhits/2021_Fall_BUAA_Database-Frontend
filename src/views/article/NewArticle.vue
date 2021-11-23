@@ -126,7 +126,6 @@ export default {
     },
 
     handleInputConfirm() {
-      // alert("u just enter")
       const inputValue = this.inputValue
       if (inputValue) {
         this.dynamicTags.push(trim(inputValue))
@@ -138,8 +137,6 @@ export default {
     post() {
       let topics = this.dynamicTags
       let _this = this
-      // console.log(this.article)
-      // console.log(topics)
       request.post("/article/post-article/", {
         "username": this.$store.state.user.username,
         "article": _this.article,
@@ -157,9 +154,6 @@ export default {
       })
     }
   },
-
-
-
 }
 </script>
 

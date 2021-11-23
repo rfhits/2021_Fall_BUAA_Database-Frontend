@@ -39,11 +39,18 @@
             <el-form-item label="昵称" prop="nickname">
               <el-input v-model="registerForm.nickname"/>
             </el-form-item>
-            <el-form-item label="性别" prop="gender">
-              <el-input v-model="registerForm.gender"/>
+
+            <el-form-item>
+
+              <el-radio-group v-model="this.registerForm.gender">
+                <el-radio :label="0">男</el-radio>
+                <el-radio :label="1">女</el-radio>
+                <el-radio :label="2">保密</el-radio>
+              </el-radio-group>
             </el-form-item>
+
             <el-form-item label="年龄" prop="age">
-              <el-input v-model="registerForm.age"/>
+              <el-input-number v-model="registerForm.age" :min="12" :max="100" @change="handleChange" />
             </el-form-item>
             <el-form-item label="头像" prop="avatar">
               <a-upload
@@ -140,7 +147,7 @@ export default {
         username: '',
         pass: '',
         checkPass: '',
-        age: 0,
+        age: null,
         gender: 0,
       },
       imageUrl: null,
@@ -173,6 +180,8 @@ export default {
               username: _this.registerForm.username,
               nickname: _this.registerForm.nickname,
               password: _this.registerForm.pass,
+              age: _this.registerForm.age,
+              gender: _this.registerForm.gender,
               avB: _this.imageUrl,
             }
           }).then((res) => {

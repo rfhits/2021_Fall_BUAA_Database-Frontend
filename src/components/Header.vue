@@ -65,6 +65,8 @@
             <template #content>
               <el-link icon="el-icon-s-home" @click="goToPage('/home')">首页</el-link>
               <br>
+              <el-link icon="el-icon-edit" @click="goToPage('/article/new-article/')">写文章</el-link>
+              <br>
               <el-link icon="el-icon-switch-button" @click="logout()">退出</el-link>
               <br>
               <el-link icon="el-icon-edit-outline" @click="goToPage('/user/' + this.username)">个人中心</el-link>
