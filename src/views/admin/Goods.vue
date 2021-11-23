@@ -17,7 +17,7 @@
             <el-button @click="handleEdit(scope.row)" type="primary" size="mini">编辑</el-button>
             <el-popconfirm title="确认删除吗？" @confirm="deleteGood(scope.row)">
               <template #reference>
-                <el-button  type="danger" size="mini">删除</el-button>
+                <el-button type="danger" size="mini">删除</el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -73,7 +73,7 @@
       </div>
     </el-dialog>
 
-<!--    编辑商品-->
+    <!--    编辑商品-->
     <el-dialog v-model="this.editGoodFormVisible" title="编辑商品">
       <div class="new-good-form">
         <el-input v-model="editGoodForm.name" placeholder="商品名称"></el-input>
@@ -156,10 +156,9 @@ export default {
       })
     },
     handleDrop(row) {
-      let dropForm = {
-        "goodId": row.id
-      }
-      request.post("/admin/manage/delete-good/", dropForm).then(res => {
+      request.post("/admin/manage/delete-good/", {
+        goodId: row.id,
+      }).then(res => {
         if (res.status === 0) {
           this.$message.success("删除成功")
           this.load()
