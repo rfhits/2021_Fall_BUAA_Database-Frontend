@@ -9,8 +9,8 @@
  }-->
 
 <template>
-  <el-card :style="{width: this.width}">
-    <div class="card-header" @click="goToPage">
+  <el-card :style="{width: this.width}" @click="goToArticlePage()">
+    <div class="card-header">
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">
       </div>
@@ -96,8 +96,8 @@ export default {
 
   },
   methods: {
-    goToPage() {
-      this.$router.push("/user/" + this.cardData.username)
+    goToArticlePage() {
+      this.$router.push("/article/" + this.cardData.articleId)
     }
   }
 }

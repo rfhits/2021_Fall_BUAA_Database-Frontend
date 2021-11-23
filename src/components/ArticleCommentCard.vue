@@ -42,7 +42,7 @@ import request from "@/api/request";
 import {LikeOutlined} from '@ant-design/icons-vue'
 
 export default {
-  name: "CommentCard",
+  name: "ArticleCommentCard",
   components: {
     LikeOutlined,
   },
@@ -56,26 +56,34 @@ export default {
     like() {
       if (this.cardData.liked) {
         request.post("/comment/dislike/", {
-
           username: this.$store.state.user.username,
           commentId: this.cardData.commentId
-
         }).then(res => {
-
+          if (res.status === 0) {
+            this.cardData.liked = false;
+            this.cardData.likes -= 1;
+          } else {
+            alert("post dislike failed")
+          }
+        }).catch(err => {
+          console.log(err)
         })
-        this.cardData.liked = false;
-        this.cardData.likes -= 1;
-      } else {
+      }
+      // like a comment
+      else {
         request.post("/comment/like/", {
-
           username: this.$store.state.user.username,
           commentId: this.cardData.commentId
-
         }).then(res => {
-
+          if (res.status === 0) {
+            this.cardData.liked = true
+            this.cardData.likes += 1
+          } else {
+            alert("post dislike failed")
+          }
+        }).catch(err => {
+          console.log(err)
         })
-        this.cardData.liked = true
-        this.cardData.likes += 1;
       }
     }
   },

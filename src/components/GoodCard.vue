@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     goToGoodPage() {
-      this.$router.push("/mall/good/" + this.cardData.goodId)
+      this.$router.push("/mall/good/" + this.cardData.id)
     }
   }
 }

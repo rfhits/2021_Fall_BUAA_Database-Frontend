@@ -66,9 +66,9 @@ export default {
       })
     },
     handlePost() {
-      request.post('good/comment/', {
+      request.post('/good/comment/', {
         username: this.$store.state.user.username,
-        goodId: this.goodId,
+        goodId: this.cardData.goodId,
         comment: this.comment
       }).then(res => {
         if (res.status === 0) {

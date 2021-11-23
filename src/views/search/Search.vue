@@ -1,8 +1,5 @@
 <template>
   <div class="root">
-    <div class="search-type-switch">
-      {{this.$route.query.keyword}}
-    </div>
     <div class="router-view-container">
       <router-view></router-view>
     </div>

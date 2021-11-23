@@ -41,7 +41,6 @@
             </el-form-item>
 
             <el-form-item>
-
               <el-radio-group v-model="this.registerForm.gender">
                 <el-radio :label="0">男</el-radio>
                 <el-radio :label="1">女</el-radio>
@@ -50,7 +49,7 @@
             </el-form-item>
 
             <el-form-item label="年龄" prop="age">
-              <el-input-number v-model="registerForm.age" :min="12" :max="100" @change="handleChange" />
+              <el-input-number v-model="registerForm.age" :min="12" :max="100" />
             </el-form-item>
             <el-form-item label="头像" prop="avatar">
               <a-upload
@@ -186,7 +185,7 @@ export default {
             }
           }).then((res) => {
               if (res.status === 0) {
-                this.$router.push("/home")
+                this.$router.push("/login")
               } else {
                 this.$message.error(res.statusInfo.message);
               }

@@ -4,14 +4,14 @@
       <div class="carousel-container">
         <el-carousel :interval="4000" type="card" class="el-carousel">
           <el-carousel-item
-              v-for="imgUrl in carouselImg"
-              :key="imgUrl"
-              >
-            <div >
+              v-for="article in officialArticles"
+              :key="article.articleId"
+          >
+            <div>
               <img
-                  :src="imgUrl"
+                  :src="article.coverUrl"
                   style="height: 100%; width: 100%; border-radius: 10px"
-                  @click="goTo()">
+                  @click="goToArticle(article.id)">
             </div>
           </el-carousel-item>
         </el-carousel>
@@ -19,6 +19,7 @@
       <div class="article-cards">
         <ArticleCard v-for="articleCard in this.articleCards"
                      :card-data="articleCard"
+                     @click="goToArticle(articleCard.articleId)"
         >
         </ArticleCard>
 
@@ -26,7 +27,6 @@
       <div class="footer"></div>
     </div>
   </div>
-<!--  <img src="http://localhost:8000/pic/kiko.jpg">-->
 </template>
 
 <script>
@@ -34,7 +34,7 @@
 import request from "@/api/request";
 import ArticleCard from "../components/ArticleCard";
 import PersonalArticleCard from "./article/PersonalArticleCard";
-import CommentCard from "@/components/comment/CommentCard"
+import CommentCard from "@/components/ArticleCommentCard"
 import sidebar from "@/components/UserSidebar"
 
 export default {
@@ -47,12 +47,19 @@ export default {
   },
   data() {
     return {
-      carouselImg: [
-        "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-        "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-        "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-        "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-        "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
+      officialArticles: [
+        {
+          id: 23,
+          coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
+        },
+        {
+          id: 24,
+          coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
+        },
+        {
+          id: 25,
+          coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
+        },
       ],
       articleCards: [
         {
@@ -67,7 +74,7 @@ export default {
           clicks: 50,
           coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
           avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-          topics: ["keqin", "ninguan","hello", "world"],
+          topics: ["keqin", "ninguan", "hello", "world"],
           width: "800px"
         },
         {}
@@ -100,23 +107,36 @@ export default {
     }
   },
   methods: {
-    goTo() {
-
+    getOfficialArticles() {
+      request.get("/article/get-official-articles", {
+        params: {}
+      }).then(res => {
+        if (res.status === 0) {
+          this.officialArticles = res.data.officialArticles
+        } else {
+          alert("get official articles failed")
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    goToArticle(articleId) {
+      this.$router.push("/article/" + articleId)
     }
   },
   created() {
+    this.getOfficialArticles()
     request.get('/article/search/', {
       params: {
         keyword: "",
       }
-    }).then(res=>{
+    }).then(res => {
       if (res.status === 0) {
         console.log(res);
         this.articleCards = res.data.articleList;
       } else {
         alert("get articles failed")
       }
-
     })
   }
 }

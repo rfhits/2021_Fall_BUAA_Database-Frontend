@@ -1,11 +1,9 @@
 <template>
-  <h1 align="center">{{this.routeKeyword}}</h1>
   <div class="article-cards">
     <ArticleCard v-for="articleCard in this.articleList"
                  :card-data="articleCard"
     >
     </ArticleCard>
-
   </div>
 </template>
 
@@ -19,25 +17,25 @@ export default {
     ArticleCard
   },
   data() {
-   return {
-     keyword: "",
-     articleList: [
-       {
-         username: "username000",
-         nickname: "nickname000",
-         time: "7hours ago",
-         articleId: 100,
-         title: "Hello, Hu Tao",
-         brief: "Hu Tao will rerun",
-         likes: 100,
-         comments: 200,
-         clicks: 50,
-         coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-         avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-         topics: ["keqin", "ninguan","hello", "world"],
-         width: "800px"
-       },
-     ],
+    return {
+      keyword: "",
+      articleList: [
+        {
+          username: "username000",
+          nickname: "nickname000",
+          time: "7hours ago",
+          articleId: 100,
+          title: "Hello, Hu Tao",
+          brief: "Hu Tao will rerun",
+          likes: 100,
+          comments: 200,
+          clicks: 50,
+          coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
+          avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
+          topics: ["keqin", "ninguan", "hello", "world"],
+          width: "800px"
+        },
+      ],
     }
   },
   computed: {
@@ -47,7 +45,7 @@ export default {
   },
   methods: {
     load() {
-      request.get('/search/article/', {
+      request.get('/article/search/', {
         params: {
           keyword: this.keyword
         }
@@ -66,7 +64,6 @@ export default {
     this.keyword = this.routeKeyword;
     this.load();
   }
-
 }
 </script>
 

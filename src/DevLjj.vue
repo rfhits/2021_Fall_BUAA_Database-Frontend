@@ -10,7 +10,7 @@
 <script>
 import ArticleCard from "@/components/ArticleCard"
 import PersonalArticleCard from "@/views/article/PersonalArticleCard";
-import CommentCard from "@/components/comment/CommentCard"
+import CommentCard from "@/components/ArticleCommentCard"
 import sidebar from "@/components/UserSidebar"
 import GoodCard from "@/components/GoodCard";
 import CartGoodCard from '@/components/CartGoodCard'

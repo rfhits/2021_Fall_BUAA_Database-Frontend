@@ -61,11 +61,13 @@
       <a-col span="3">
         <!--              avater, popmenu-->
         <div v-if=this.$store.state.loggedIn>
-          <a-popover>
+          <a-popover
+              trigger="click"
+          >
             <template #content>
               <el-link icon="el-icon-s-home" @click="goToPage('/home')">首页</el-link>
               <br>
-              <el-link icon="el-icon-edit" @click="goToPage('/article/new-article/')">写文章</el-link>
+              <el-link icon="el-icon-edit" @click="goToPage('/new-article/')">写文章</el-link>
               <br>
               <el-link icon="el-icon-switch-button" @click="logout()">退出</el-link>
               <br>

@@ -38,8 +38,9 @@
     </div>
   </div>
 
+<!--  avatar uploader-->
   <el-dialog v-model="dialogVisible" title="上传头像" style="display: block;">
-    <div class = "upload-container">
+    <div class="upload-container">
       <a-upload
           name="avatar"
           list-type="picture-card"
@@ -78,7 +79,7 @@ export default {
       infoForm: {
         nickname: "",
         genderIndex: '',
-        gender: ref(this.$store.state.user.gender)
+        gender: this.$store.state.user.gender
       },
     }
   },
@@ -116,6 +117,8 @@ export default {
           this.$store.commit('setAvatarUrl', res.data);
           this.dialogVisible = false;
           this.$message.success("save success")
+          console.log("responds avatarUrl is " + res.data.avatarUrl)
+          console.log("the store avatar url is " + this.$store.state.user.avatarUrl)
         } else {
           this.$message.error(res.statusInfo.message);
         }
@@ -123,6 +126,7 @@ export default {
         console.log(err);
       })
     },
+
     submitInfo() {
       request.post("/user/edit-info/", {
         "user": {
@@ -133,8 +137,8 @@ export default {
       }).then((res) => {
         if (res.status === 0) {
           this.$store.commit('setInfo', {
-            nickname: this.nickname,
-            gender: this.gender
+            nickname: this.infoForm.nickname,
+            gender: this.infoForm.gender
           });
           this.$message.success("save success")
         } else {
@@ -177,7 +181,7 @@ export default {
   vertical-align: top;
 }
 
-.upload-container /deep/  .ant-upload-picture-card-wrapper {
+.upload-container /deep/ .ant-upload-picture-card-wrapper {
   display: flex;
 }
 
@@ -198,6 +202,7 @@ export default {
 .text-editor {
   margin: 20px;
 }
+
 .nickname-editor {
   display: flex;
   width: 300px;

@@ -66,14 +66,18 @@ export default {
   components: {Header, Sidebar},
   data() {
     return {
-      nickname: this.$store.state.user.nickname,
-      avatarUrl: this.$store.state.user.avatarUrl,
       followed: false,
       followers: 100,
       posts: 200,
     }
   },
   computed: {
+    nickname() {
+      return this.$store.state.user.nickname
+    },
+    avatarUrl() {
+      return this.$store.state.user.avatarUrl
+    },
     followState() {
       if (this.followed === false) {
         return "关注"

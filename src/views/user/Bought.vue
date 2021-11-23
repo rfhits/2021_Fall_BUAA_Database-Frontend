@@ -5,8 +5,10 @@
 </template>
 
 <script>
-import CartGoodCard from "@/components/CartGoodCard";
+import CartGoodCard from "@/components/CartGoodCard"
 import OrderCard from '@/components/OrderCard'
+import request from "@/api/request"
+
 export default {
   name: "Bought",
   components: {CartGoodCard, OrderCard},

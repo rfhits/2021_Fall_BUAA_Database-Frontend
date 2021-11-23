@@ -38,12 +38,12 @@ export default {
   data() {
     return{
       good: {
+        id: 0,
         name: "毛绒玩具",
         price: 30,
         storeQuantity: 200,
         imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg'
       },
-      goodId: 0,
       orderQuantity: 0,
       commentList: [
         {
@@ -51,10 +51,7 @@ export default {
           nickname: "nickname000",
           avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
           date: "10-15",
-          time: "7hours ago",
           content: "Hu Tao will rerun I love hutao, I lllllllllllllllllove hutao",
-          likes: 100,
-          liked: true,
           width: "960px",
         }
       ]
@@ -63,20 +60,38 @@ export default {
   computed: {},
   methods: {
     load() {
-      let goodId = this.$route.params.id;
-      this.goodId = goodId;
+      request.get('good/view-good/', {
+        params: {
+          goodId: this.$route.params.id
+        }
+      }).then(res => {
+        if (res.status === 0) {
+          // this.good = res.data.good
+          this.good.id = res.data.id
+          this.good.name = res.data.name
+          this.good.price = res.data.price
+          this.good.storeQuantity = res.data.quantity
+          this.good.content = res.data.content
+          this.good.imgUrl = res.data.imgUrl
+          this.commentList = res.data.commentList
+        } else {
+          alert('get good info failed')
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     },
     handleOrder() {
       if (this.$store.state.loggedIn) {
         request.post('/order/add-order', {
-          goodId: this.goodId,
+          goodId: this.good.id,
           orderQuantity: this.orderQuantity,
         }).then(res => {
           if (res.status === 0) {
             // todo: pop a img, my wechat
             this.$message.success("支付成功")
           } else {
-            alert("order failed")
+            alert(res.statusInfo.message)
           }
         }).catch(err => {
           console.log(err)
@@ -89,10 +104,10 @@ export default {
       if (this.$store.state.loggedIn) {
         request.post("cart/add-good/", {
           username: this.$store.state.user.username,
-          goodId: this.goodId,
+          goodId: this.good.id,
         }).then(res => {
           if (res.status === 0) {
-            this.$message.success("添加成功")
+            this.$message.success("在购物车等着亲呢❤")
           } else {
             alert('添加失败')
           }
@@ -103,8 +118,10 @@ export default {
         alert("请先登录")
       }
     }
+  },
+  created() {
+    this.load()
   }
-
 }
 </script>
 

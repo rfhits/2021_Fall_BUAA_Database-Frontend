@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <PersonalCommentCard
-        v-for="comment in this.comments"
+        v-for="comment in this.commentList"
         :card-data="comment"
         :card-width="this.cardWidth"
     >
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import PersonalCommentCard from "../../components/comment/PersonalCommentCard"
+import PersonalCommentCard from "../../components/PersonalCommentCard"
 import request from "@/api/request";
 
 export default {
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       cardWidth: "600px",
-      comments: [
+      commentList: [
         {
           articleId: 233,
           articleTitle: "Hello World",
@@ -40,10 +40,8 @@ export default {
   methods: {
     load() {
       request.post("/user/comments/", {
-
         otherUsername: this.$route.params.username,
         selfUsername: this.$store.state.user.username
-
       }).then(res => {
         console.log(res);
         this.commentList = res.data.comments;

@@ -34,7 +34,7 @@ data: {
 
 <script>
 import {LikeOutlined, ClockCircleOutlined} from '@ant-design/icons-vue'
-import request from "../../api/request";
+import request from "../api/request";
 
 export default {
   name: "PersonalCommentCard",

@@ -24,12 +24,6 @@ data: {
       <div style="color: #999; float: left; width: 70px">
         {{ cardData.date }}
       </div>
-
-      <div style="padding-right: 0px; display: flex; align-items: center; font-size: 16px; width: 30px; height: 30px">
-        <LikeOutlined :style="{color:likeColor}" @click="like()"></LikeOutlined>
-        <span style="color: #999; margin-left: 5px">{{ cardData.likes }}</span>
-      </div>
-
     </div>
   </el-card>
 

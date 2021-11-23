@@ -55,10 +55,10 @@
     </el-card>
 
     <div class="comments">
-      <comment-card
+      <ArticleCommentCard
           v-for="comment in this.comments"
           :card-data="comment">
-      </comment-card>
+      </ArticleCommentCard>
     </div>
 
     <div class="footer">
@@ -71,13 +71,13 @@
 <script>
 import Header from "../../components/Header"
 import {LikeOutlined, StarOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
-import CommentCard from "../../components/comment/CommentCard";
+import ArticleCommentCard from "@/components/ArticleCommentCard";
 import request from "@/api/request";
 
 export default {
   name: "ArticleDetail",
   components: {
-    CommentCard,
+    ArticleCommentCard,
     Header,
     LikeOutlined,
     StarOutlined,
