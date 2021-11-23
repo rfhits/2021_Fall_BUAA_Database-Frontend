@@ -149,7 +149,7 @@ export default {
           this.total = res.data.goodList.length
           let i = 0, length = this.tableData.length
         } else {
-          alert("search article failed")
+          alert("search good failed")
         }
       }).catch(err => {
         console.log("err: " + err);
