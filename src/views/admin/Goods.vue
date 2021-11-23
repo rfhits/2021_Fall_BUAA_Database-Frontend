@@ -145,8 +145,8 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.status === 0) {
-          this.tableData = res.data.articleList
-          this.total = res.data.articleList.length
+          this.tableData = res.data.goodList
+          this.total = res.data.goodList.length
           let i = 0, length = this.tableData.length
         } else {
           alert("search article failed")

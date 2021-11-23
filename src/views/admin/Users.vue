@@ -122,7 +122,7 @@ export default {
       console.log(this.searchText)
       request.get("/admin/manage/users/", {
         params: {
-          searchText: this.searchText,
+          keyword: this.searchText,
           pageNumber: this.currentPage,
           pageSize: this.pageSize
         }
