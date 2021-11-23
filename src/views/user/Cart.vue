@@ -6,6 +6,8 @@
 
 <script>
 import CartGoodCard from "@/components/CartGoodCard";
+import request from "@/api/request";
+
 export default {
   name: "Cart",
   components: {CartGoodCard},

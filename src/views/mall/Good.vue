@@ -43,6 +43,7 @@ export default {
         storeQuantity: 200,
         imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg'
       },
+      goodId: 0,
       orderQuantity: 0,
       commentList: [
         {
@@ -86,7 +87,8 @@ export default {
     },
     addToCart() {
       if (this.$store.state.loggedIn) {
-        request.post("good/add-to-cart", {
+        request.post("cart/add-good/", {
+          username: this.$store.state.user.username,
           goodId: this.goodId,
         }).then(res => {
           if (res.status === 0) {

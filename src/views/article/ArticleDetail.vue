@@ -4,7 +4,7 @@
 
     <div class="article">
       <div class="article-header" align="center">
-        <h1 >{{ this.article.title }}</h1>
+        <h1>{{ this.article.title }}</h1>
       </div>
 
       <div class="article-data">
@@ -99,7 +99,8 @@ export default {
         likes: 233,
         comments: 233,
         clicks: 233,
-        topics: []
+        topics: [],
+        liked: false,
       },
       comments: [
         {
@@ -115,8 +116,7 @@ export default {
         },
       ],
       articleId: this.$route.params.articleId,
-      liked: false,
-      likeColor: "#999",
+      articleLikeColor: "#999",
       commentContent: "",
       testUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
     }
@@ -133,36 +133,40 @@ export default {
           articleId: this.articleId,
         }
       }).then(res => {
-        console.log(res);
-        this.user = res.data.user;
-        this.article = res.data.article;
-        this.comments = res.data.comments;
+        if (res.status == 0) {
+          console.log(res);
+          this.user = res.data.user;
+          this.article = res.data.article;
+          this.comments = res.data.comments;
+        } else {
+          alert("load failed")
+        }
+      }).catch(err => {
+        console.log(err)
       })
     },
 
     like() {
-      if (this.liked === false) {
-        this.liked = true;
-        this.likeColor = "#00c3ff"
+      if (this.article.liked === false) {
         request.post("/article/like-article/", {
           username: this.$store.state.user.username,
           articleId: this.articleId
-        }).then(res=> {
+        }).then(res => {
           if (res.status === 0) {
-
+            this.article.liked = true;
+            this.articleLikeColor = "#00c3ff"
           } else {
             alert("like failed")
           }
         })
       } else {
-        this.liked = false;
-        this.likeColor = '#999'
         request.post("/article/cancel-like-article/", {
           username: this.$store.state.user.username,
           articleId: this.articleId
-        }).then(res=> {
+        }).then(res => {
           if (res.status === 0) {
-
+            this.article.liked = false;
+            this.articleLikeColor = '#999'
           } else {
             alert("cancel like failed")
           }
@@ -172,14 +176,13 @@ export default {
 
     postComment() {
       request.post("/comment/post/", {
-          username: this.$store.state.user.username,
-          articleId: this.articleId,
-          content: this.commentContent
+        username: this.$store.state.user.username,
+        articleId: this.articleId,
+        content: this.commentContent
       }).then(res => {
         if (res.status === 0) {
-          console.log("comment post success")
-          this.load(),
-          this.commentContent= '';
+          this.load()
+          this.commentContent = '';
           this.$message.success("评论成功❤")
         } else {
           alert("comment post failed")

@@ -66,7 +66,7 @@ export default {
   components: {Header, Sidebar},
   data() {
     return {
-      nickname: "nickname0",
+      nickname: this.$store.state.user.nickname,
       avatarUrl: this.$store.state.user.avatarUrl,
       followed: false,
       followers: 100,
