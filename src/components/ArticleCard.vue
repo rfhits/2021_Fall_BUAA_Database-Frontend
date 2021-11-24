@@ -103,7 +103,12 @@ export default {
     newBrief() {
       const s = this.cardData.brief
       var re = new RegExp('<[^<>]+>', 'g');
-      var text = s.replace(re, "");
+      let text = ""
+      if (s) {
+        text = s.replace(re, "");
+      } else {
+        // pass
+      }
       return text
     }
   },
