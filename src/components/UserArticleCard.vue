@@ -6,7 +6,7 @@
           <img :src=cardData.avatarUrl class="avatar_img">
         </div>
         <a style="margin-left: 10px;">{{cardData.nickname}}</a>
-        <p style="font-size: 12px; margin: 0px 10px; color: #999">{{cardData.time}}</p>
+        <p style="font-size: 12px; margin: 0px 10px; color: #999">{{this.postDateTillDay}}</p>
       </div>
 
       <a class="card-content" style="display: block">
@@ -18,7 +18,7 @@
           >{{ cardData.title }}</el-link>
         </div>
         <div class="brief">
-          {{cardData.brief}}
+          {{this.briefWithoutTag}}
         </div>
         <div class="preview" style="display: flex;">
           <img style="border-radius: 6px" :src=cardData.coverUrl>
@@ -48,9 +48,10 @@
 
 <script>
 import {LikeOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
+import {removeHtmlTag} from "@/api/utils";
 
 export default {
-  name: "PersonalArticleCard",
+  name: "UserArticleCard",
   components: {
     LikeOutlined,
     EyeOutlined,
@@ -62,6 +63,16 @@ export default {
   computed: {
     articleUrl() {
       return "/article/" + this.cardData.articleId;
+    },
+    briefWithoutTag() {
+      return removeHtmlTag(this.cardData.brief)
+    },
+    postDateTillDay() {
+      if (this.cardData.postDate) {
+        return this.cardData.postDate.substring(0, 9)
+      } else {
+        return "no post date"
+      }
     }
   },
   methods: {
@@ -125,6 +136,10 @@ export default {
   color: #999;
   align-items: center;
   margin: 3px 20px;
+}
+
+.data * {
+  margin: 0 3px;
 }
 
 </style>

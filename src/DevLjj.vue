@@ -9,7 +9,7 @@
 
 <script>
 import ArticleCard from "@/components/ArticleCard"
-import PersonalArticleCard from "@/views/article/PersonalArticleCard";
+import PersonalArticleCard from "@/components/UserArticleCard";
 import CommentCard from "@/components/ArticleCommentCard"
 import sidebar from "@/components/UserSidebar"
 import GoodCard from "@/components/GoodCard";

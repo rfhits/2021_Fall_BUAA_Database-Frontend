@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <GoodCard v-for="good in this.goodList" :card-data="good"></GoodCard>
+    <GoodCard v-for="good in this.goodList" :card-data="good" :width="'400px'"></GoodCard>
   </div>
 </template>
 
@@ -56,5 +56,9 @@ export default {
   padding: 40px;
   border: 1px solid #999;
   border-radius: 10px;
+}
+
+.root * {
+  margin: 15px;
 }
 </style>

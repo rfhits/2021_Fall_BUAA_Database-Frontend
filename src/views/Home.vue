@@ -19,7 +19,6 @@
       <div class="article-cards">
         <ArticleCard v-for="articleCard in this.articleCards"
                      :card-data="articleCard"
-                     @click="goToArticle(articleCard.articleId)"
         >
         </ArticleCard>
 
@@ -33,7 +32,7 @@
 // @ is an alias to /src
 import request from "@/api/request";
 import ArticleCard from "../components/ArticleCard";
-import PersonalArticleCard from "./article/PersonalArticleCard";
+import PersonalArticleCard from "../components/UserArticleCard";
 import CommentCard from "@/components/ArticleCommentCard"
 import sidebar from "@/components/UserSidebar"
 
@@ -65,16 +64,24 @@ export default {
         {
           username: "username000",
           nickname: "nickname000",
-          time: "7hours ago",
+          postDate: "2021-11-23 13:46:13.660181",
           articleId: 100,
           title: "Hello, Hu Tao",
-          brief: "Hu Tao will rerun",
+          brief: "<p>在哪个tag中</p>",
           likes: 100,
           comments: 200,
           clicks: 50,
           coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
           avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-          topics: ["keqin", "ninguan", "hello", "world"],
+          topics: [
+            {
+              id: 233,
+              name: "刻晴",
+            }, {
+              id: 233,
+              name: "申鹤"
+            }
+          ],
           width: "800px"
         },
         {}
@@ -82,10 +89,10 @@ export default {
       cardData: {
         username: "username000",
         nickname: "nickname000",
-        time: "7hours ago",
+        postDate: "2021-00-00",
         articleId: 100,
         title: "Hello, Hu Tao",
-        brief: "Hu Tao will rerun",
+        brief: "<p>在哪个tag中</p>",
         likes: 100,
         comments: 200,
         clicks: 50,
@@ -97,8 +104,7 @@ export default {
         username: "username000",
         nickname: "nickname000",
         avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-        date: "10-15",
-        time: "7hours ago",
+        date: "2021-10-15",
         content: "Hu Tao will rerun I love hutao, I lllllllllllllllllove hutao",
         likes: 100,
         liked: true,

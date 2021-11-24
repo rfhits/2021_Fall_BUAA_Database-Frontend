@@ -4,10 +4,7 @@
 /home
 
 /search
-  |- /search/user
   |- /search/article
-  |- /search/topic
-
 
 /mall
   |- /good/id

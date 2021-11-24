@@ -1,5 +1,5 @@
 <template>
-  <el-card :style="{width: cardData.width}" shadow="hover" @click="goToGoodPage()">
+  <el-card :style="{width: this.width}" shadow="hover" @click="goToGoodPage()">
     <div class="img-container">
       <img :src="cardData.imgUrl" style="width:100%" alt="imgCard">
     </div>
@@ -19,7 +19,8 @@
 export default {
   name: "GoodCard",
   props: {
-    cardData: {type: Object, required: true}
+    cardData: {type: Object, required: true},
+    width: {type: String}
   },
   methods: {
     goToGoodPage() {
@@ -32,7 +33,7 @@ export default {
 <style scoped>
 
 .img-container {
-  width: 200px;
+  /*width: 200px;*/
 }
 
 .good-name {
@@ -46,5 +47,4 @@ export default {
   font-size: 25px;
   font-weight: bold;
 }
-
 </style>

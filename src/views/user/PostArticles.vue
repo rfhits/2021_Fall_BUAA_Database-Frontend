@@ -1,19 +1,19 @@
 <template>
   <div class="page-container">
-    <PersonalArticleCard
+    <UserArticleCard
         v-for="article in this.articleList"
         :card-data="article">
-    </PersonalArticleCard>
+    </UserArticleCard>
   </div>
 </template>
 
 <script>
 import request from "../../api/request";
-import PersonalArticleCard from "../article/PersonalArticleCard";
+import UserArticleCard from "../../components/UserArticleCard";
 
 export default {
   name: "PostArticles",
-  components: {PersonalArticleCard},
+  components: {UserArticleCard},
   data() {
     return {
       articleList: [

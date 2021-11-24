@@ -6,11 +6,12 @@
       </div>
       <div class="good-info">
         <div class="good-name">{{ this.good.name }}</div>
+        <div class="good-content"> {{ this.good.content}}</div>
         <div class="good-price">￥{{ this.good.price }}</div>
         <div class="good-quantity">
-          <el-input-number v-model="this.orderQuantity" :min="1" :max="this.stockQuantity"/>
+          <el-input-number v-model="this.orderQuantity" :min="1" :max="this.good.quantity"/>
 
-          <span style="margin-left: 20px; color: #999">库存：{{this.storeQuantity}}</span>
+          <span style="margin-left: 20px; color: #999">库存：{{this.good.quantity}}</span>
         </div>
         <div class="good-action">
           <el-button type="danger" @click="handleOrder()" style="width: 140px">立即购买</el-button>
@@ -66,13 +67,7 @@ export default {
         }
       }).then(res => {
         if (res.status === 0) {
-          // this.good = res.data.good
-          this.good.id = res.data.id
-          this.good.name = res.data.name
-          this.good.price = res.data.price
-          this.good.storeQuantity = res.data.quantity
-          this.good.content = res.data.content
-          this.good.imgUrl = res.data.imgUrl
+          this.good = res.data.good
           this.commentList = res.data.commentList
         } else {
           alert('get good info failed')
@@ -160,6 +155,18 @@ export default {
   font-weight: normal;
   text-align: center;
 }
+
+
+.good-content {
+  background-color: rgb(250, 250, 250);
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+  margin: 20px auto;
+  padding: 5px;
+  width: 300px;
+}
+
 
 .good-price {
   background-color: rgb(250, 250, 250);
