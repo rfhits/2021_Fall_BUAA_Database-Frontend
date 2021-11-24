@@ -173,7 +173,6 @@ export default {
       if (value == null || value == "") {
         value = "Fate";
       }
-      // this.$store.commit('commitSearch', value);
       this.$router.push({
         path: '/search/article/',
         query: {

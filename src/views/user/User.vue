@@ -69,12 +69,10 @@ export default {
       followed: false,
       followers: 100,
       posts: 200,
+      nickname: "",
     }
   },
   computed: {
-    nickname() {
-      return this.$store.state.user.nickname
-    },
     avatarUrl() {
       return this.$store.state.user.avatarUrl
     },

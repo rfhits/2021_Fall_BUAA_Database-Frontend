@@ -44,7 +44,7 @@ export default {
         selfUsername: this.$store.state.user.username
       }).then(res => {
         console.log(res);
-        this.commentList = res.data.comments;
+        this.commentList = res.data.commentList;
       })
     },
   },

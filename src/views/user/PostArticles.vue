@@ -39,7 +39,7 @@ export default {
     getPosts() {
       request.get("/user/posts-info/", {
         params: {
-          username: this.$store.state.user.username
+          username: this.$route.params.username
         }
       }).then(res => {
         this.articleList = res.data.articleList;

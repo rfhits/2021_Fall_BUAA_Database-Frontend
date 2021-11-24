@@ -4,8 +4,7 @@
       <Header></Header>
     </div>
     <div style="height: 70px; background-color: rgb(243, 243, 244)" ></div>
-
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
   </div>
 
 </template>
