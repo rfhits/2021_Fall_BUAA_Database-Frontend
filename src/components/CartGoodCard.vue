@@ -17,7 +17,7 @@
 
       <div>库存：{{ this.cardData.storeQuantity }}</div>
 
-      <div>应付：{{ this.cardData.price * orderQuantity }}</div>
+      <div>应付：{{ this.cardData.price * this.cardData.orderQuantity }}</div>
 
       <div class="action">
         <el-button size="mini" style="margin:0 10px" @click="handleOrder()">下单</el-button>
