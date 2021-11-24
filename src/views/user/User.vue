@@ -70,12 +70,11 @@ export default {
       followers: 100,
       posts: 200,
       nickname: "",
+      avatarUrl: "",
     }
   },
   computed: {
-    avatarUrl() {
-      return this.$store.state.user.avatarUrl
-    },
+
     followState() {
       if (this.followed === false) {
         return "关注"
