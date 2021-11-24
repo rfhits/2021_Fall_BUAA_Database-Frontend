@@ -32,7 +32,7 @@
                 key="2"
                 class="menu-font"
             >
-              <router-link to="/topic/2">酒馆</router-link>
+              <router-link to="/topic/1">酒馆</router-link>
             </a-menu-item>
             <a-menu-item
                 key="3"

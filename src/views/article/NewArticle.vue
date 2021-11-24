@@ -136,6 +136,13 @@ export default {
 
     post() {
       let topics = this.dynamicTags
+      if (this.article.radio === 1) {
+        topics.push("酒馆")
+      } else if (this.article.radio === 2) {
+        topics.push("攻略")
+      } else {
+        topics.push("同人")
+      }
       let _this = this
       request.post("/article/post-article/", {
         "username": this.$store.state.user.username,

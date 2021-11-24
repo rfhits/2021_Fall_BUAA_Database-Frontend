@@ -161,7 +161,7 @@ export default {
     handleConfirm() {
       console.log(this.editUser);
       this.editTableVisible = false
-      request.post('@/admin/manage/edit-user/', {
+      request.post('/admin/manage/edit-user/', {
         username: this.editUser.username,
         nickname: this.editUser.nickname,
         age: this.editUser.age,
