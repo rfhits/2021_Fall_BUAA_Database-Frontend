@@ -6,7 +6,7 @@
     </div>
 
     <div class="table-container">
-      <el-table :data="tableData" border style="width: 100%">
+      <el-table :data="articleList" border style="width: 100%">
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="username" label="作者"></el-table-column>
         <el-table-column prop="postDate" label="发布时间"></el-table-column>
@@ -17,20 +17,6 @@
           </template>
         </el-table-column>
       </el-table>
-    </div>
-
-    <div class="pagination-container">
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[10, 20, 30]"
-          :page-size="10"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="this.total"
-          style="margin: 10px"
-      >
-      </el-pagination>
     </div>
   </div>
 </template>
@@ -46,14 +32,11 @@ export default {
     return {
       form: {},
       keyword: "",
-      currentPage: 1,
-      pageSize: 10,
-      total: 10,
-      tableData: [{
-        articleId: 'articleId',
+      articleList: [{
+        id: '233',
         title: 'title',
         username: 'username',
-        postDate: "date:2021",
+        postDate: "2021-00-00",
       }],
     }
   },
@@ -64,17 +47,14 @@ export default {
       request.get("/article/search/", {
         params: {
           keyword: this.keyword,
-          pageNumber: this.currentPage,
-          pageSize: this.pageSize
         }
       }).then(res => {
         console.log(res);
         if (res.status === 0) {
-          this.tableData = res.data.articleList
-          this.total = res.data.articleList.length
-          let i = 0, length = this.tableData.length
+          this.articleList = res.data.articleList
+          let i = 0, length = this.articleList.length
           for (; i < length; i++) {
-            this.tableData[i].link = '/article/' + this.tableData[i].articleId
+            this.articleList[i].link = '/article/' + this.articleList[i].articleId
           }
         } else {
           alert("search article failed")
@@ -97,21 +77,7 @@ export default {
       }).catch((err) => {
         console.log(err)
       })
-    },
-    handleSizeChange(pageSize) {
-      this.pageSize = pageSize
-      this.load()
-    },
-    handleCurrentChange(pageNum) {
-      this.currentPage = pageNum;
-      this.load()
-    },
-    handleEdit(row) {
-      this.editTableVisible = true
-      this.editUser = row
-      this.editUser.gender = row.gender.toString()
-      this.editUser.refGender = ref(this.editUser.gender)
-    },
+    }
   },
   created() {
     this.load();
