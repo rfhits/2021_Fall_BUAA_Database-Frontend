@@ -25,11 +25,13 @@ export default {
 
 <style scoped>
 .root {
-
+  background-color: rgb(240, 241, 245);
 }
 
 .router-view-container {
   width: 800px;
-  margin: 20px auto;
+  margin: 0px auto;
+  padding: 20px auto;
+  background-color: rgb(240, 241, 245);
 }
 </style>

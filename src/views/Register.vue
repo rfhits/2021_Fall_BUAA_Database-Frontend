@@ -10,72 +10,66 @@
         </a-steps>
       </div>
       <div class="register-info">
-        <el-form
-            ref="registerForm"
-            :model="registerForm"
-            :rules="rules"
-            label-width="120px"
-            status-icon
-        >
-<!--          current at 0-->
-          <div v-if="currentStep === 0">
-            <el-form-item label="用户名" prop="username">
-              <el-input v-model="registerForm.username" autocomplete="off"/>
-            </el-form-item>
-            <el-form-item label="密码" prop="pass">
-              <el-input v-model="registerForm.pass" type="password" autocomplete="off"/>
-            </el-form-item>
-            <el-form-item label="确认密码" prop="checkPass">
-              <el-input v-model="registerForm.checkPass" type="password" autocomplete="off"/>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="resetForm('registerForm')">重置</el-button>
-              <el-button type="primary" @click="nextStep()">下一步</el-button>
-            </el-form-item>
+        <!--          current at 0-->
+        <div v-if="currentStep === 0" class="step-0">
+          <el-input v-model="registerForm.username"
+                    autocomplete="off"
+                    placeholder="用户名"
+          />
+
+          <el-input v-model="registerForm.pass" type="password" autocomplete="off" placeholder="密码"/>
+
+          <el-input v-model="registerForm.checkPass" type="password" autocomplete="off" placeholder="确认密码"/>
+
+          <div style="display: flex; justify-content: space-between">
+            <el-button type="primary"
+                       @click="resetForm('registerForm')"
+            >
+              重置
+            </el-button>
+            <el-button type="primary" @click="nextStep()">下一步</el-button>
+          </div>
+        </div>
+
+        <!--          nickname and avatar-->
+        <div v-if="currentStep === 1" class="step-1">
+
+          <el-input v-model="registerForm.nickname" placeholder="昵称" style="width: 200px"/>
+
+          <el-radio-group v-model="this.registerForm.gender">
+            <el-radio :label="0">男</el-radio>
+            <el-radio :label="1">女</el-radio>
+            <el-radio :label="2">保密</el-radio>
+          </el-radio-group>
+
+          <div style="display: flex; align-items: center">
+            <div style="margin-right: 10px">年龄</div>
+            <el-input-number v-model="registerForm.age" :min="12" :max="100"/>
           </div>
 
-<!--          nickname and avatar-->
-          <template v-if="currentStep === 1">
-            <el-form-item label="昵称" prop="nickname">
-              <el-input v-model="registerForm.nickname"/>
-            </el-form-item>
 
-            <el-form-item>
-              <el-radio-group v-model="this.registerForm.gender">
-                <el-radio :label="0">男</el-radio>
-                <el-radio :label="1">女</el-radio>
-                <el-radio :label="2">保密</el-radio>
-              </el-radio-group>
-            </el-form-item>
+          <a-upload
+              name="avatar"
+              list-type="picture-card"
+              class="avatar-uploader"
+              :show-upload-list="false"
+              :before-upload="beforeUpload"
+              @change="handleChange"
+          >
+            <img v-if="imageUrl" :src="imageUrl" alt="avatar" width="200"/>
+            <div v-else>
+              <PlusOutlined/>
+              <div class="ant-upload-text">
+                上传头像
+              </div>
+            </div>
+          </a-upload>
 
-            <el-form-item label="年龄" prop="age">
-              <el-input-number v-model="registerForm.age" :min="12" :max="100" />
-            </el-form-item>
-            <el-form-item label="头像" prop="avatar">
-              <a-upload
-                  name="avatar"
-                  list-type="picture-card"
-                  class="avatar-uploader"
-                  :show-upload-list="false"
-                  :before-upload="beforeUpload"
-                  @change="handleChange"
-              >
-                <img v-if="imageUrl" :src="imageUrl" alt="avatar" width="200"/>
-                <div v-else>
-                  <a-icon type="plus"/>
-                  <div class="ant-upload-text">
-                    Upload
-                  </div>
-                </div>
-              </a-upload>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="previousStep()">上一步</el-button>
-              <el-button type="primary" @click="submitForm(registerForm)">提交</el-button>
-            </el-form-item>
-          </template>
-
-        </el-form>
+          <div style="display: flex; justify-content: space-between">
+            <el-button type="primary" @click="previousStep()">后退</el-button>
+            <el-button type="primary" @click="submitForm(registerForm)">提交</el-button>
+          </div>
+        </div>
       </div>
       <div class="result" v-if="currentStep === 2">
         <a-result
@@ -97,7 +91,14 @@
 
 <script>
 import request from "../api/request";
-
+import {
+  PlusOutlined,
+  EditOutlined,
+  LikeOutlined,
+  EyeOutlined,
+  CommentOutlined,
+  AccountBookOutlined
+} from '@ant-design/icons-vue'
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -108,36 +109,9 @@ function getBase64(img, callback) {
 export default {
   name: "Register",
   components: {
+    PlusOutlined
   },
-  data: function () {
-    let validateUsername = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入用户ID'));
-      } else {
-        callback();
-      }
-    };
-    let validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'));
-      } else if (value.length < 8) {
-        callback(new Error('密码至少应为8位'));
-      } else {
-        if (this.registerForm.checkPass !== '') {
-          this.$refs.registerForm.validateField('checkPass');
-        }
-        callback();
-      }
-    };
-    let validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.registerForm.pass) {
-        callback(new Error("两次密码输入不一致！"));
-      } else {
-        callback();
-      }
-    };
+  data() {
     return {
       currentStep: 0,
       registerForm: {
@@ -150,53 +124,78 @@ export default {
         gender: 0,
       },
       imageUrl: null,
-      rules: {
-        username: [{validator: validateUsername, trigger: 'change'}],
-        pass: [{validator: validatePass, trigger: 'change'}],
-        checkPass: [{validator: validatePass2, trigger: 'change'}],
-      }
     };
   },
   methods: {
     previousStep() {
-      this.currentStep = this.currentStep-1;
+      this.currentStep = this.currentStep - 1;
+    },
+    checkUsername() {
+      if (this.registerForm.username === "") {
+        this.$message.error("please input username")
+        return false
+      } else {
+        return true
+      }
+    },
+    checkPassword() {
+      if (this.registerForm.pass.length < 8) {
+        this.$message.error("需要8位以上的密码长度")
+        return false
+      } else {
+        return true
+      }
+    },
+    checkPassTwo() {
+      if (this.registerForm.pass !== this.registerForm.checkPass) {
+        this.$message.error("两次密码不一致")
+        return false
+      } else {
+        return true
+      }
+    },
+    checkNickname() {
+      if (this.registerForm.nickname === "") {
+        this.$message.error("input nickname")
+        return false
+      } else {
+        return true
+      }
     },
     nextStep() {
-      this.$refs.registerForm.validate(valid => {
-        if (valid) {
-          this.currentStep += 1;
-        } else {
-          return false;
-        }
-      });
+      let passCheck = true
+      passCheck = passCheck & this.checkUsername()
+      passCheck = passCheck & this.checkPassword()
+      passCheck = passCheck & this.checkPassTwo()
+      if (passCheck) {
+        this.currentStep += 1
+      } else {
+
+      }
     },
     submitForm() {
+      if (!this.checkNickname()) return
       let _this = this;
-      this.$refs.registerForm.validate(valid => {
-        if (valid) {
-          request.post("/user/register/", {
-            "user": {
-              username: _this.registerForm.username,
-              nickname: _this.registerForm.nickname,
-              password: _this.registerForm.pass,
-              age: _this.registerForm.age,
-              gender: _this.registerForm.gender,
-              avB: _this.imageUrl,
-            }
-          }).then((res) => {
-              if (res.status === 0) {
-                this.$router.push("/login")
-              } else {
-                this.$message.error(res.statusInfo.message);
-              }
-          }).catch((err) => {
-              _this.submitting = false;
-              console.log(err);
-          })
-        } else {
-          return false;
+
+      request.post("/user/register/", {
+        "user": {
+          username: _this.registerForm.username,
+          nickname: _this.registerForm.nickname,
+          password: _this.registerForm.pass,
+          age: _this.registerForm.age,
+          gender: _this.registerForm.gender,
+          avB: _this.imageUrl,
         }
-      });
+      }).then((res) => {
+        if (res.status === 0) {
+          this.currentStep += 1;
+        } else {
+          this.$message.error(res.statusInfo.message);
+        }
+      }).catch((err) => {
+        _this.submitting = false;
+        console.log(err);
+      })
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
@@ -226,33 +225,6 @@ export default {
 </script>
 
 <style scoped>
-.s-skin-container {
-  position: fixed;
-  _position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  min-width: 1000px;
-  z-index: -10;
-  background-color: #cfe8fc;
-  background-position: center 0;
-  background-repeat: repeat;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  zoom: 1;
-  animation: anim 25s linear infinite;
-}
-@keyframes anim {
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 .register-root {
   background-color: #fff;
   padding: 32px;
@@ -260,7 +232,6 @@ export default {
   margin: 0 auto;
   text-align: left;
   border-radius: 16px;
-  /*border-color: hsv(0, 0, 85%);*/
   border-width: 1px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
@@ -270,18 +241,38 @@ export default {
 }
 
 .register-info {
-  margin: 32px auto;
-  width: 60%;
+  margin: 30px auto;
+  width: 500px;
 }
 
-.button-container {
+.step-0 {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.step-0 * {
+  margin-bottom: 20px;
+}
+
+.step-1 {
+  width: 400px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 }
 
-.button {
-  margin: 0px 0px 0px 16px;
+.step-1 * {
+  margin-bottom: 10px;
 }
 
+.avatar-uploader {
+  display: flex;
+}
+
+.avatar-uploader /deep/ .ant-upload {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+}
 </style>

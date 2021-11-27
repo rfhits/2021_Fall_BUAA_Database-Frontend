@@ -8,7 +8,7 @@ data: {
 }
 -->
 <template>
-  <el-card :style="{width: this.cardData.width}">
+  <el-card :style="{width: this.width}">
     <div class="card-header" @click="goToPage">
       <div class="avatar_container">
         <img :src=cardData.avatarUrl class="avatar_img">
@@ -21,7 +21,7 @@ data: {
     </div>
 
     <div class="footer">
-      <div style="color: #999; float: left; width: 70px">
+      <div style="color: #999; float: left; width: 150px">
         {{ cardData.date }}
       </div>
     </div>
@@ -39,7 +39,8 @@ export default {
     LikeOutlined,
   },
   props: {
-    cardData: {type: Object, required: true}
+    cardData: {type: Object, required: true},
+    width: {type: String}
   },
   methods: {
     goToPage() {

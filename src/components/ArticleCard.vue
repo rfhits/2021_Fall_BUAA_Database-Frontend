@@ -131,9 +131,9 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  width: 600px;
-}
+/*.card {*/
+/*  width: 600px;*/
+/*}*/
 
 .card-header {
   display: flex;

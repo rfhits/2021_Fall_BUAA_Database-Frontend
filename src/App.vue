@@ -3,7 +3,7 @@
     <div v-if="headerVisiable" class="header-container">
       <Header></Header>
     </div>
-    <div style="height: 70px; background-color: rgb(243, 243, 244)" ></div>
+    <div v-if="headerVisiable" style="height: 70px; background-color: rgb(243, 243, 244)" ></div>
     <router-view :key="$route.fullPath"/>
   </div>
 
@@ -28,11 +28,10 @@ export default {
   },
   computed: {
     headerVisiable() {
-      if (this.$route.path.indexOf("/admin/") !== -1) {
-        return false
-      } else {
-        return true
-      }
+      let visiable = true
+      if (this.$route.path.indexOf("/admin/") !== -1) return false
+      if (this.$route.path.indexOf("login") !== -1) return false
+      return visiable
     }
   }
 }

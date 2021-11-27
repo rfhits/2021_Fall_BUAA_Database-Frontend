@@ -77,4 +77,8 @@ export default {
 
 <style scoped>
 
+.article-cards {
+
+}
+
 </style>

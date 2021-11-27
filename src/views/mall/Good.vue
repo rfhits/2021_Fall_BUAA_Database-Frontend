@@ -20,7 +20,12 @@
       </div>
     </div>
     <div class="comments">
-      <GoodCommentCard v-for="comment in this.commentList" :card-data="comment"></GoodCommentCard>
+      <GoodCommentCard v-for="comment in this.commentList"
+                       :card-data="comment"
+                       :width="'800px'"
+      >
+
+      </GoodCommentCard>
     </div>
     <div class="footer"></div>
   </div>
@@ -128,14 +133,15 @@ export default {
 
 .content {
   display: flex;
-  width: 1000px;
+  width: 800px;
   padding: 20px;
   margin: 0px auto;
   background-color: white;
 }
 
 .img-container {
-  width: 450px;
+  margin-left: 50px;
+  width: 600px;
 
 }
 
@@ -156,7 +162,6 @@ export default {
   text-align: center;
 }
 
-
 .good-content {
   background-color: rgb(250, 250, 250);
   font-size: 18px;
@@ -166,7 +171,6 @@ export default {
   padding: 5px;
   width: 300px;
 }
-
 
 .good-price {
   background-color: rgb(250, 250, 250);
@@ -189,10 +193,10 @@ export default {
 }
 
 .comments {
-  width: 1000px;
+  width: 800px;
   margin: 20px auto;
   background-color: white;
-  padding: 20px;
+  /*padding: 20px;*/
 
 }
 

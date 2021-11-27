@@ -19,30 +19,76 @@
       <div class="article-cards">
         <ArticleCard v-for="articleCard in this.articleCards"
                      :card-data="articleCard"
+                     :width="'700px'"
         >
         </ArticleCard>
 
       </div>
       <div class="footer"></div>
     </div>
+    <div class="right-side">
+      <div class="user-action">
+        <div
+            style="font-size: 30px;
+            font-weight: bold;
+            width: 100px;
+            margin: 20px auto 0 auto;
+            text-align: center"
+        >
+          Let's
+        </div>
+        <el-divider></el-divider>
+        <el-button
+            type="primary"
+            style="width: 200px; height: 50px; margin: 10px auto;
+            color: black; font-size: 20px; font-weight: bold"
+            @click="goToPostArticle()"
+        >
+          <EditOutlined/>
+          Post Articles
+        </el-button>
+        <el-button
+            type="primary"
+            style="width: 200px; height: 50px; margin: 10px auto 40px auto;
+            color: black; font-size: 20px; font-weight: bold"
+            @click="goTo('/mall')">
+          <AccountBookOutlined/>
+          Go to the Mall
+        </el-button>
+      </div>
+      <div class="official-info">
+        <div
+            style="width:200px; font-size: 20px; font-weight: bold; margin: 10px auto;  text-align: center"
+        >
+          newest info
+        </div>
+        <div v-for="article in this.articleCards"
+             style="font-size: 17px; margin-left: 60px;"
+        >
+          <a :href="articleIdToLink(article.articleId)">{{ article.title }}</a>
+        </div>
+      </div>
+      <el-backtop :right="230"/>
+
+    </div>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import request from "@/api/request";
+import {Edit, Share, Delete, Search, Upload} from '@element-plus/icons'
+import {EditOutlined, LikeOutlined, EyeOutlined, CommentOutlined, AccountBookOutlined} from '@ant-design/icons-vue'
 import ArticleCard from "../components/ArticleCard";
-import PersonalArticleCard from "../components/UserArticleCard";
-import CommentCard from "@/components/ArticleCommentCard"
 import sidebar from "@/components/UserSidebar"
 
 export default {
   name: 'Home',
   components: {
     ArticleCard,
-    CommentCard,
-    PersonalArticleCard,
     sidebar,
+    EditOutlined,
+    AccountBookOutlined
   },
   data() {
     return {
@@ -82,36 +128,13 @@ export default {
               name: "申鹤"
             }
           ],
-          width: "800px"
         },
         {}
       ],
-      cardData: {
-        username: "username000",
-        nickname: "nickname000",
-        postDate: "2021-00-00",
-        articleId: 100,
-        title: "Hello, Hu Tao",
-        brief: "<p>在哪个tag中</p>",
-        likes: 100,
-        comments: 200,
-        clicks: 50,
-        coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-        avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-        width: "800px"
-      },
-      commentCardData: {
-        username: "username000",
-        nickname: "nickname000",
-        avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-        date: "2021-10-15",
-        content: "Hu Tao will rerun I love hutao, I lllllllllllllllllove hutao",
-        likes: 100,
-        liked: true,
-        width: "600px",
-      }
     }
   },
+  computed: {},
+
   methods: {
     getOfficialArticles() {
       request.get("/article/get-official-articles", {
@@ -128,6 +151,20 @@ export default {
     },
     goToArticle(articleId) {
       this.$router.push("/article/" + articleId)
+    },
+    goToPostArticle() {
+      if (this.$store.state.loggedIn) {
+        this.$router.push("/new-article")
+      } else {
+        this.$message.error("login first")
+      }
+    },
+
+    goTo(url) {
+      this.$router.push(url)
+    },
+    articleIdToLink(articleId) {
+      return '/article/' + articleId
     }
   },
   created() {
@@ -151,10 +188,17 @@ export default {
 <style scoped>
 .home {
   background-color: #f0f1f5;
+  display: flex;
+}
+
+.content-container {
+  margin-left: 130px;
+  margin-right: 30px;
+  width: 700px;
 }
 
 .carousel-container {
-  width: 800px;
+  width: 100%;
   padding-top: 20px;
   margin: 0 auto 20px auto;
 }
@@ -166,6 +210,24 @@ export default {
 .article-cards {
   width: 800px;
   margin: 20px auto;
+
+}
+
+.right-side {
+  width: 300px;
+}
+
+.user-action {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.official-info {
+  display: flex;
+  flex-direction: column;
   background-color: white;
 }
 

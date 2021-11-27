@@ -69,9 +69,9 @@
               <br>
               <el-link icon="el-icon-edit" @click="goToPage('/new-article/')">写文章</el-link>
               <br>
-              <el-link icon="el-icon-switch-button" @click="logout()">退出</el-link>
-              <br>
               <el-link icon="el-icon-edit-outline" @click="goToPage('/user/' + this.username)">个人中心</el-link>
+              <br>
+              <el-link icon="el-icon-switch-button" @click="logout()">退出</el-link>
             </template>
             <a-avatar :src=this.$store.state.user.avatarUrl />
           </a-popover>
@@ -186,7 +186,7 @@ export default {
     },
     logout() {
       this.$store.commit('logout');
-      this.$router.push('/login');
+      this.$router.push('/home');
       window.localStorage.removeItem('token');
       this.$message.success("退出成功");
     },
@@ -254,12 +254,6 @@ export default {
   width: 80px;
   text-align: center;
   margin: 0px 50px;
-}
-
-.userdata {
-  margin-left: 20px;
-  color: #fb7299;
-  font-size: small;
 }
 
 .logo {
