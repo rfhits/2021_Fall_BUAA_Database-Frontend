@@ -74,7 +74,6 @@ export default {
     }
   },
   computed: {
-
     followState() {
       if (this.followed === false) {
         return "关注"

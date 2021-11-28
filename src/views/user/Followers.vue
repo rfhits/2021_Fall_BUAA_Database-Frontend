@@ -8,12 +8,11 @@
       </div>
       <el-link style="margin-left: 15px;" :href="'/user/' + follower.username">{{ follower.nickname }}</el-link>
       <div class="follow-action" style="margin-left: 460px">
-<!--        todo: followed and follow switch-->
         <el-button
             :type="buttonFollowType(follower.followed)"
             round
             @click="handleFollow(follower)">
-          {{followText(follower.followed)}}
+          {{ followText(follower.followed) }}
         </el-button>
       </div>
     </div>
@@ -39,7 +38,7 @@ export default {
     }
   },
   computed: {
-    selfUsername(){
+    selfUsername() {
       return this.$store.state.user.username
     },
     followText() {
@@ -79,19 +78,27 @@ export default {
       this.$router.push(url)
     },
     handleFollow(follower) {
-      let url = (follower.followed)? "/user/unfollow-user": "/user/follow-user";
+      // check if follow self
+      const selfUsername = this.$store.state.user.username
+      const otherUsername = follower.username
+      if (selfUsername === otherUsername) {
+        this.$message.error("您不能关注自己")
+        return
+      }
+
+      let url = (follower.followed) ? "/user/unfollow-user" : "/user/follow-user";
       follower.followed = !follower.followed
       request.post(url, {
         "selfUsername": this.$store.state.user.username,
         "otherUsername": follower.username
-      }).then( res=> {
+      }).then(res => {
         if (res.status === 0) {
 
         } else {
           console.log(res.status)
           this.$message.error(res.statusInfo.message)
         }
-      }).catch((err)=> { // cant post
+      }).catch((err) => { // cant post
         console.log(err)
       })
     },

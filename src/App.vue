@@ -42,7 +42,7 @@ export default {
 .header-container {
   width: 100%;
   position: fixed;
-  z-index: 9999;
+  z-index: 3;
   top: 0;
 }
 </style>
