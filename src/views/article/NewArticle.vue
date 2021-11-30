@@ -21,7 +21,7 @@
           <img v-if="article.coverB64" :src="article.coverB64" alt="avatar" width="200"/>
           <div v-else>
             <div>
-             上传封面
+              上传封面
             </div>
           </div>
         </a-upload>
@@ -46,7 +46,13 @@
             @keyup.enter="handleInputConfirm"
             @blur="handleInputConfirm"
         ></el-input>
-        <el-button v-else class="button-new-tag" size="small" @click="showInput">输入话题</el-button>
+        <el-button v-else class="button-new-tag"
+                   size="small"
+                   @click="showInput"
+                   style="margin-bottom: 10px;"
+        >
+          输入话题
+        </el-button>
       </div>
 
       <el-radio-group v-model="article.radio">
@@ -67,25 +73,22 @@
 </template>
 
 <script>
-import {getBase64, trim} from "../../api/utils.js"
-import Header from "../../views/Home"
-import ArticleEditor from "../../components/editor/index"
-import { PlusSquareOutlined } from '@ant-design/icons-vue'
+import {getBase64, trim} from "@/api/utils.js"
+import ArticleEditor from "@/components/editor/index"
+import {PlusSquareOutlined} from '@ant-design/icons-vue'
 import {LikeOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
 import request from "../../api/request";
-
 
 export default {
   name: "NewArticle",
   components: {
     PlusSquareOutlined,
-    Header,
     ArticleEditor,
   },
   data() {
     return {
       article: {
-        title : "",
+        title: "",
         radio: 1,
         content: "",
         coverB64: null,
@@ -134,8 +137,24 @@ export default {
       this.inputValue = ''
     },
 
+    validateArticle() {
+      if (this.article.title === "") {
+        this.$message.error("少侠，你好像忘记输入标题了")
+        return false
+      }
+
+      if (this.article.content === "") {
+        this.$message.error("少侠，写点什么吧")
+        return false
+      }
+      return true
+
+    },
+
     post() {
-      let topics = this.dynamicTags
+      if (!this.validateArticle()) return;
+
+      let topics = this.dynamicTags.slice()
       if (this.article.radio === 1) {
         topics.push("酒馆")
       } else if (this.article.radio === 2) {
@@ -183,14 +202,21 @@ export default {
 }
 
 .cover-upload-container {
-  /*width: 50px;*/
-  margin: 30px 400px;
+  /*width: 250px;*/
+  margin: 30px 400px 10px 400px;
   text-align: center;
+}
+
+.avatar-uploader /deep/ .ant-upload {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
 }
 
 .el-tag + .el-tag {
   margin-left: 10px;
 }
+
 .button-new-tag {
   margin-left: 10px;
   height: 32px;
@@ -198,6 +224,7 @@ export default {
   padding-top: 0;
   padding-bottom: 0;
 }
+
 .input-new-tag {
   width: 90px;
   margin-left: 10px;

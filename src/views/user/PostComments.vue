@@ -6,17 +6,19 @@
         :card-width="this.cardWidth"
     >
     </PersonalCommentCard>
+    <NoData v-if="this.commentList.length === 0" :message="'还没有发布过评论呢'"></NoData>
   </div>
 </template>
 
 <script>
 import PersonalCommentCard from "../../components/PersonalCommentCard"
+import NoData from "@/components/NoData";
 import request from "@/api/request";
 
 export default {
   name: "PostComments",
   components: {
-    PersonalCommentCard
+    PersonalCommentCard, NoData
   },
   data() {
     return {

@@ -4,16 +4,18 @@
         v-for="article in this.articleList"
         :card-data="article">
     </UserArticleCard>
+    <NoData v-if="this.articleList.length===0" :message="'还没有发布帖子呢'"></NoData>
   </div>
 </template>
 
 <script>
 import request from "../../api/request";
 import UserArticleCard from "../../components/UserArticleCard";
+import NoData from "@/components/NoData";
 
 export default {
   name: "PostArticles",
-  components: {UserArticleCard},
+  components: {NoData, UserArticleCard},
   data() {
     return {
       articleList: [

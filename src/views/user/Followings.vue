@@ -18,14 +18,17 @@
       </div>
     </div>
   </el-card>
+  <NoData v-if="this.followings.length === 0" :message="'还没有关注呢'"></NoData>
 
 </template>
 
 <script>
 import request from "@/api/request";
+import NoData from "@/components/NoData"
 
 export default {
   name: "Followings",
+  components: {NoData},
   data() {
     return {
       followings: [

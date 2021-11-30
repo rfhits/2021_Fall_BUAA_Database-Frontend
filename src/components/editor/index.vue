@@ -41,7 +41,6 @@ export default {
         menubar: false,
         toolbar: ['image imagetools |formatselect | bold italic underline textcolor| ' +
                   'alignleft aligncenter alignright | preview paste code wordcount'],
-
         images_upload_handler: async (blobInfo, succFun, failFun) => {
           // let formData = new FormData();
           // formData.append('file', blobInfo.blob(), blobInfo.name());//此处与源文档不一样

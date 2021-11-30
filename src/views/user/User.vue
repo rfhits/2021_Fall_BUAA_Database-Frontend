@@ -22,15 +22,13 @@
         <div style="width: 550px"></div>
 
         <div style="display: flex; color: #999">
-          <div style="font-size: 20px; margin-right: 20px">
-            <span>{{ followers }}</span>
-            <br>
+          <div style="font-size: 20px; margin-right: 20px; display: flex; flex-direction: column; align-items: center">
+            <div>{{ this.followers }}</div>
             <span>粉丝</span>
           </div>
-          <el-divider direction="vertical" style="height: 50px"></el-divider>
-          <div style="font-size: 20px; margin-left: 20px">
-            <span>{{ posts }}</span>
-            <br>
+          <el-divider direction="vertical" style="height: 50px;"></el-divider>
+          <div style="font-size: 20px; margin-left: 20px; display: flex; flex-direction: column; align-items: center">
+            <div>{{ posts }}</div>
             <span>文章</span>
           </div>
         </div>

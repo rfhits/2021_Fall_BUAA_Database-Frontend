@@ -5,39 +5,41 @@
         :model="ruleForm"
         status-icon
         :rules="rules"
-        label-width="120px"
+        label-width="0"
         class="demo-ruleForm"
-        style="padding: 20px"
+        style="padding-top: 120px; margin: 0 auto 0 auto; width: 300px"
 
     >
-      <el-form-item label="旧密码" prop="originPass">
+      <el-form-item label="" prop="originPass">
         <el-input
             v-model="ruleForm.originPass"
             type="password"
+            placeholder="旧密码"
             autocomplete="off"
         ></el-input>
       </el-form-item>
-      <el-form-item label="新密码" prop="pass">
+      <el-form-item label="" prop="pass">
         <el-input
             v-model="ruleForm.pass"
+            placeholder="新密码"
             type="password"
             autocomplete="off"
         ></el-input>
       </el-form-item>
-      <el-form-item label="确认密码" prop="checkPass">
+      <el-form-item label="" prop="checkPass">
         <el-input
             v-model="ruleForm.checkPass"
             type="password"
+            placeholder="再输入新密码"
             autocomplete="off"
         ></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-        <el-button @click="resetForm('ruleForm')">Reset</el-button>
-      </el-form-item>
+      <div style="display: flex; justify-content: space-between">
+        <el-button @click="resetForm('ruleForm')">清空</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
+      </div>
     </el-form>
   </div>
-
 </template>
 
 
@@ -96,6 +98,7 @@ export default {
           }).then((res) => {
             if (res.status === 0) {
              this.$message.success("密码修改成功❤")
+              this.ruleForm = {}
             } else {
               this.$message.error(res.statusInfo.message);
             }
@@ -119,5 +122,6 @@ export default {
 
 .page-container {
   background-color: white;
+  height: 508px;
 }
 </style>

@@ -1,17 +1,17 @@
 <template>
-  <div class="root">
-    <CartGoodCard v-for="good in this.goodList" :card-data="good"></CartGoodCard>
-  </div>
+  <CartGoodCard v-for="good in this.goodList" :card-data="good"></CartGoodCard>
+  <NoData v-if="goodList.length=== 0" :message="'购物车是空的呢'"></NoData>
 </template>
 
 <script>
 import CartGoodCard from "@/components/CartGoodCard";
 import request from "@/api/request";
+import NoData from "@/components/NoData";
 
 export default {
   name: "Cart",
-  components: {CartGoodCard},
-  data () {
+  components: {NoData, CartGoodCard},
+  data() {
     return {
       goodList: [
         {
@@ -21,13 +21,13 @@ export default {
           name: 'good-name',
           storeQuantity: 20,
           price: 520,
-        },{}
+        }, {}
       ]
     }
   },
   methods: {
     load() {
-      request.get('cart/query-cart/' ,{
+      request.get('cart/query-cart/', {
         params: {
           username: this.$store.state.user.username,
         }

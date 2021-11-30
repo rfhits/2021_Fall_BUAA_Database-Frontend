@@ -1,6 +1,5 @@
 <template>
   <div class="page_container">
-
     <div class="avatar_editor">
       <div class="avatar_container">
         <img class="avatar_img" :src=this.$store.state.user.avatarUrl>
@@ -11,7 +10,6 @@
       </div>
 
     </div>
-
     <div class="text-editor">
       <div class="nickname-editor">
         <div style="margin-right: 20px">昵称</div>
@@ -39,25 +37,28 @@
   </div>
 
 <!--  avatar uploader-->
-  <el-dialog v-model="dialogVisible" title="上传头像" style="display: block;">
-    <div class="upload-container">
-      <a-upload
-          name="avatar"
-          list-type="picture-card"
-          class="avatar-uploader"
-          :show-upload-list="false"
-          :before-upload="beforeUpload"
-          @change="handleChange"
-      >
-        <div v-if="uploadB64" class="upload-img-container">
-          <img :src="uploadB64" alt="avatar" class="avatar_img"/>
-        </div>
-        <div v-else style=" width: 200px; height: 200px; margin: 0 auto;">
-          <PlusOutlined :style="{fontSize: '30px', color: '#08c'}"/>
-        </div>
-      </a-upload>
+  <el-dialog v-model="dialogVisible" title="上传头像" >
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <div class="upload-container">
+        <a-upload
+            name="avatar"
+            list-type="picture-card"
+            class="avatar-uploader"
+            :show-upload-list="false"
+            :before-upload="beforeUpload"
+            @change="handleChange"
+        >
+          <div v-if="uploadB64" class="upload-img-container">
+            <img :src="uploadB64" alt="avatar" class="avatar_img"/>
+          </div>
+          <div v-else style=" width: 200px; height: 200px; margin: 0 auto">
+            <PlusOutlined :style="{fontSize: '30px', color: '#08c', marginTop:'80px'}"/>
+          </div>
+        </a-upload>
+      </div>
+      <el-button @click="saveNewAvatar()">保存头像</el-button>
     </div>
-    <el-button @click="saveNewAvatar()">保存头像</el-button>
+
   </el-dialog>
 </template>
 
@@ -140,7 +141,7 @@ export default {
             nickname: this.infoForm.nickname,
             gender: this.infoForm.gender
           });
-          this.$message.success("save success")
+          this.$message.success("个人信息修改成功❤")
         } else {
           this.$message.error(res.statusInfo.message);
         }
@@ -160,6 +161,8 @@ export default {
 
 .page_container {
   background-color: #ffffff;
+  height: 508px;
+  padding-top: 30px;
 }
 
 .avatar_editor {

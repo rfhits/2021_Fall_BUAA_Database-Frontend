@@ -17,14 +17,17 @@
       </div>
     </div>
   </el-card>
+  <NoData v-if="this.followers.length === 0" :message="'还没有粉丝呢'"></NoData>
 
 </template>
 
 <script>
 import request from "../../api/request";
+import NoData from "@/components/NoData";
 
 export default {
   name: "Followers",
+  components: {NoData},
   data() {
     return {
       followers: [
