@@ -29,31 +29,32 @@
     <div class="right-side">
       <div class="user-action">
         <div
-            style="font-size: 30px;
+            style="font-size: 25px;
             font-weight: bold;
             width: 100px;
             margin: 20px auto 0 auto;
             text-align: center"
         >
-          Let's
+          我  要
         </div>
         <el-divider></el-divider>
         <el-button
-            type="primary"
-            style="width: 200px; height: 50px; margin: 10px auto;
-            color: black; font-size: 20px; font-weight: bold"
+            style="width: 200px; height: 50px; margin: 10px auto; color: black; font-size: 20px; font-weight: bold"
+            color="#ffe14c"
             @click="goToPostArticle()"
         >
           <EditOutlined/>
-          Post An Article
+          发篇文章
+          <RightOutlined />
         </el-button>
         <el-button
-            type="primary"
+            color="#ffe14c"
             style="width: 200px; height: 50px; margin: 10px auto 40px auto;
             color: black; font-size: 20px; font-weight: bold"
             @click="goTo('/mall')">
           <AccountBookOutlined/>
-          Go to the Mall
+          逛逛商城
+          <RightOutlined />
         </el-button>
       </div>
       <div class="official-info">
@@ -77,8 +78,7 @@
 
 <script>
 import request from "@/api/request";
-import {Edit, Share, Delete, Search, Upload} from '@element-plus/icons'
-import {EditOutlined, LikeOutlined, EyeOutlined, CommentOutlined, AccountBookOutlined} from '@ant-design/icons-vue'
+import {RightOutlined, EditOutlined, LikeOutlined, EyeOutlined, CommentOutlined, AccountBookOutlined} from '@ant-design/icons-vue'
 import ArticleCard from "../components/ArticleCard";
 import sidebar from "@/components/UserSidebar"
 
@@ -88,6 +88,7 @@ export default {
     ArticleCard,
     sidebar,
     EditOutlined,
+    RightOutlined,
     AccountBookOutlined
   },
   data() {

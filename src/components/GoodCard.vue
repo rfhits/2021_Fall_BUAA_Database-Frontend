@@ -34,6 +34,7 @@ export default {
 
 .img-container {
   /*width: 200px;*/
+  height: 230px
 }
 
 .good-name {

@@ -1,5 +1,9 @@
 <template>
-  <CartGoodCard v-for="good in this.goodList" :card-data="good"></CartGoodCard>
+  <CartGoodCard
+      v-for="good in this.goodList"
+      :card-data="good"
+      @reload="load"
+  ></CartGoodCard>
   <NoData v-if="goodList.length=== 0" :message="'购物车是空的呢'"></NoData>
 </template>
 
@@ -15,12 +19,11 @@ export default {
     return {
       goodList: [
         {
-          goodId: 233,
-          imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg',
-          width: '800px',
-          name: 'good-name',
-          storeQuantity: 20,
+          id: 0,
+          name: "goodNameTest",
           price: 520,
+          imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg',
+          storeQuantity: 20,
         }, {}
       ]
     }

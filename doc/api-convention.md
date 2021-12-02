@@ -1319,8 +1319,9 @@ url: @/cart/query-cart
     "data": {
         goodList: [
             {
-                goodName: "23",
-                goodPrice: 233, // 单价
+                id: 233,
+                name: "23",
+                price: 233, // 单价
                 storeQuantity: 233 // 库存
             },
             

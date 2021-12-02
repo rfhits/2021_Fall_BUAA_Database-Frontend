@@ -8,7 +8,7 @@
     >
       <el-menu-item :index=postsUrl>
         <ProfileOutlined/>
-        <span>发帖</span>
+        <span>文章</span>
       </el-menu-item>
 
       <el-menu-item :index=commentsUrl>
@@ -32,7 +32,7 @@
       </el-menu-item>
 
       <el-menu-item v-if="isSelf" :index=boughtUrl>
-        <i class="el-icon-user-solid"></i>
+        <AccountBookOutlined />
         <span>已购</span>
       </el-menu-item>
 
@@ -57,7 +57,7 @@
 
 <script>
 import {ProfileOutlined, CommentOutlined, HeartOutlined,
-  UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined}
+  UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined,AccountBookOutlined}
   from '@ant-design/icons-vue'
 
 export default {
@@ -69,8 +69,8 @@ export default {
     UsergroupAddOutlined,
     ShoppingCartOutlined,
     LogoutOutlined,
-    EditOutlined
-
+    EditOutlined,
+    AccountBookOutlined
   },
   computed: {
     postsUrl() {

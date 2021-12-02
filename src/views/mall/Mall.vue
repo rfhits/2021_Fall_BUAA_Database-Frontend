@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <GoodCard v-for="good in this.goodList" :card-data="good" :width="'300px'"></GoodCard>
+    <GoodCard v-for="good in this.goodList" :card-data="good" :width="'22.3%'"></GoodCard>
   </div>
 </template>
 

@@ -24,7 +24,6 @@
               </template>
             </el-popconfirm>
           </template>
-
         </el-table-column>
       </el-table>
     </div>
@@ -98,7 +97,6 @@
         <div style="display: flex; justify-content: space-between">
           <el-button @click="cancelEditGood()">取消</el-button>
           <el-button type="primary" @click="saveEditGood()">保存</el-button>
-
         </div>
 
       </div>
@@ -219,7 +217,66 @@ export default {
       this.newGoodFormVisible = false
     },
 
+    checkGoodForm(goodForm) {
+      var priceReg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/
+      var quantityReg = /^\d+$/
+      if (goodForm.name === "") {
+        this.$message.error("请输入商品的名称")
+        return false
+      }
+
+      if (goodForm.price === "") {
+        this.$message.error("请输入商品的单价")
+        return false
+      }
+
+      if (!priceReg.test(goodForm.price)) {
+        this.$message.error("请输入正确格式的价格")
+        return false
+      }
+
+      if (goodForm.quantity === "") {
+        this.$message.error("请输入商品的数量")
+        return false
+      }
+
+      if (!quantityReg.test(goodForm.quantity)) {
+        this.$message.error("商品的数量得是正整数哟")
+        return false
+      }
+      return true
+    },
+    checkNewGood() {
+      var priceReg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/
+      var quantityReg = /^\d+$/
+      if (this.newGoodForm.name === "") {
+        this.$message.error("请输入商品的名称")
+        return false
+      }
+
+      if (this.newGoodForm.price === "") {
+        this.$message.error("请输入商品的单价")
+        return false
+      }
+
+      if (!priceReg.test(this.newGoodForm.price)) {
+        this.$message.error("请输入正确格式的价格")
+        return false
+      }
+
+      if (this.newGoodForm.quantity === "") {
+        this.$message.error("请输入商品的数量")
+        return false
+      }
+
+      if (!quantityReg.test(this.newGoodForm.quantity)) {
+        this.$message.error("商品的数量得是正整数哟")
+        return false
+      }
+      return true
+    },
     saveNewGood() {
+      if (!this.checkGoodForm(this.newGoodForm)) return false
       request.post('/admin/manage/post-good/', {
         good: this.newGoodForm
       }).then(res => {
@@ -235,8 +292,11 @@ export default {
       this.newGoodForm = {}
       this.newGoodFormVisible = false
     },
+    checkEditGood() {
 
+    },
     saveEditGood() {
+      if (!this.checkGoodForm(this.editGoodForm)) return false
       request.post('/admin/manage/edit-good/', {
         good: this.editGoodForm
       }).then(res => {

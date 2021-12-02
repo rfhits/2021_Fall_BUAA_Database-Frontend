@@ -1,23 +1,5 @@
 <template>
-  <el-card
-      v-for="follower in this.followings"
-  >
-    <div class="card-container">
-      <div class="avatar_container">
-        <img :src='follower.avatarUrl' class="avatar_img">
-      </div>
-      <el-link style="margin-left: 15px;" :href="'/user/' + follower.username">{{ follower.nickname }}</el-link>
-      <div class="follow-action" style="margin-left: 460px">
-        <!--        todo: followed and follow switch-->
-        <el-button
-            :type="buttonFollowType(follower.followed)"
-            round
-            @click="handleFollow(follower)">
-          {{followText(follower.followed)}}
-        </el-button>
-      </div>
-    </div>
-  </el-card>
+  <UserFollowingCard v-for="user in this.followings" :user="user"></UserFollowingCard>
   <NoData v-if="this.followings.length === 0" :message="'还没有关注呢'"></NoData>
 
 </template>
@@ -25,10 +7,11 @@
 <script>
 import request from "@/api/request";
 import NoData from "@/components/UserNoData"
+import UserFollowingCard from "@/components/UserFollowingCard";
 
 export default {
   name: "Followings",
-  components: {NoData},
+  components: {UserFollowingCard, NoData},
   data() {
     return {
       followings: [
@@ -51,6 +34,9 @@ export default {
         }
       }
     },
+
+  },
+  methods: {
     buttonFollowType() {
       return function (followed) {
         if (followed) {
@@ -59,10 +45,7 @@ export default {
           return "primary"
         }
       }
-
-    }
-  },
-  methods: {
+    },
     load() {
       request.post('user/view-leaders/', {
         selfUsername: this.$store.state.user.username,

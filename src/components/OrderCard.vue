@@ -11,12 +11,19 @@
 
       <div>买了：{{ this.cardData.quantity }} 个</div>
 
-      <div class="price">付了：{{ cardData.price }} 元</div>
+      <div class="price">付了：{{ cardData.price*this.cardData.quantity }} 元</div>
 
       <div class="action">
-        <el-button v-if="cardData.hasReceived" size="mini" style="margin:0 10px" @click="handleComment()">撰写评论
+        <el-button v-if="cardData.hasReceived"
+                   size="mini"
+                   style="margin:0 10px"
+                   type="danger"
+                   @click="handleComment()">撰写评论
         </el-button>
-        <el-button v-else size="mini" style="margin:0 10px" @click="handleConfirm">确认收货</el-button>
+        <el-button v-else size="mini"
+                   type="primary"
+                   style="margin:0 10px"
+                   @click="handleConfirm">确认收货</el-button>
       </div>
     </div>
   </el-card>
@@ -29,7 +36,7 @@
           type="textarea"
       ></el-input>
     </div>
-    <el-button @click="handlePost" style="margin-top: 20px">发表评论</el-button>
+    <el-button @click="handlePost" type="primary" style="margin-top: 20px">发表评论</el-button>
   </el-dialog>
 </template>
 
@@ -106,8 +113,7 @@ export default {
 }
 
 .price {
-  color: deeppink;
-  font-size: 16px;
+  /*font-size: 16px;*/
   margin: 0 10px;
 }
 

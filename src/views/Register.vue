@@ -156,7 +156,15 @@ export default {
     },
     checkNickname() {
       if (this.registerForm.nickname === "") {
-        this.$message.error("input nickname")
+        this.$message.error("请输入昵称哟")
+        return false
+      } else {
+        return true
+      }
+    },
+    checkAvB64() {
+      if (this.registerForm.imgurl === "") {
+        this.$message.error("请上传头像呦")
         return false
       } else {
         return true
@@ -174,7 +182,8 @@ export default {
       }
     },
     submitForm() {
-      if (!this.checkNickname()) return
+      if (!this.checkNickname()) return false
+      if (!this.checkAvB64()) return false
       let _this = this;
 
       request.post("/user/register/", {

@@ -1,22 +1,5 @@
 <template>
-  <el-card
-      v-for="follower in this.followers"
-  >
-    <div class="card-container">
-      <div class="avatar_container">
-        <img :src='follower.avatarUrl' class="avatar_img">
-      </div>
-      <el-link style="margin-left: 15px;" :href="'/user/' + follower.username">{{ follower.nickname }}</el-link>
-      <div class="follow-action" style="margin-left: 460px">
-        <el-button
-            :type="buttonFollowType(follower.followed)"
-            round
-            @click="handleFollow(follower)">
-          {{ followText(follower.followed) }}
-        </el-button>
-      </div>
-    </div>
-  </el-card>
+  <UserFollowingCard v-for="user in followers" :user="user"/>
   <NoData v-if="this.followers.length === 0" :message="'还没有粉丝呢'"></NoData>
 
 </template>
@@ -24,10 +7,11 @@
 <script>
 import request from "../../api/request";
 import NoData from "@/components/UserNoData";
+import UserFollowingCard from "@/components/UserFollowingCard";
 
 export default {
   name: "Followers",
-  components: {NoData},
+  components: {UserFollowingCard, NoData},
   data() {
     return {
       followers: [

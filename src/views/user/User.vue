@@ -3,17 +3,33 @@
     <div class="user-card-container">
       <el-card :body-style="{display: 'flex', alignItems: 'center'}">
         <div class="avatar_container">
-          <img :src=this.avatarUrl class="avatar_img" alt="alt">
+          <img v-if="isSelf" :src=this.selfAvatarUrl class="avatar_img" alt="alt">
+          <img v-else :src=this.avatarUrl class="avatar_img" alt="alt">
         </div>
         <div style="margin-left: 20px">
           <h2 style="font-weight: bold">{{ this.nickname }}</h2>
           <div v-if="this.$store.state.user.username===this.$route.params.username">
-            <el-button>
+            <el-button
+                @click="goToEditInfoPage()"
+            >
               编辑
             </el-button>
           </div>
           <div v-else>
-            <el-button @click="handleFollow()">
+            <el-button
+                v-if="this.followed"
+                type="info"
+                round
+                @click="handleFollow()"
+            >
+              {{ followState }}
+            </el-button>
+            <el-button
+                v-else
+                type="primary"
+                round
+                @click="handleFollow()"
+            >
               {{ followState }}
             </el-button>
           </div>
@@ -43,7 +59,7 @@
         </div>
 
         <div class="router-container">
-          <router-view></router-view>
+          <router-view @updataAvatarUrl="updataAvatarUrl"></router-view>
         </div>
 
       </div>
@@ -72,6 +88,14 @@ export default {
     }
   },
   computed: {
+    buttonFollowType() {
+      if (this.followed) {
+        return "info"
+      } else {
+        return "primary"
+      }
+    },
+
     followState() {
       if (this.followed === false) {
         return "关注"
@@ -79,11 +103,17 @@ export default {
         return "已关注"
       }
     },
+    isSelf() {
+      return this.selfUsername === this.viewedUsername
+    },
     selfUsername() {
       return this.$store.state.user.username
     },
     viewedUsername() {
       return this.$route.params.username
+    },
+    selfAvatarUrl() {
+      return this.$store.state.user.avatarUrl
     }
   },
   methods: {
@@ -135,6 +165,12 @@ export default {
           }
         })
       }
+    },
+    updataAvatarUrl(avatarUrl) {
+      this.avatarUrl = avatarUrl
+    },
+    goToEditInfoPage() {
+      this.$router.push("/user/" + this.selfUsername + "/edit-info")
     }
   },
 

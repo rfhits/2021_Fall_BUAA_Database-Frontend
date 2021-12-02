@@ -13,7 +13,18 @@
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="username" label="作者"></el-table-column>
         <el-table-column prop="postDate" label="发布时间"></el-table-column>
-        <el-table-column prop="link" label="文章链接"></el-table-column>
+        <el-table-column label="文章链接">
+          <template #default="scope">
+            <el-link
+                :href="articleIdToLink(scope.row.articleId)"
+                target="_blank"
+            >
+              {{articleIdToLink(scope.row.articleId)}}
+            </el-link>
+          </template>
+
+
+        </el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template #default="scope">
             <el-button @click="handleDrop(scope.row)" type="text" size="small">删除</el-button>
@@ -36,17 +47,25 @@ export default {
     return {
       form: {},
       keyword: "",
-      articleList: [{
-        id: '233',
-        title: 'title',
-        username: 'username',
-        postDate: "2021-00-00",
-      }],
+      articleList: [
+        {
+          id: '233',
+          title: 'title',
+          username: 'username',
+          postDate: "2021-00-00",
+        }
+      ],
     }
   },
-  computed: {},
-  methods: {
+  computed: {
+    articleIdToLink() {
+      return function (articleId) {
+        return "/article/" + articleId
+      }
+    },
 
+  },
+  methods: {
     load() {
       request.get('/article/search/', {
         params: {

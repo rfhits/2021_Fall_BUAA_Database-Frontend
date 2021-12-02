@@ -170,11 +170,11 @@ export default {
     },
 
     authorPageUrl() {
-      return "/user/" + this.author.username + "/posts/"
+      return "/user/" + this.author.username + "/posts"
     },
 
     authorFollowersPageUrl() {
-      return "/user/" + this.author.username + "/followers/"
+      return "/user/" + this.author.username + "/followers"
     }
 
   },
@@ -272,27 +272,28 @@ export default {
       console.log(this.$store.state.user.username)
       console.log(this.$store.state.loggedIn)
       console.log(this.$route.params.username)
-      if (this.followed) {
-        this.followed = false;
+      if (this.author.followed) {
+
         request.post('user/unfollow-user/', {
           selfUsername: this.$store.state.user.username,
           otherUsername: this.author.username
         }).then(res => {
           if (res.status === 0) {
             console.log('unfollow success')
+            this.author.followed = false;
             this.author.followers--
           } else {
             alert("unfollowe failed")
           }
         })
       } else {
-        this.followed = true
         request.post('user/follow-user/', {
           selfUsername: this.$store.state.user.username,
           otherUsername: this.author.username
         }).then(res => {
           if (res.status === 0) {
             console.log('follow success')
+            this.author.followed = true;
             this.author.followers++
           } else {
             alert("unfollow failed")

@@ -27,7 +27,7 @@
         <span>评论</span>
       </el-menu-item>
 
-      <el-menu-item @click="logout()">
+      <el-menu-item @click="logout()" index="">
         <LogoutOutlined/>
         <span>退出登录</span>
       </el-menu-item>

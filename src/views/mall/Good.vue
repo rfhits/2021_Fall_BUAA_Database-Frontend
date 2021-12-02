@@ -47,7 +47,7 @@ export default {
         id: 0,
         name: "毛绒玩具",
         price: 30,
-        storeQuantity: 200,
+        quantity: 200,
         imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg'
       },
       orderQuantity: 0,
@@ -83,13 +83,14 @@ export default {
     },
     handleOrder() {
       if (this.$store.state.loggedIn) {
-        request.post('/order/add-order', {
+        request.post('/order/add-order/', {
           goodId: this.good.id,
           orderQuantity: this.orderQuantity,
         }).then(res => {
           if (res.status === 0) {
             // todo: pop a img, my wechat
             this.$message.success("支付成功")
+            this.good.quantity -= this.orderQuantity
           } else {
             alert(res.statusInfo.message)
           }

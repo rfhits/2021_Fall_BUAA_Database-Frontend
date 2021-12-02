@@ -117,6 +117,7 @@ export default {
         if (res.status === 0) {
           this.$store.commit('setAvatarUrl', res.data);
           this.dialogVisible = false;
+          this.$emit("updataAvatarUrl", res.data.avatarUrl)
           this.$message.success("save success")
           console.log("responds avatarUrl is " + res.data.avatarUrl)
           console.log("the store avatar url is " + this.$store.state.user.avatarUrl)

@@ -4,7 +4,7 @@
         v-for="article in this.articleList"
         :card-data="article">
     </UserArticleCard>
-    <NoData v-if="this.articleList.length===0" :message="'还没有发布帖子呢'"></NoData>
+    <NoData v-if="this.articleList.length===0" :message="'还没有发布文章呢'"></NoData>
   </div>
 </template>
 
