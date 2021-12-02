@@ -11,7 +11,7 @@
 <script>
 import request from "../../api/request";
 import UserArticleCard from "../../components/UserArticleCard";
-import NoData from "@/components/NoData";
+import NoData from "@/components/UserNoData";
 
 export default {
   name: "PostArticles",

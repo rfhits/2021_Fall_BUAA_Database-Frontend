@@ -1,8 +1,10 @@
 <template>
   <div class="root" >
-    <div class="articles">
-      <ArticleCard v-for="article in articleList" :card-data="article" :width="'800px'" style="margin: 0 auto"></ArticleCard>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <ArticleCard v-for="article in articleList" :card-data="article" :width="'800px'"></ArticleCard>
+      <ArticleNoData :width="'800px'"></ArticleNoData>
     </div>
+
     <Footer></Footer>
   </div>
 </template>
@@ -11,10 +13,11 @@
 import request from "@/api/request";
 import ArticleCard from "@/components/ArticleCard";
 import Footer from "@/components/Footer";
+import ArticleNoData from "@/components/ArticleNoData";
 
 export default {
   name: "Topic",
-  components: {Footer, ArticleCard},
+  components: {ArticleNoData, Footer, ArticleCard},
   data() {
     return {
       articleList: [

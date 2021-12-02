@@ -22,12 +22,12 @@
           <el-input v-model="registerForm.checkPass" type="password" autocomplete="off" placeholder="确认密码"/>
 
           <div style="display: flex; justify-content: space-between">
-            <el-button type="primary"
-                       @click="resetForm('registerForm')"
-            >
+            <el-button @click="resetForm('registerForm')">
               重置
             </el-button>
-            <el-button type="primary" @click="nextStep()">下一步</el-button>
+            <el-button type="primary" @click="nextStep()">
+              下一步
+            </el-button>
           </div>
         </div>
 

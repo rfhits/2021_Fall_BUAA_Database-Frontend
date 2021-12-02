@@ -69,7 +69,6 @@ export default {
     }
   },
   created() {
-    this.keyword = this.routeKeyword;
     this.load();
   }
 }

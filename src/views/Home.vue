@@ -45,7 +45,7 @@
             @click="goToPostArticle()"
         >
           <EditOutlined/>
-          Post Articles
+          Post An Article
         </el-button>
         <el-button
             type="primary"

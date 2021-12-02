@@ -6,7 +6,7 @@
 <script>
 import CartGoodCard from "@/components/CartGoodCard";
 import request from "@/api/request";
-import NoData from "@/components/NoData";
+import NoData from "@/components/UserNoData";
 
 export default {
   name: "Cart",

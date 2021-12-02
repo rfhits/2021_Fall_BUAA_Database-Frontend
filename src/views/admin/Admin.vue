@@ -1,4 +1,5 @@
 <template>
+  <div class="header"></div>
   <router-view></router-view>
 </template>
 
@@ -9,5 +10,7 @@ export default {
 </script>
 
 <style scoped>
-
+.header {
+  height: 30px;
+}
 </style>

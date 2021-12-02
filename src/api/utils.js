@@ -18,3 +18,8 @@ export function removeHtmlTag(txt) {
     var text = s.replace(re, "");
     return text
 }
+
+export function formatDate(str) {
+    // 2021-11-24T14:59:10.160Z
+    return str.substr(0, 19).replace("T", " ")
+}

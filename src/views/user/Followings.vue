@@ -24,7 +24,7 @@
 
 <script>
 import request from "@/api/request";
-import NoData from "@/components/NoData"
+import NoData from "@/components/UserNoData"
 
 export default {
   name: "Followings",
@@ -79,14 +79,13 @@ export default {
       this.$router.push(url)
     },
     handleFollow(follower) {
-      let url = (follower.followed)? "/user/unfollow-user": "/user/follow-user";
-      follower.followed = !follower.followed
+      let url = (follower.followed)? "/user/unfollow-user/": "/user/follow-user/";
       request.post(url, {
         "selfUsername": this.$store.state.user.username,
         "otherUsername": follower.username
       }).then( res=> {
         if (res.status === 0) {
-
+          follower.followed = !follower.followed
         } else {
           console.log(res.status)
           this.$message.error(res.statusInfo.message)

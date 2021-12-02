@@ -2,8 +2,11 @@
   <div class="root">
     <div class="op_on_table">
       <el-button type="primary" style="margin-right: 20px" @click="showAddForm">新增商品</el-button>
-      <el-input v-model="keyword" placeholder="搜索商品" style="width: 40%;"></el-input>
-      <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
+      <div>
+        <el-input v-model="keyword" placeholder="搜索商品" style="width: 66%;" @keyup.enter.native="load()"></el-input>
+        <el-button type="primary" style="margin-left: 20px" @click="load()">搜索</el-button>
+      </div>
+
     </div>
 
     <div class="table-container">
@@ -25,6 +28,7 @@
         </el-table-column>
       </el-table>
     </div>
+
     <div class="pagination-container">
       <el-pagination
           @size-change="handleSizeChange"
@@ -39,6 +43,7 @@
       </el-pagination>
     </div>
 
+    <!--    add a good-->
     <el-dialog v-model="this.newGoodFormVisible" title="新增商品">
       <div class="new-good-form">
         <div class="upload-container">
@@ -54,7 +59,7 @@
               <img :src="this.newGoodForm.imgB64" alt="avatar" class="avatar_img"/>
             </div>
             <div v-else style=" width: 200px; height: 200px; margin: 0 auto;">
-              <PlusOutlined :style="{fontSize: '30px', color: '#08c'}"/>
+              <PlusOutlined :style="{fontSize: '30px', color: '#08c', marginTop: '75px'}"/>
             </div>
           </a-upload>
         </div>
@@ -69,7 +74,11 @@
             type="textarea"
             style="width: 400px; margin: 0 auto 10px auto;"
         ></el-input>
-        <el-button @click="saveNewGood()">保存</el-button>
+        <div style="display: flex; justify-content: space-between; width: 70%">
+          <el-button @click="cancelNewGood()">取消</el-button>
+          <el-button type="primary" @click="saveNewGood()">保存</el-button>
+        </div>
+
       </div>
     </el-dialog>
 
@@ -86,7 +95,12 @@
             type="textarea"
             style="width: 400px; margin: 0 auto 10px auto;"
         ></el-input>
-        <el-button @click="saveEditGood()">保存</el-button>
+        <div style="display: flex; justify-content: space-between">
+          <el-button @click="cancelEditGood()">取消</el-button>
+          <el-button type="primary" @click="saveEditGood()">保存</el-button>
+
+        </div>
+
       </div>
     </el-dialog>
   </div>
@@ -97,10 +111,11 @@
 <script>
 import request from "@/api/request";
 import {getBase64} from "@/api/utils";
+import {PlusOutlined} from '@ant-design/icons-vue'
 
 export default {
   name: "Goods",
-  components: {},
+  components: {PlusOutlined},
   data() {
     return {
       keyword: "",
@@ -199,6 +214,11 @@ export default {
         _this.uploadB64 = imageUrl;
       });
     },
+    cancelNewGood() {
+      this.newGoodForm = {}
+      this.newGoodFormVisible = false
+    },
+
     saveNewGood() {
       request.post('/admin/manage/post-good/', {
         good: this.newGoodForm
@@ -215,6 +235,7 @@ export default {
       this.newGoodForm = {}
       this.newGoodFormVisible = false
     },
+
     saveEditGood() {
       request.post('/admin/manage/edit-good/', {
         good: this.editGoodForm
@@ -228,6 +249,11 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+      this.editGoodForm = {}
+      this.editGoodFormVisible = false
+    },
+
+    cancelEditGood() {
       this.editGoodForm = {}
       this.editGoodFormVisible = false
     },
@@ -260,15 +286,18 @@ export default {
 
 .op_on_table {
   margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .table-container {
-  width: 800px;
+  width: 700px;
 }
 
 .new-good-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 400px;
   margin: 0px auto;
 }
@@ -283,8 +312,8 @@ export default {
 
 
 .upload-img-container {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   margin: 20px auto;
   background-color: white;
 }

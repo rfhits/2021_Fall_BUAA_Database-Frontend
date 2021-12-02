@@ -2,7 +2,7 @@
   <div>
     <div class="login-root">
       <div class="form" style="text-align: center; width: 250px; margin: 50px auto; margin-top: 50px">
-        <h1>Welcome, Administrator</h1>
+        <h1>Administrator Register</h1>
         <el-form ref="form" :model="form" >
           <el-form-item>
             <el-input prefix-icon="el-icon-user-solid" v-model="form.username"></el-input>
@@ -12,7 +12,7 @@
           </el-form-item>
           <el-form-item>
             <div>
-              <el-button  type="primary" @click="login">登陆</el-button>
+              <el-button  type="primary" @click="register">注册</el-button>
             </div>
           </el-form-item>
         </el-form>
@@ -28,7 +28,7 @@ export default {
   components: {
 
   },
-  name: "login",
+  name: "Register",
   data() {
     return {
       name: "",
@@ -39,16 +39,14 @@ export default {
     }
   },
   methods: {
-    login() {
+    register() {
       let isValidAccount = this.form.password.length >= 8 && this.form.username !== ''
       if (isValidAccount) {
-        request.post("/admin/login/", {
+        request.post("/admin/register/", {
           "user": this.form
         }).then( res=> {
           if (res.status === 0) {
-            window.localStorage.setItem("token", res.data.token)
-            this.$store.commit("login", res.data)
-            this.$router.push("/admin/manage")
+            this.$router.push("/admin/login/")
           } else {
             console.log(res.status)
             this.$message.error(res.statusInfo.message)

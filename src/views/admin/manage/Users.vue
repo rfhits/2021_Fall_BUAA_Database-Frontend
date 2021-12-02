@@ -1,8 +1,15 @@
 <template>
   <div class="root">
     <div class="op_on_table">
-      <el-input v-model="searchText" placeholder="搜索用户" style="width: 40%; margin-left: 0"></el-input>
-      <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
+      <el-input v-model="searchText"
+                placeholder="搜索用户"
+                @keyup.enter.native="load()"
+                style="width: 40%; margin-left: 0"></el-input>
+      <el-button type="primary" style="margin-left: 20px"
+                 @click="load()"
+      >
+        搜索
+      </el-button>
     </div>
 
     <div class="table-container">
@@ -25,35 +32,41 @@
     <div class="dialog-container">
       <el-dialog
           v-model="this.editTableVisible"
-          title="Tips"
+          title="编辑用户信息"
           width="30%"
       >
         <el-form
             ref="ruleForm"
             :model="this.editUser"
-            label-width="120px"
+            label-width="80px"
             class="demo-ruleForm"
         >
-          <el-form-item label="username" prop="username">
+          <el-form-item label="用户名" prop="username">
             <el-input v-model="editUser.username" ></el-input>
           </el-form-item>
 
-          <el-form-item label="nickname" prop="nickname">
+          <el-form-item label="昵称" prop="nickname">
             <el-input v-model="editUser.nickname"></el-input>
           </el-form-item>
 
-          <el-form-item label="gender" prop="gender">
-            <el-radio-group v-model=editUser.refGender>
-              <el-radio label='0'>male</el-radio>
-              <el-radio label="1">female</el-radio>
-              <el-radio label="2">secret</el-radio>
+          <el-form-item label="性别" prop="gender">
+            <el-radio-group v-model=editUser.gender>
+              <el-radio label='0'>男</el-radio>
+              <el-radio label="1">女</el-radio>
+              <el-radio label="2">保密</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-form>
+        <div style="display: flex; justify-content: space-between; margin: 0 30px">
+          <el-button @click="editTableVisible = false">
+            取消
+          </el-button>
 
-        <el-button @click="editTableVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="handleConfirm()">Confirm
-        </el-button>
+          <el-button type="primary" @click="handleConfirm()">
+            确认
+          </el-button>
+        </div>
+
       </el-dialog>
     </div>
   </div>
@@ -98,11 +111,11 @@ export default {
     },
     genderInt2Str(gender) {
       if (gender === 0) {
-        return "male";
+        return "男";
       } else if (gender === 1) {
-        return "female"
+        return "女"
       } else {
-        return "secret"
+        return "保密"
       }
     },
     load() {
@@ -123,7 +136,7 @@ export default {
             this.tableData[i].genderStr = this.genderInt2Str(this.tableData[i].gender)
           }
         } else {
-          alert("search user failed")
+          this.$message.error(res.statusInfo.message)
         }
       }).catch(err => {
         console.log("err: " + err);

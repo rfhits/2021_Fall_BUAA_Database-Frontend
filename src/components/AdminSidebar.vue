@@ -4,11 +4,11 @@
         router
         :default-active=this.$route.path
         class="el-menu-vertical-demo"
-        style="width: 200px"
+        style="width: 180px"
     >
 
       <el-menu-item :index=usersUrl>
-        <HeartOutlined/>
+        <UserOutlined />
         <span>用户</span>
       </el-menu-item>
 
@@ -38,14 +38,15 @@
 
 <script>
 import {
-  ProfileOutlined, CommentOutlined, HeartOutlined,
+  ProfileOutlined, CommentOutlined, HeartOutlined,UserOutlined,
   UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined
 }
   from '@ant-design/icons-vue'
 
 export default {
-  name: "Sidebar",
+  name: "AdminSidebar",
   components: {
+    UserOutlined,
     ProfileOutlined,
     CommentOutlined,
     HeartOutlined,
@@ -79,7 +80,6 @@ export default {
 
 <style scoped>
 .sidebar-container {
-  border: 1px solid #e6e6e6;
-  width: 150px;
+
 }
 </style>

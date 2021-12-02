@@ -1,8 +1,11 @@
 <template>
   <div class="root">
     <div class="op_on_table">
-      <el-input v-model="keyword" placeholder="搜索文章" style="width: 40%; margin-left: 0"></el-input>
-      <el-button type="primary" style="margin-left: 20px" @click="load()">search</el-button>
+      <el-input v-model="keyword"
+                placeholder="搜索文章"
+                @keyup.enter.native="load()"
+                style="width: 40%; margin-left: 0"/>
+      <el-button type="primary" style="margin-left: 20px" @click="load()">搜索</el-button>
     </div>
 
     <div class="table-container">
@@ -23,6 +26,7 @@
 
 <script>
 import request from "@/api/request";
+import {formatDate} from "@/api/utils";
 import {defineComponent, ref} from 'vue'
 
 export default {
@@ -42,11 +46,11 @@ export default {
   },
   computed: {},
   methods: {
+
     load() {
-      console.log(this.keyword)
-      request.get("/article/search/", {
+      request.get('/article/search/', {
         params: {
-          keyword: this.keyword,
+          keyword: this.keyword
         }
       }).then(res => {
         console.log(res);
@@ -55,6 +59,7 @@ export default {
           let i = 0, length = this.articleList.length
           for (; i < length; i++) {
             this.articleList[i].link = '/article/' + this.articleList[i].articleId
+            this.articleList[i].postDate = formatDate(this.articleList[i].postDate)
           }
         } else {
           alert("search article failed")

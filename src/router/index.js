@@ -163,7 +163,7 @@ const routes = [
         path: '/admin/',
         name: 'Admin',
         component: () => import('@/views/admin/Admin'),
-        redirect: '/admin/login/',
+        redirect: '/admin/login',
         children: [
             {
                 path: '/admin/login',
@@ -171,30 +171,35 @@ const routes = [
                 component: () => import('@/views/admin/Login')
             },
             {
+                path: '/admin/register',
+                name: 'AdminRegister',
+                component: () => import('@/views/admin/Register')
+            },
+            {
                 path: '/admin/manage',
-                redirect: '/admin/manage/articles/',
+                redirect: '/admin/manage/articles',
                 name: 'AdminManage',
-                component: () => import('@/views/admin/Manage'),
+                component: () => import('@/views/admin/manage/Manage'),
                 children: [
                     {
                         path: '/admin/manage/articles',
                         name: 'ManageArticles',
-                        component: () => import('@/views/admin/Articles')
+                        component: () => import('@/views/admin/manage/Articles')
                     },
                     {
                         path: '/admin/manage/users',
                         name: 'ManageUsers',
-                        component: () => import('@/views/admin/Users')
+                        component: () => import('@/views/admin/manage/Users')
                     },
                     {
                         path: '/admin/manage/goods',
                         name: 'ManageGoods',
-                        component: () => import('@/views/admin/Goods')
+                        component: () => import('@/views/admin/manage/Goods')
                     },
                     {
                         path: '/admin/manage/comments',
                         name: 'ManageComments',
-                        component: () => import('@/views/admin/Comments')
+                        component: () => import('@/views/admin/manage/Comments')
                     }
 
                 ]

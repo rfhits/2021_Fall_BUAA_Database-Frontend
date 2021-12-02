@@ -12,7 +12,7 @@
 
 <script>
 import PersonalCommentCard from "../../components/PersonalCommentCard"
-import NoData from "@/components/NoData";
+import NoData from "@/components/UserNoData";
 import request from "@/api/request";
 
 export default {
