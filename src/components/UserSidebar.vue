@@ -46,7 +46,7 @@
         <span>编辑资料</span>
       </el-menu-item>
 
-      <el-menu-item v-if="isSelf" @click="logout()">
+      <el-menu-item v-if="isSelf" index="" @click="logout()">
         <LogoutOutlined />
         <span>退出登录</span>
       </el-menu-item>
