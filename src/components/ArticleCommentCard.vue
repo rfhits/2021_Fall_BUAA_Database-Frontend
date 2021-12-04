@@ -22,13 +22,10 @@ data: {
 
     <div class="footer">
       <div class="comment-time" style="color: #999">
-        {{ cardData.date }}
+        {{ this.formatedDate }}
       </div>
-      <div style="width: 460px"></div>
-
       <div style="display: flex; align-items: center; font-size: 16px">
         <LikeOutlined :style="{color:likeColor}" @click="like()"></LikeOutlined>
-
         <span style="color: #999; margin-left: 5px">{{ cardData.likes }}</span>
       </div>
 
@@ -39,6 +36,7 @@ data: {
 
 <script>
 import request from "@/api/request";
+import {formatDate} from "@/api/utils";
 import {LikeOutlined} from '@ant-design/icons-vue'
 
 export default {
@@ -48,6 +46,18 @@ export default {
   },
   props: {
     cardData: {type: Object, required: true}
+  },
+  computed: {
+    likeColor() {
+      if (this.cardData.liked) {
+        return "#05c4ff"
+      } else {
+        return "#999"
+      }
+    },
+    formatedDate() {
+      return formatDate(this.cardData.date)
+    }
   },
   methods: {
     goToPage() {
@@ -87,21 +97,14 @@ export default {
       }
     }
   },
-  computed: {
-    likeColor() {
-      if (this.cardData.liked) {
-        return "#05c4ff"
-      } else {
-        return "#999"
-      }
-    },
-  }
+
 }
 </script>
 
 <style scoped>
 
 .card-header {
+  margin: 0 3% 0 3%;
   display: flex;
   align-items: center;
 }
@@ -121,21 +124,14 @@ export default {
 
 .content {
   display: flex;
-  margin-top: 20px;
-}
-
-.preview {
-  margin: 10px 0px;
-  height: 120px;
-  width: 120px;;
+  margin: 20px 5% 0 5%;
 }
 
 .footer {
-  margin-top: 10px;
-  margin-bottom: 0px;
+  margin: 10px 5% 0 5%;
   display: flex;
   align-items: center;
-
+  justify-content: space-between;
 }
 
 .data {

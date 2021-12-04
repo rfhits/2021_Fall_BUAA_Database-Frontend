@@ -1,7 +1,7 @@
 <template>
   <div class="root"
 
-       :style="{width: this.width, textAlign: 'center', backgroundColor: 'white', paddingBottom: '30px', fontSize: '16px'}"
+       :style="{width: this.width, textAlign: 'center', backgroundColor: 'white', paddingTop: '30px', paddingBottom: '30px', fontSize: '16px'}"
   >
     没有更多数据了
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div :style="{width: cardData.width}">
+  <div :style="{width: this.width}">
     <el-card  @click="debug()">
       <div v-if="false" class="card-header" @click="goToPage">
         <div class="avatar_container">
@@ -58,7 +58,8 @@ export default {
     CommentOutlined
   },
   props: {
-    cardData: {type: Object, required: true}
+    cardData: {type: Object, required: true},
+    width: {type: String}
   },
   computed: {
     articleUrl() {

@@ -1,76 +1,79 @@
 <template>
   <div class="home">
-    <div class="content-container">
-      <div class="carousel-container">
-        <el-carousel :interval="4000" type="card" class="el-carousel">
-          <el-carousel-item
-              v-for="article in officialArticles"
-              :key="article.articleId"
+    <div style="width: 80%; margin: 0 auto; display: flex; justify-content: space-between">
+      <div class="content-container">
+        <div class="carousel-container">
+          <el-carousel :interval="4000" type="card" class="el-carousel">
+            <el-carousel-item
+                v-for="article in officialArticles"
+                :key="article.articleId"
+            >
+              <div style="height: 220px">
+                <img
+                    :src="article.coverUrl"
+                    style="height: 100%; width: 100%; border-radius: 10px"
+                    @click="goToArticle(article.id)">
+              </div>
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+        <div class="article-cards">
+          <ArticleCard v-for="articleCard in this.articleCards"
+                       :card-data="articleCard"
+                       :width="'100%'"
           >
-            <div>
-              <img
-                  :src="article.coverUrl"
-                  style="height: 100%; width: 100%; border-radius: 10px"
-                  @click="goToArticle(article.id)">
-            </div>
-          </el-carousel-item>
-        </el-carousel>
-      </div>
-      <div class="article-cards">
-        <ArticleCard v-for="articleCard in this.articleCards"
-                     :card-data="articleCard"
-                     :width="'700px'"
-        >
-        </ArticleCard>
+          </ArticleCard>
+          <ArticleNoData :width="'100%'"></ArticleNoData>
+        </div>
 
+        <div class="footer"></div>
       </div>
-      <div class="footer"></div>
-    </div>
-    <div class="right-side">
-      <div class="user-action">
-        <div
-            style="font-size: 25px;
+      <div class="right-side">
+        <div class="user-action">
+          <div
+              style="font-size: 25px;
             font-weight: bold;
             width: 100px;
             margin: 20px auto 0 auto;
             text-align: center"
-        >
-          我  要
-        </div>
-        <el-divider></el-divider>
-        <el-button
-            style="width: 200px; height: 50px; margin: 10px auto; color: black; font-size: 20px; font-weight: bold"
-            color="#ffe14c"
-            @click="goToPostArticle()"
-        >
-          <EditOutlined/>
-          发篇文章
-          <RightOutlined />
-        </el-button>
-        <el-button
-            color="#ffe14c"
-            style="width: 200px; height: 50px; margin: 10px auto 40px auto;
+          >
+            我  要
+          </div>
+          <el-divider></el-divider>
+          <el-button
+              style="width: 200px; height: 50px; margin: 10px auto; color: black; font-size: 20px; font-weight: bold"
+              color="#ffe14c"
+              @click="goToPostArticle()"
+          >
+            <EditOutlined/>
+            发篇文章
+            <RightOutlined />
+          </el-button>
+          <el-button
+              color="#ffe14c"
+              style="width: 200px; height: 50px; margin: 10px auto 40px auto;
             color: black; font-size: 20px; font-weight: bold"
-            @click="goTo('/mall')">
-          <AccountBookOutlined/>
-          逛逛商城
-          <RightOutlined />
-        </el-button>
-      </div>
-      <div class="official-info">
-        <div
-            style="width:200px; font-size: 20px; font-weight: bold; margin: 10px auto;  text-align: center"
-        >
-          newest info
+              @click="goTo('/mall')">
+            <AccountBookOutlined/>
+            逛逛商城
+            <RightOutlined />
+          </el-button>
         </div>
-        <div v-for="article in this.articleCards"
-             style="font-size: 17px; margin-left: 60px;"
-        >
-          <a :href="articleIdToLink(article.articleId)">{{ article.title }}</a>
+        <div class="official-info">
+          <div
+              style="width:200px; font-size: 20px; font-weight: bold; margin: 10px auto;  text-align: center"
+          >
+            newest info
+          </div>
+          <div v-for="article in this.articleCards"
+               style="font-size: 17px; margin-left: 60px;"
+          >
+            <a :href="articleIdToLink(article.articleId)">{{ article.title }}</a>
+          </div>
         </div>
-      </div>
-      <el-backtop :right="230"/>
+        <el-backtop :right="230"/>
 
+      </div>
     </div>
 
   </div>
@@ -81,10 +84,12 @@ import request from "@/api/request";
 import {RightOutlined, EditOutlined, LikeOutlined, EyeOutlined, CommentOutlined, AccountBookOutlined} from '@ant-design/icons-vue'
 import ArticleCard from "../components/ArticleCard";
 import sidebar from "@/components/UserSidebar"
+import ArticleNoData from "@/components/ArticleNoData";
 
 export default {
   name: 'Home',
   components: {
+    ArticleNoData,
     ArticleCard,
     sidebar,
     EditOutlined,
@@ -189,33 +194,31 @@ export default {
 <style scoped>
 .home {
   background-color: #f0f1f5;
-  display: flex;
 }
 
 .content-container {
-  margin-left: 130px;
-  margin-right: 30px;
-  width: 700px;
+  width: 70%;
 }
 
 .carousel-container {
   width: 100%;
+  height: 7.2%;
   padding-top: 20px;
   margin: 0 auto 20px auto;
 }
 
 .el-carousel /deep/ .el-carousel__container {
-  height: 200px;
+  height: 230px;
+  /*height: 100%;*/
 }
 
 .article-cards {
-  width: 800px;
+  width: 100%;
   margin: 20px auto;
-
 }
 
 .right-side {
-  width: 300px;
+  width: 27%;
 }
 
 .user-action {

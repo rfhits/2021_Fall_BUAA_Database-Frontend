@@ -163,7 +163,7 @@ export default {
       }
     },
     checkAvB64() {
-      if (this.registerForm.imgurl === "") {
+      if (!this.imageUrl) {
         this.$message.error("请上传头像呦")
         return false
       } else {

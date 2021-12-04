@@ -2,8 +2,8 @@
   <div class="page-container">
     <UserArticleCard
         v-for="article in this.articleList"
-        :card-data="article">
-    </UserArticleCard>
+        :card-data="article"
+        :width="'100%'"/>
     <NoData v-if="this.articleList.length===0" :message="'还没有发布文章呢'"></NoData>
   </div>
 </template>

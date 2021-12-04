@@ -1,108 +1,132 @@
 <template>
   <div class="page-container">
-
-    <div class="left-side">
-      <div class="article">
-        <div class="article-header" align="center">
-          <h1>{{ this.article.title }}</h1>
-        </div>
-
-        <div class="article-data">
-          <div>
-            <EyeOutlined></EyeOutlined>
-            <span>{{ this.article.clicks }}</span>
+    <div style="display:flex; justify-content:space-between; width: 1000px; margin: 0 auto">
+      <div class="left-side">
+        <div class="article">
+          <div class="article-header" align="center">
+            <h1>{{ this.article.title }}</h1>
           </div>
 
-          <div>
-            <LikeOutlined></LikeOutlined>
-            <span>{{ this.article.likes }}</span>
-          </div>
-
-          <div>
-            <CommentOutlined></CommentOutlined>
-            <span>{{ this.article.comments }}</span>
-          </div>
-        </div>
-
-        <div class="article-content">
-          <div v-html="this.article.content"></div>
-        </div>
-
-        <div class="article-footer">
-          <div class="article-action">
-            <LikeOutlined :style="{color: articleLikeColor}" @click="like()"/>
-          </div>
-        </div>
-      </div>
-
-      <el-card class="comment-action">
-        <div style="display: flex">
-          <p style="color: #999">看帖是喜欢，评论才是真爱：</p>
-        </div>
-
-        <el-input
-            v-model="commentContent"
-            :autosize="{ minRows: 4, maxRows: 8 }"
-            type="textarea"
-            placeholder="请开始你的表演..."
-        >
-        </el-input>
-
-        <el-button type="primary" style="margin-top: 20px" @click="postComment">
-          发表
-        </el-button>
-      </el-card>
-
-      <div class="comments">
-        <ArticleCommentCard
-            v-for="comment in this.comments"
-            :card-data="comment">
-        </ArticleCommentCard>
-      </div>
-    </div>
-    <div class="right-side">
-      <el-card style="width: 250px">
-        <div style="display: flex; align-items: center">
-          <div class="avatar-container">
-            <img class="avatar-img" :src="this.author.avatarUrl" alt="avatar">
-          </div>
-          <div style="margin-left: 20px; display: flex; flex-direction: column; align-items: center">
-            <a :href=authorPageUrl style="font-size: 25px;font-weight: bold; color: black; margin-bottom: 5px">
-              {{ this.author.nickname }}
-            </a>
-
-            <div v-if="this.$store.state.user.username===this.author.username">
-              <el-button @click="goToAuthorPage">
-                编辑
-              </el-button>
+          <div class="article-data">
+            <div>
+              发布时间：{{ this.formatedDate }}
             </div>
-            <div v-else>
-              <el-button @click="handleFollow()" style="width: 80px">
-                {{ followState }}
-              </el-button>
+            <div class="three-data">
+              <div>
+                <EyeOutlined></EyeOutlined>
+                <span>{{ this.article.clicks }}</span>
+              </div>
+
+              <div>
+                <LikeOutlined></LikeOutlined>
+                <span>{{ this.article.likes }}</span>
+              </div>
+
+              <div>
+                <CommentOutlined></CommentOutlined>
+                <span>{{ this.article.comments }}</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="article-content">
+            <div v-html="this.article.content"></div>
+          </div>
+
+          <div class="article-footer">
+            <div class="article-action">
+              <LikeOutlined :style="{color: articleLikeColor}" @click="like()"/>
             </div>
           </div>
         </div>
 
-        <div class="author-data">
-          <div style="display: flex; flex-direction: column; align-items: center; font-weight: bold">
-            <a :href=authorFollowersPageUrl style="color: black">粉丝</a>
-            <div>{{this.author.followers}}</div>
+        <el-card class="comment-action">
+          <div style="display: flex">
+            <p style="color: #999">看帖是喜欢，评论才是真爱：</p>
           </div>
 
-          <div style="display: flex; flex-direction: column; align-items: center;font-weight: bold">
-            <a :href=authorPageUrl style="color: black">文章</a>
-            {{this.author.posts}}
-          </div>
+          <el-input
+              v-model="commentContent"
+              :autosize="{ minRows: 4, maxRows: 8 }"
+              type="textarea"
+              placeholder="请开始你的表演..."
+          >
+          </el-input>
+
+          <el-button type="primary" style="margin-top: 20px" @click="postComment">
+            发表
+          </el-button>
+        </el-card>
+
+        <div class="comments">
+          <ArticleCommentCard
+              v-for="comment in this.comments"
+              :card-data="comment">
+          </ArticleCommentCard>
         </div>
-      </el-card>
+      </div>
+      <div class="right-side" style="width: 250px">
+        <el-card>
+          <div style="display: flex; align-items: center">
+            <div class="avatar-container">
+              <img class="avatar-img" :src="this.author.avatarUrl" alt="avatar">
+            </div>
+            <div style="margin-left: 20px; display: flex; flex-direction: column; align-items: center">
+              <a :href=authorPageUrl style="font-size: 25px;font-weight: bold; color: black; margin-bottom: 5px">
+                {{ this.author.nickname }}
+              </a>
+
+              <div v-if="this.$store.state.user.username===this.author.username">
+                <el-button @click="goToAuthorPage">
+                  编辑
+                </el-button>
+              </div>
+              <div v-else>
+                <el-button
+                    v-if="this.author.followed"
+                    @click="handleFollow()"
+                    style="width: 80px"
+                    type="info"
+                    round
+                >
+                  {{ followState }}
+                </el-button>
+                <el-button
+                    v-else
+                    round
+                    @click="handleFollow()"
+                    style="width: 80px"
+                    type="primary"
+                >
+                  {{ followState }}
+                </el-button>
+              </div>
+            </div>
+          </div>
+
+          <div class="author-data">
+            <div style="display: flex; flex-direction: column; align-items: center; font-weight: bold">
+              <a :href=authorFollowersPageUrl style="color: black">粉丝</a>
+              <div>{{ this.author.followers }}</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center;font-weight: bold">
+              <a :href=authorPageUrl style="color: black">文章</a>
+              {{ this.author.posts }}
+            </div>
+          </div>
+        </el-card>
+      </div>
     </div>
+
     <el-backtop right="180"/>
   </div>
 </template>
 
 <script>
 import request from "@/api/request";
+import {formatDate} from "@/api/utils"
 import {LikeOutlined, StarOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
 import ArticleCommentCard from "@/components/ArticleCommentCard";
 
@@ -175,6 +199,10 @@ export default {
 
     authorFollowersPageUrl() {
       return "/user/" + this.author.username + "/followers"
+    },
+
+    formatedDate() {
+      return formatDate(this.article.postDate)
     }
 
   },
@@ -182,7 +210,7 @@ export default {
     // handleScroll为页面滚动的监听回调
     window.addEventListener('scroll', this.handleScroll);
   },
-  destroyed(){
+  destroyed() {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
@@ -252,7 +280,15 @@ export default {
       }
     },
 
+    checkComment() {
+      if (this.commentContent === "") {
+        this.$message.error("评论的内容不能为空哟")
+        return false
+      }
+    },
+
     postComment() {
+      if (!this.checkComment()) return false
       request.post("/comment/post/", {
         username: this.$store.state.user.username,
         articleId: this.articleId,
@@ -273,7 +309,6 @@ export default {
       console.log(this.$store.state.loggedIn)
       console.log(this.$route.params.username)
       if (this.author.followed) {
-
         request.post('user/unfollow-user/', {
           selfUsername: this.$store.state.user.username,
           otherUsername: this.author.username
@@ -315,18 +350,16 @@ export default {
 
 <style scoped>
 .page-container {
-  display: flex;
   width: 100%;
   background-color: rgb(240, 241, 245);
-  padding: 0 100px;
+
 }
 
 .left-side {
-  margin-right: 20px;
+  width: 730px;
 }
 
 .article {
-  width: 800px;
   margin: 0px auto 0 auto;
   background-color: white;
 }
@@ -338,14 +371,20 @@ export default {
 
 .article-data {
   background-color: #f7f8fc;
+  color: #999;
   margin: 0 30px;
   height: 30px;
+  padding-left: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.article-data * {
+.three-data {
+  display: flex;
+}
+
+.three-data * {
   color: #999;
   margin-right: 20px;
 }
@@ -371,12 +410,10 @@ export default {
 
 .comment-action {
   margin: 20px auto;
-  width: 800px;
   padding: 0 40px;
 }
 
 .comments {
-  width: 800px;
   margin: 20px auto;
 }
 
