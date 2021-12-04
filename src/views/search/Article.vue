@@ -55,7 +55,7 @@ export default {
     load() {
       request.get('/article/search/', {
         params: {
-          keyword: this.keyword
+          keyword: this.routeKeyword
         }
       }).then(res => {
         if (res.status === 0) {
