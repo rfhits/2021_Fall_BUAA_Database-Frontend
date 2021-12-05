@@ -78,7 +78,7 @@ export default {
   z-index: 3;
   text-align: center;
   width: 250px;
-  left: 900px;
-  top: 200px;
+  left: 75%;
+  top: 35%;
 }
 </style>

@@ -77,6 +77,7 @@ props:
 
 <script>
 import {LikeOutlined, EyeOutlined, CommentOutlined} from '@ant-design/icons-vue'
+import {removeHtmlTag} from "@/api/utils";
 
 export default {
   name: "ArticleCard",
@@ -102,10 +103,9 @@ export default {
     },
     newBrief() {
       const s = this.cardData.brief
-      var re = new RegExp('<[^<>]+>', 'g');
-      let text = ""
+      var text = ""
       if (s) {
-        text = s.replace(re, "");
+        text = removeHtmlTag(s);
       } else {
         // pass
       }

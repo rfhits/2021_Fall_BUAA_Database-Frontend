@@ -14,7 +14,8 @@ export default {
   components: {NoData, CartGoodCard, OrderCard},
   data() {
     return {
-      orderList: [
+      orderList: [],
+      fakeData: [
         {
           orderId: 233,
           imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg',
@@ -23,14 +24,6 @@ export default {
           quantity: 20,
           price: 520,
           hasReceived: false,
-        }, {
-          orderId: 233,
-          imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg',
-          width: '700px',
-          name: 'good-name',
-          quantity: 20,
-          price: 520,
-          hasReceived: true,
         }
       ]
     }

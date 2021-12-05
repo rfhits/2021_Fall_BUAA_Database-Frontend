@@ -23,7 +23,8 @@ export default {
   data() {
     return {
       cardWidth: "600px",
-      commentList: [
+      commentList: [],
+      fakeData: [
         {
           articleId: 233,
           articleTitle: "Hello World",
@@ -33,7 +34,7 @@ export default {
           likes: 100,
           liked: true,
         },
-      ],
+      ]
     }
   },
   created() {

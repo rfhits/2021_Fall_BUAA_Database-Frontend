@@ -14,7 +14,8 @@ export default {
   components: {UserFollowingCard, NoData},
   data() {
     return {
-      followers: [
+      followers: [],
+      fakeData: [
         {
           username: "233",
           nickname: "nickname007",

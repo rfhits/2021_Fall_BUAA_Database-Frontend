@@ -1,10 +1,12 @@
 <template>
-  <div class="root" >
-    <div style="display: flex; flex-direction: column; align-items: center">
+  <div class="root">
+    <div v-if=this.loading>
+      <Loading></Loading>
+    </div>
+    <div v-else style="display: flex; flex-direction: column; align-items: center">
       <ArticleCard v-for="article in articleList" :card-data="article" :width="'800px'"></ArticleCard>
       <ArticleNoData :width="'800px'"></ArticleNoData>
     </div>
-
     <Footer></Footer>
   </div>
 </template>
@@ -14,28 +16,15 @@ import request from "@/api/request";
 import ArticleCard from "@/components/ArticleCard";
 import Footer from "@/components/Footer";
 import ArticleNoData from "@/components/ArticleNoData";
+import Loading from "@/components/Loading";
 
 export default {
   name: "Topic",
-  components: {ArticleNoData, Footer, ArticleCard},
+  components: {Loading, ArticleNoData, Footer, ArticleCard},
   data() {
     return {
-      articleList: [
-        {
-          username: "username000",
-          nickname: "nickname000",
-          time: "7hours ago",
-          articleId: 100,
-          title: "Hello, Hu Tao",
-          brief: "Hu Tao will rerun",
-          likes: 100,
-          comments: 200,
-          clicks: 50,
-          coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-          avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-          topics: ["keqin", "ninguan","hello", "world"],
-        },{},{}
-      ]
+      loading: true,
+      articleList: []
     }
   },
   methods: {
@@ -47,6 +36,7 @@ export default {
       }).then(res => {
         if (res.status === 0) {
           this.articleList = res.data.articleList
+          this.loading=false
         } else {
           alert('get articles failed')
         }
@@ -67,6 +57,7 @@ export default {
   background-color: rgb(240, 241, 245);
   padding-top: 40px;
 }
+
 .articles {
   width: 900px;
   margin: 0px auto;

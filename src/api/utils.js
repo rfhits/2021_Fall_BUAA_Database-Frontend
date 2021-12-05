@@ -9,11 +9,28 @@ export function trim(str){ //删除左右两端的空格
 }
 
 export function removeHtmlTag(txt) {
-    const s = txt
+    let s = txt
+    let replaceList = ["&nbsp;", "&rdquo;", "&mdash;", "&gt;"]
+    let replaceMap = [
+        {
+            src: "&hellip;",
+            dst: "…"
+        }
+    ]
     var re = new RegExp('<[^<>]+>', 'g');
-    s.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/g,'').replace(/&nbsp;/ig,'');
-    var text = s.replace(re, "");
-    return text
+    s =  s.replace(re, "");
+    s = s.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/g,'')
+    for (let i = 0; i < replaceList.length; i++) {
+        var re = new RegExp(replaceList[i], "ig");
+        s = s.replace(re, "")
+    }
+    for (let i = 0; i < replaceMap.length; i++) {
+        var re = new RegExp(replaceMap[i].src, "ig");
+        s = s.replace(re, replaceMap[i].dst)
+    }
+
+    s = s.replace("&nbsp;", "").replace("&rdquo;", "");
+    return s
 }
 
 export function formatDate(str) {

@@ -19,15 +19,10 @@ import ChangePassword from "@/views/user/ChangePassword"
 import EditInfo from "@/views/user/EditInfo"
 import DevLjj from "@/DevLjj"
 import Topic from '@/views/topic/Topic'
+import Mall from '@/views/mall/Mall'
 
 
 const routes = [
-    {
-        path: '/good-card',
-        name: 'GoodCard',
-        component: () => import('@/components/GoodCard')
-    },
-
     {
         path: '/dev-ljj',
         name: "DevLjj",
@@ -42,7 +37,10 @@ const routes = [
         path: '/article/:articleId',
         name: 'Article',
         component: ArticleDetail,
-        meta: {title: "ArticleDetails"},
+        meta: {
+            title: "ArticleDetails",
+            requiresLoggin: true,
+        },
         props: true,
     },
     {
@@ -116,41 +114,65 @@ const routes = [
                 path: '/user/:username/posts',
                 name: 'Posts',
                 component: PostArticles,
+                meta: {
+                    noScroll: true,
+                }
             },
             {
                 path: '/user/:username/comments',
                 name: 'Comments',
                 component: PostComments,
+                meta: {
+                    noScroll: true,
+                }
             },
             {
                 path: '/user/:username/followers',
                 name: 'Followers',
                 component: Followers,
+                meta: {
+                    noScroll: true,
+                }
             },
             {
                 path: '/user/:username/followings',
                 name: 'Following',
                 component: Followings,
+                meta: {
+                    noScroll: true,
+                }
             },
             {
                 path: '/user/:username/cart',
                 name: 'Cart',
                 component: Cart,
+                meta: {
+                    noScroll: true,
+                }
             },
             {
                 path: '/user/:username/bought',
                 name: 'bought',
                 component: Bought,
+                meta: {
+                    noScroll: true,
+                }
             },
             {
                 path: '/user/:username/edit-info',
                 name: 'editInfo',
                 component: EditInfo,
+                meta: {
+                    noScroll: true,
+                }
             },
             {
                 path: '/user/:username/change-password',
                 name: 'changePassword',
                 component: ChangePassword,
+                meta: {
+                    noScroll: true,
+                }
             },
         ]
     },
@@ -209,7 +231,7 @@ const routes = [
     {
       path: '/mall/',
       name: 'Mall',
-      component: () => import('@/views/mall/Mall')
+      component: Mall
     },
     {
       path: '/mall/good/:id',
@@ -221,12 +243,35 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
-    routes
+    routes,
+    scrollBehavior(to,from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        }
+        if (to.meta.noScroll) {
+            return 0;
+        } else {
+            return {x:0, y:0}
+        }
+    }
 })
 
 router.beforeEach((to, from, next) => {
-    next()
-    window.scrollTo(0,0)
+
+    if (to.meta.noScroll) {
+        // pass
+    } else {
+        window.scrollTo(0,0)
+    }
+    if (to.meta.requiresLoggin) {
+        next({
+            path: '/login'
+        })
+    } else {
+        next()
+    }
+
+
 })
 
 export default router

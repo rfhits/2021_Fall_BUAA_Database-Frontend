@@ -38,7 +38,7 @@
             margin: 20px auto 0 auto;
             text-align: center"
           >
-            我  要
+            我 要
           </div>
           <el-divider></el-divider>
           <el-button
@@ -48,7 +48,7 @@
           >
             <EditOutlined/>
             发篇文章
-            <RightOutlined />
+            <RightOutlined/>
           </el-button>
           <el-button
               color="#ffe14c"
@@ -57,7 +57,7 @@
               @click="goTo('/mall')">
             <AccountBookOutlined/>
             逛逛商城
-            <RightOutlined />
+            <RightOutlined/>
           </el-button>
         </div>
         <div class="official-info">
@@ -66,14 +66,15 @@
           >
             最新文章
           </div>
-          <div v-for="article in this.articleCards"
-               style="font-size: 12px; margin-left: 60px; color: black"
+          <div v-for="article in this.articleCards.slice(0, 10)"
+               style="font-size: 13px; margin-left: 60px; margin-bottom: 5px"
           >
-            <a :href="articleIdToLink(article.articleId)"
-               style="color: black"
+            <el-link :href="articleIdToLink(article.articleId)"
+                     target="_blank"
             >
-              {{ article.title }}
-            </a>
+              {{ shortenArticleTitle(article.title) }}
+            </el-link>
+
           </div>
         </div>
         <el-backtop :right="230"/>
@@ -86,7 +87,14 @@
 
 <script>
 import request from "@/api/request";
-import {RightOutlined, EditOutlined, LikeOutlined, EyeOutlined, CommentOutlined, AccountBookOutlined} from '@ant-design/icons-vue'
+import {
+  RightOutlined,
+  EditOutlined,
+  LikeOutlined,
+  EyeOutlined,
+  CommentOutlined,
+  AccountBookOutlined
+} from '@ant-design/icons-vue'
 import ArticleCard from "../components/ArticleCard";
 import sidebar from "@/components/UserSidebar"
 import ArticleNoData from "@/components/ArticleNoData";
@@ -144,7 +152,17 @@ export default {
       ],
     }
   },
-  computed: {},
+  computed: {
+    shortenArticleTitle() {
+      return function (title) {
+        if (title && title.length >= 11) {
+          return title.slice(0, 12) + "...";
+        } else {
+          return title;
+        }
+      }
+    }
+  },
 
   methods: {
     getOfficialArticles() {
@@ -186,7 +204,6 @@ export default {
       }
     }).then(res => {
       if (res.status === 0) {
-        console.log(res);
         this.articleCards = res.data.articleList;
       } else {
         alert("get articles failed")
@@ -238,9 +255,10 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: white;
+  border-radius: 5px;
 }
 
 .footer {
-  height: 200px;
+  height: 100px;
 }
 </style>

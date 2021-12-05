@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <h1 style="text-align: center">footer</h1>
+    <h4 style="text-align: center; color: #999">我可是有底线的</h4>
   </div>
 </template>
 

@@ -214,7 +214,7 @@ export default {
 
 .router-container {
   margin-top: 20px;
-  width: 900px;
+  width: 770px;
 }
 
 .footer {

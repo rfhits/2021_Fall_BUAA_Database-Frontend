@@ -30,14 +30,18 @@
       </div>
 
       <div style="width: 100px; margin:0 auto">
-        <el-button @click="submitInfo()">保存</el-button>
+        <el-button @click="submitInfo()"
+                   type="primary"
+        >
+          保存
+        </el-button>
       </div>
 
     </div>
   </div>
 
-<!--  avatar uploader-->
-  <el-dialog v-model="dialogVisible" title="上传头像" >
+  <!--  avatar uploader-->
+  <el-dialog v-model="dialogVisible" title="上传头像">
     <div style="display: flex; flex-direction: column; align-items: center">
       <div class="upload-container">
         <a-upload

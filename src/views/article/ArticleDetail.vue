@@ -73,9 +73,10 @@
               <img class="avatar-img" :src="this.author.avatarUrl" alt="avatar">
             </div>
             <div style="margin-left: 20px; display: flex; flex-direction: column; align-items: center">
-              <a :href=authorPageUrl style="font-size: 25px;font-weight: bold; color: black; margin-bottom: 5px">
+              <el-link :href=authorPageUrl
+                 style="font-size: 15px;font-weight: bold; color: black; margin-bottom: 10px">
                 {{ this.author.nickname }}
-              </a>
+              </el-link>
 
               <div v-if="this.$store.state.user.username===this.author.username">
                 <el-button @click="goToAuthorPage">
@@ -157,8 +158,8 @@ export default {
       },
       article: {
         postDate: "1926-08-17",
-        title: "test_title",
-        content: "test_content",
+        title: "加载中",
+        content: "加载中",
         likes: 233,
         comments: 233,
         clicks: 233,
