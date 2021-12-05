@@ -1,14 +1,15 @@
 <template>
   <div class="home">
-    <div style="width: 80%; margin: 0 auto; display: flex; justify-content: space-between">
+    <div style="width: 1000px; margin: 0 auto; display: flex; justify-content: space-between">
       <div class="content-container">
         <div class="carousel-container">
           <el-carousel :interval="4000" type="card" class="el-carousel">
             <el-carousel-item
                 v-for="article in officialArticles"
                 :key="article.articleId"
+
             >
-              <div style="height: 220px">
+              <div style="height: 200px;">
                 <img
                     :src="article.coverUrl"
                     style="height: 100%; width: 100%; border-radius: 10px"
@@ -63,12 +64,16 @@
           <div
               style="width:200px; font-size: 20px; font-weight: bold; margin: 10px auto;  text-align: center"
           >
-            newest info
+            最新文章
           </div>
           <div v-for="article in this.articleCards"
-               style="font-size: 17px; margin-left: 60px;"
+               style="font-size: 12px; margin-left: 60px; color: black"
           >
-            <a :href="articleIdToLink(article.articleId)">{{ article.title }}</a>
+            <a :href="articleIdToLink(article.articleId)"
+               style="color: black"
+            >
+              {{ article.title }}
+            </a>
           </div>
         </div>
         <el-backtop :right="230"/>
@@ -197,12 +202,12 @@ export default {
 }
 
 .content-container {
-  width: 70%;
+  width: 700px;
 }
 
 .carousel-container {
   width: 100%;
-  height: 7.2%;
+
   padding-top: 20px;
   margin: 0 auto 20px auto;
 }
@@ -218,7 +223,7 @@ export default {
 }
 
 .right-side {
-  width: 27%;
+  width: 270px;
 }
 
 .user-action {
