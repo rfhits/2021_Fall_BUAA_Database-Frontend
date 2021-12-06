@@ -1,17 +1,20 @@
 <template>
   <el-card>
     <div class="card-container">
-      <div class="avatar_container">
-        <img :src='this.user.avatarUrl' class="avatar_img">
+      <div class="user-info">
+        <div class="avatar_container">
+          <img :src='this.user.avatarUrl' class="avatar_img">
+        </div>
+        <el-link
+            style="margin-left: 15px"
+            :href="'/user/' + this.user.username"
+        >
+          {{ this.user.nickname }}
+        </el-link>
       </div>
-      <el-link
-          style="margin-left: 15px;"
-          :href="'/user/' + this.user.username"
-      >
-        {{ this.user.nickname }}
-      </el-link>
 
-      <div class="follow-action" style="margin-left: 460px">
+
+      <div class="follow-action">
         <el-button v-if="this.user.followed"
             type="info"
             round
@@ -97,6 +100,12 @@ export default {
 <style scoped>
 
 .card-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-info {
   display: flex;
   align-items: center;
 }

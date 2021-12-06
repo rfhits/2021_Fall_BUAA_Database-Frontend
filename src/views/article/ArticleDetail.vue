@@ -285,6 +285,8 @@ export default {
       if (this.commentContent === "") {
         this.$message.error("评论的内容不能为空哟")
         return false
+      } else {
+        return true
       }
     },
 
