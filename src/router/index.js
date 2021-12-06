@@ -1,9 +1,9 @@
 import {createRouter, createWebHistory} from 'vue-router'
+import store from '@/store'
 import Home from '../views/Home.vue'
 import Login from "../views/Login";
 import Register from "../views/Register";
 import ArticleCard from "@/components/ArticleCard";
-import Sidebar from "../components/UserSidebar";
 import ArticleEditor from "../components/editor/index"
 import NewArticle from "../views/article/NewArticle"
 import ArticleDetail from "../views/article/ArticleDetail"
@@ -39,7 +39,7 @@ const routes = [
         component: ArticleDetail,
         meta: {
             title: "ArticleDetails",
-            requiresLoggin: true,
+            requiresLoggedIn: true,
         },
         props: true,
     },
@@ -263,9 +263,12 @@ router.beforeEach((to, from, next) => {
     } else {
         window.scrollTo(0,0)
     }
-    if (to.meta.requiresLoggin) {
+    if (to.meta.requiresLoggedIn && !store.state.loggedIn) {
         next({
-            path: '/login'
+            path: '/login',
+            query: {
+                redirect: to.path
+            }
         })
     } else {
         next()

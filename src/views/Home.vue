@@ -185,7 +185,7 @@ export default {
       if (this.$store.state.loggedIn) {
         this.$router.push("/new-article")
       } else {
-        this.$message.error("login first")
+        this.$message.error("亲，请先登录")
       }
     },
 

@@ -1,11 +1,11 @@
 <template>
   <div class="root">
     <div class="op_on_table">
-      <el-button type="primary" style="margin-right: 20px" @click="showAddForm">新增商品</el-button>
-      <div>
-        <el-input v-model="keyword" placeholder="搜索商品" style="width: 66%;" @keyup.enter.native="load()"></el-input>
+      <div class="search-op">
+        <el-input v-model="keyword" placeholder="搜索商品"  @keyup.enter.native="load()"></el-input>
         <el-button type="primary" style="margin-left: 20px" @click="load()">搜索</el-button>
       </div>
+      <el-button type="primary" style="margin-right: 20px" @click="showAddForm">新增商品</el-button>
 
     </div>
 
@@ -14,7 +14,7 @@
         <el-table-column prop="name" label="商品名称"></el-table-column>
         <el-table-column prop="price" label="单价"></el-table-column>
         <el-table-column prop="quantity" label="库存"></el-table-column>
-
+        <el-table-column prop="content" label="商品描述"></el-table-column>
         <el-table-column fixed="right" label="操作">
           <template #default="scope">
             <el-button @click="handleEdit(scope.row)" type="primary" size="mini">编辑</el-button>
@@ -347,11 +347,18 @@ export default {
 .op_on_table {
   margin: 20px 0;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
+.search-op {
+  display: flex;
+  align-items: center;
+  width: 400px;
+}
+
 .table-container {
-  width: 700px;
+  width: 800px;
 }
 
 .new-good-form {

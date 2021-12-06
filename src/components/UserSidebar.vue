@@ -6,49 +6,74 @@
         class="el-menu-vertical-demo"
         style="width: 200px"
     >
-      <el-menu-item :index=postsUrl>
-        <ProfileOutlined/>
-        <span>文章</span>
+      <el-menu-item :index=postsUrl
+      >
+        <div class="menu-item-content">
+          <ProfileOutlined/>
+          <div>文章</div>
+        </div>
       </el-menu-item>
 
       <el-menu-item :index=commentsUrl>
-        <CommentOutlined/>
-        <span>评论</span>
+        <div class="menu-item-content">
+          <CommentOutlined/>
+          <div>评论</div>
+        </div>
       </el-menu-item>
 
       <el-menu-item :index=followersUrl>
-        <UsergroupAddOutlined/>
-        <span>粉丝</span>
+        <div class="menu-item-content">
+          <UsergroupAddOutlined/>
+          <div>粉丝</div>
+        </div>
       </el-menu-item>
 
       <el-menu-item :index=followingsUrl>
-        <HeartOutlined/>
-        <span>关注</span>
+        <div class="menu-item-content">
+          <HeartOutlined/>
+          <div>关注</div>
+        </div>
       </el-menu-item>
 
       <el-menu-item v-if="isSelf" :index=cartUrl>
-        <ShoppingCartOutlined />
-        <span>购物车</span>
+        <div class="menu-item-content">
+          <ShoppingCartOutlined/>
+          <div>购物车</div>
+        </div>
+
       </el-menu-item>
 
       <el-menu-item v-if="isSelf" :index=boughtUrl>
-        <AccountBookOutlined />
-        <span>已购</span>
+        <div class="menu-item-content">
+          <AccountBookOutlined/>
+          <div>已购</div>
+        </div>
+
+
       </el-menu-item>
 
       <el-menu-item v-if="isSelf" :index=changePasswordUrl>
-        <EditOutlined />
-        <span>修改密码</span>
+        <div class="menu-item-content">
+          <EditOutlined/>
+          <div>修改密码</div>
+        </div>
+
       </el-menu-item>
 
       <el-menu-item v-if="isSelf" :index=editUrl>
-        <EditOutlined />
-        <span>编辑资料</span>
+        <div class="menu-item-content">
+          <EditOutlined/>
+          <div>编辑资料</div>
+        </div>
+
       </el-menu-item>
 
       <el-menu-item v-if="isSelf" index="" @click="logout()">
-        <LogoutOutlined />
-        <span>退出登录</span>
+        <div class="menu-item-content">
+          <LogoutOutlined/>
+          <div>退出登录</div>
+        </div>
+
       </el-menu-item>
 
     </el-menu>
@@ -56,8 +81,10 @@
 </template>
 
 <script>
-import {ProfileOutlined, CommentOutlined, HeartOutlined,
-  UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined,AccountBookOutlined}
+import {
+  ProfileOutlined, CommentOutlined, HeartOutlined,
+  UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined, AccountBookOutlined
+}
   from '@ant-design/icons-vue'
 
 export default {
@@ -118,4 +145,15 @@ export default {
   width: 151px;
   /*height*/
 }
+
+.menu-item-content {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.menu-item-content * {
+  margin-right: 10px;
+}
+
 </style>

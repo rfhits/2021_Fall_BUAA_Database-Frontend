@@ -9,7 +9,7 @@
       <a-col :span="1"></a-col>
       <a-col :span="3">
         <router-link to="/">
-          <div class="logo">BBS</div>
+          <div class="logo">Genshin</div>
         </router-link>
       </a-col>
 

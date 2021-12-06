@@ -1,48 +1,39 @@
 <template>
-  <div class="article-cards">
+  <div v-if="loading">
+    加载中，请稍后
+  </div>
+  <div v-else class="article-cards">
     <ArticleCard v-for="articleCard in this.articleList"
                  :card-data="articleCard"
     >
     </ArticleCard>
+    <ArticleNoData></ArticleNoData>
+    <NoData v-if="this.articleList.length === 0"
+            :message="'换个关键词试试吧'"
+    >
+
+    </NoData>
   </div>
 </template>
 
 <script>
 import request from "@/api/request";
 import ArticleCard from '@/components/ArticleCard'
+import NoData from "@/components/UserNoData";
+import ArticleNoData from "@/components/ArticleNoData";
 
 export default {
   name: "Article",
   components: {
+    ArticleNoData,
+    NoData,
     ArticleCard
   },
   data() {
     return {
+      loading: true,
       keyword: "",
       articleList: [
-        {
-          username: "username000",
-          nickname: "nickname000",
-          postDate: "7hours ago",
-          articleId: 100,
-          title: "Hello, Hu Tao",
-          brief: "Hu Tao will rerun",
-          likes: 100,
-          comments: 200,
-          clicks: 50,
-          coverUrl: "https://upload-bbs.mihoyo.com/upload/2021/10/29/75276539/58f93aa54eeb06c327e159d1ed8b3bea_1303088191273586996.jpg?x-oss-process=image/resize,s_300/quality,q_80/auto-orient,0/interlace,1/format,jpg",
-          avatarUrl: 'https://img-static.mihoyo.com/communityweb/upload/6961459d4637f5c23f166e12c4da6660.png',
-          topics: [
-            {
-              id: 233,
-              name: "刻晴",
-            }, {
-              id: 233,
-              name: "申鹤"
-            }
-          ],
-          width: "800px"
-        },
       ],
     }
   },
@@ -60,6 +51,7 @@ export default {
       }).then(res => {
         if (res.status === 0) {
           this.articleList = res.data.articleList
+          this.loading = false
         } else {
           alert("search article failed")
         }

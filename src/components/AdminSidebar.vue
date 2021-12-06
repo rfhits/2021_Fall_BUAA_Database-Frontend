@@ -8,28 +8,36 @@
     >
 
       <el-menu-item :index=usersUrl>
-        <UserOutlined />
-        <span>用户</span>
+        <div class="menu-item-content">
+          <UserOutlined/>
+          <span>用户</span>
+        </div>
+
       </el-menu-item>
 
       <el-menu-item index="/admin/manage/articles">
-        <ProfileOutlined/>
-        <span>文章</span>
+        <div class="menu-item-content">
+          <ProfileOutlined/>
+          <span>文章</span>
+        </div>
+
       </el-menu-item>
 
       <el-menu-item index="/admin/manage/goods">
-        <ShoppingCartOutlined/>
-        <span>商品</span>
-      </el-menu-item>
+        <div class="menu-item-content">
+          <ShoppingCartOutlined/>
+          <span>商品</span>
+        </div>
 
-      <el-menu-item v-if="false" index="/admin/manage/comments">
-        <CommentOutlined/>
-        <span>评论</span>
       </el-menu-item>
 
       <el-menu-item @click="logout()" index="">
-        <LogoutOutlined/>
-        <span>退出登录</span>
+        <div class="menu-item-content">
+          <LogoutOutlined/>
+          <span>退出登录</span>
+
+        </div>
+
       </el-menu-item>
 
     </el-menu>
@@ -38,7 +46,7 @@
 
 <script>
 import {
-  ProfileOutlined, CommentOutlined, HeartOutlined,UserOutlined,
+  ProfileOutlined, CommentOutlined, HeartOutlined, UserOutlined,
   UsergroupAddOutlined, ShoppingCartOutlined, LogoutOutlined, EditOutlined
 }
   from '@ant-design/icons-vue'
@@ -80,6 +88,15 @@ export default {
 
 <style scoped>
 .sidebar-container {
+}
 
+.menu-item-content {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.menu-item-content * {
+  margin-right: 10px;
 }
 </style>
