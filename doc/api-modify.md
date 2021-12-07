@@ -1,12 +1,24 @@
+## date: 12-07
+
+#### 搜索用户
+
+url:@/admin/manage/user/search/
+
+#### 搜索文章
+
+url: @/admin/manage/article/search
+
+#### 搜索商品
+
+url: @/admin/manage/good/search
+
 ## date: 11-24
 
-### 首页
-
-#### 查看官方文章
+### 查看官方文章
 
 url:@/article/get-official-articles
 
-#### 用户注册
+### 用户注册
 
 url: @/user/register/
 
@@ -14,11 +26,11 @@ method: POST
 
 用户注册时提供性别和年龄
 
-#### view-article
+### view-article
 
 这个接口后端的实现有问题，topic没有在自己专门的model中，合并到article里了
 
-#### 查看一件商品
+### 查看一件商品
 
 url: @/good/view-good
 

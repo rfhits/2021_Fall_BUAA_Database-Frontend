@@ -360,8 +360,6 @@ url: @/article/search/
         "detail": ""
     }
 }
-
-
 ```
 
 备注：
@@ -1442,9 +1440,9 @@ url: @/admin/manage/edit-user
 
 ### 管理员 <--> 用户
 
-### 搜索后台用户
+#### 搜索用户
 
-url:@/admin/manage/search-users/
+url:@/admin/manage/user/search/
 
 发送方法：GET
 
@@ -1452,7 +1450,9 @@ url:@/admin/manage/search-users/
 
 ```json
 {
-     keyword："233"
+     keyword："233",
+     pageNum: 1,
+     pageSize: 10,
 }
 ```
 
@@ -1479,7 +1479,15 @@ url:@/admin/manage/search-users/
 }
 ```
 
-备注：若keyword为空，返回所有用户
+备注：
+
+1. 若keyword为空，返回所有用户
+
+2. 注意鉴权
+
+3. pageNum从1开始，是用户的视角，要查找结果（pageNum-1 * pageSize）：（pageNum*pageSize)
+
+    如果没有查到或者查找长度不够，注意数组的越界问题
 
 #### 编辑用户信息
 
@@ -1551,6 +1559,58 @@ url: @/admin/manage/delete-user
 
 ### 管理员<-->文章
 
+#### 搜索文章
+
+url: @/admin/manage/article/search
+
+发送方法：GET
+
+发送格式：
+
+```json
+{
+    keyword: "",
+    pageNum: 1,
+    pageSize: 10,
+}
+```
+
+返回格式：
+
+```json
+{
+    "data": {
+        "articleList": [
+            {
+                username: "username000", // 作者用户名
+                nickname: "nickname000", // 作者昵称
+                articleId: 233,
+                postDate: "",
+                title: "Hello World",
+            }, 
+            {
+                ...
+            }, ...
+        ]
+    },
+    "status": 0,
+    "statusInfo": {
+        "message": "xxx",
+        "detail": ""
+    }
+}
+```
+
+备注：
+
+1. 注意鉴权
+
+2. pageNum从1开始，是用户的视角，要查找结果（pageNum-1 * pageSize）：（pageNum*pageSize)
+
+    如果没有查到或者查找长度不够，注意数组的越界问题
+
+3. keyword为空，返回所有结果的分页，而不是返回空
+
 #### 删除文章
 
 url: @/admin/manage/delete-article
@@ -1584,6 +1644,54 @@ url: @/admin/manage/delete-article
 删除文章的评论，用户-文章关系
 
 ### 管理员 <-->商品
+
+#### 搜索商品
+
+url: @/admin/manage/good/search
+
+发送方法：GET
+
+发送格式：
+
+```json
+{
+    keyword: "233",
+    pageNum: 1,
+    pageSize: 10,
+}
+```
+
+返回格式：
+
+```json
+{
+    "data": {
+       goodList: [
+           {
+               id: 233,
+               name: "233",
+               price: 233,
+               quantity: 23,
+               content: "233",
+               imgUrl: "233", 
+           }
+       ]
+    },
+    "status": 0,
+    "statusInfo": {
+        "message": "xxx",
+        "detail": ""
+    }
+}
+```
+
+1. keyword如果为空，返回所有商品
+
+2. 注意鉴权
+
+3. pageNum从1开始，是用户的视角，要查找结果（pageNum-1 * pageSize）：（pageNum*pageSize)
+
+    如果没有查到或者查找长度不够，注意数组的越界问题
 
 #### 发布商品
 

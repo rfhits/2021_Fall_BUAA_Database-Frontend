@@ -34,7 +34,7 @@
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-sizes="[10, 20, 30]"
-          :page-size="10"
+          :page-size="this.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="this.total"
           style="margin: 10px"
@@ -151,18 +151,19 @@ export default {
   computed: {},
   methods: {
     load() {
-      request.get("/good/search/", {
+      request.get("admin/manage/good/search/", {
         params: {
           keyword: this.keyword,
+          pageNum: this.currentPage,
+          pageSize: this.pageSize
         }
       }).then(res => {
         console.log(res);
         if (res.status === 0) {
           this.tableData = res.data.goodList
           this.total = res.data.goodList.length
-          let i = 0, length = this.tableData.length
         } else {
-          alert("search good failed")
+          this.$message.error(res.statusInfo.message)
         }
       }).catch(err => {
         console.log("err: " + err);
@@ -246,35 +247,7 @@ export default {
       }
       return true
     },
-    checkNewGood() {
-      var priceReg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/
-      var quantityReg = /^\d+$/
-      if (this.newGoodForm.name === "") {
-        this.$message.error("请输入商品的名称")
-        return false
-      }
 
-      if (this.newGoodForm.price === "") {
-        this.$message.error("请输入商品的单价")
-        return false
-      }
-
-      if (!priceReg.test(this.newGoodForm.price)) {
-        this.$message.error("请输入正确格式的价格")
-        return false
-      }
-
-      if (this.newGoodForm.quantity === "") {
-        this.$message.error("请输入商品的数量")
-        return false
-      }
-
-      if (!quantityReg.test(this.newGoodForm.quantity)) {
-        this.$message.error("商品的数量得是正整数哟")
-        return false
-      }
-      return true
-    },
     saveNewGood() {
       if (!this.checkGoodForm(this.newGoodForm)) return false
       request.post('/admin/manage/post-good/', {
@@ -292,9 +265,7 @@ export default {
       this.newGoodForm = {}
       this.newGoodFormVisible = false
     },
-    checkEditGood() {
 
-    },
     saveEditGood() {
       if (!this.checkGoodForm(this.editGoodForm)) return false
       request.post('/admin/manage/edit-good/', {

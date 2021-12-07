@@ -199,7 +199,7 @@ const routes = [
             },
             {
                 path: '/admin/manage',
-                redirect: '/admin/manage/articles',
+                redirect: '/admin/manage/users',
                 name: 'AdminManage',
                 component: () => import('@/views/admin/manage/Manage'),
                 children: [

@@ -28,6 +28,20 @@
       </el-table>
     </div>
 
+    <div class="pagination-container">
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30]"
+          :page-size="this.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="this.total"
+          style="margin: 10px"
+      >
+      </el-pagination>
+    </div>
+
 <!--    edit user-->
     <div class="dialog-container">
       <el-dialog
@@ -120,10 +134,10 @@ export default {
     },
     load() {
       console.log(this.searchText)
-      request.get("/admin/manage/search-users/", {
+      request.get("/admin/manage/user/search/", {
         params: {
           keyword: this.searchText,
-          pageNumber: this.currentPage,
+          pageNum: this.currentPage,
           pageSize: this.pageSize
         }
       }).then(res => {

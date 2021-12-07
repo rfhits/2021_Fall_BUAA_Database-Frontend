@@ -19,10 +19,9 @@
                 :href="articleIdToLink(scope.row.articleId)"
                 target="_blank"
             >
-              {{articleIdToLink(scope.row.articleId)}}
+              {{ articleIdToLink(scope.row.articleId) }}
             </el-link>
           </template>
-
 
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
@@ -31,6 +30,20 @@
           </template>
         </el-table-column>
       </el-table>
+    </div>
+
+    <div class="pagination-container">
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30]"
+          :page-size="this.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="this.total"
+          style="margin: 10px"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -46,6 +59,9 @@ export default {
   data() {
     return {
       form: {},
+      currentPage: 1,
+      pageSize: 10,
+      total: 10,
       keyword: "",
       articleList: [
         {
@@ -67,25 +83,38 @@ export default {
   },
   methods: {
     load() {
-      request.get('/article/search/', {
+      request.get('admin/manage/article/search/', {
         params: {
-          keyword: this.keyword
+          keyword: this.keyword,
+          pageNum: this.currentPage,
+          pageSize: this.pageSize
         }
       }).then(res => {
         console.log(res);
         if (res.status === 0) {
           this.articleList = res.data.articleList
-          let i = 0, length = this.articleList.length
+          this.total = this.articleList.length
+          let i = 0
+          let length = this.articleList.length
           for (; i < length; i++) {
             this.articleList[i].link = '/article/' + this.articleList[i].articleId
             this.articleList[i].postDate = formatDate(this.articleList[i].postDate)
           }
         } else {
-          alert("search article failed")
+          this.$message.error(res.statusInfo.message)
         }
       }).catch(err => {
         console.log("err: " + err);
       })
+    },
+    handleSizeChange(pageSize) {
+      this.pageSize = pageSize
+      this.load()
+    },
+
+    handleCurrentChange(pageNum) {
+      this.currentPage = pageNum
+      this.load()
     },
     handleDrop(row) {
       let dropForm = {
