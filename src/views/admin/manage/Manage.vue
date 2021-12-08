@@ -4,7 +4,7 @@
       <AdminSidebar/>
     </div>
     <div class="router-container">
-      <router-view/>
+      <router-view style="width: 900px; margin: 0 auto"/>
     </div>
   </div>
 </template>
@@ -22,13 +22,18 @@ export default {
 <style scoped>
 .root {
   display: flex;
+  background-color: #f0f1f5;
 
 }
 .sidebar-container {
-  margin-top: 10px;
-  margin-left: 50px;
+  margin-top: 10%;
   margin-right: 70px;
+  border-radius: 5px;
   width: 200px;
   border-color: #999;
+}
+
+.router-container {
+
 }
 </style>

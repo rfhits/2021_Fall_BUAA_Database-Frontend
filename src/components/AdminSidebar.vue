@@ -1,10 +1,10 @@
 <template>
-  <div class="sidebar-container">
+
     <el-menu
         router
         :default-active=this.$route.path
         class="el-menu-vertical-demo"
-        style="width: 180px"
+        style="width: 180px; position: fixed"
     >
 
       <el-menu-item :index=usersUrl>
@@ -41,7 +41,7 @@
       </el-menu-item>
 
     </el-menu>
-  </div>
+
 </template>
 
 <script>
@@ -82,12 +82,12 @@ export default {
     }
   }
 }
-
-
 </script>
 
 <style scoped>
 .sidebar-container {
+  border-radius: 5px;
+  background-color: red;
 }
 
 .menu-item-content {

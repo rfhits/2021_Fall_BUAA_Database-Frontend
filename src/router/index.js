@@ -206,24 +206,30 @@ const routes = [
                     {
                         path: '/admin/manage/articles',
                         name: 'ManageArticles',
-                        component: () => import('@/views/admin/manage/Articles')
+                        component: () => import('@/views/admin/manage/Articles'),
+                        meta: {
+                            requiresLoggedIn: true,
+                            userType: 1,
+                        }
                     },
                     {
                         path: '/admin/manage/users',
                         name: 'ManageUsers',
-                        component: () => import('@/views/admin/manage/Users')
+                        component: () => import('@/views/admin/manage/Users'),
+                        meta: {
+                            requiresLoggedIn: true,
+                            userType: 1,
+                        }
                     },
                     {
                         path: '/admin/manage/goods',
                         name: 'ManageGoods',
-                        component: () => import('@/views/admin/manage/Goods')
+                        component: () => import('@/views/admin/manage/Goods'),
+                        meta: {
+                            requiresLoggedIn: true,
+                            userType: 1,
+                        }
                     },
-                    {
-                        path: '/admin/manage/comments',
-                        name: 'ManageComments',
-                        component: () => import('@/views/admin/manage/Comments')
-                    }
-
                 ]
             }
         ]
@@ -257,19 +263,24 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-
     if (to.meta.noScroll) {
         // pass
     } else {
         window.scrollTo(0,0)
     }
     if (to.meta.requiresLoggedIn && !store.state.loggedIn) {
-        next({
-            path: '/login',
-            query: {
-                redirect: to.path
-            }
-        })
+        if (to.meta.userType === 1) {
+            next({
+                path: '/admin/login',
+            })
+        } else {
+            next({
+                path: '/login',
+                query: {
+                    redirect: to.path
+                }
+            })
+        }
     } else {
         next()
     }

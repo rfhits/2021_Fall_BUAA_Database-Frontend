@@ -33,9 +33,9 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[10, 20, 30]"
+          :page-sizes="[7, 10, 20, 30]"
           :page-size="this.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="sizes, prev, pager, next, jumper"
           :total="this.total"
           style="margin: 10px"
       >
@@ -134,7 +134,7 @@ export default {
         content: "",
       },
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 7,
       total: 10,
       tableData: [
         {
@@ -161,7 +161,7 @@ export default {
         console.log(res);
         if (res.status === 0) {
           this.tableData = res.data.goodList
-          this.total = res.data.goodList.length
+          this.total = res.data.total
         } else {
           this.$message.error(res.statusInfo.message)
         }
@@ -329,7 +329,7 @@ export default {
 }
 
 .table-container {
-  width: 800px;
+
 }
 
 .new-good-form {

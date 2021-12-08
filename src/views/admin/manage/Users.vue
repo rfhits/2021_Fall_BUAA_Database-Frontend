@@ -18,11 +18,15 @@
         <el-table-column prop="nickname" label="昵称"></el-table-column>
         <el-table-column prop="genderStr" label="性别"></el-table-column>
         <el-table-column prop="age" label="年龄"></el-table-column>
-
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
-            <el-button @click="handleDrop(scope.row)" type="text" size="small">删除</el-button>
+
+            <el-button @click="handleEdit(scope.row)" type="primary" size="mini">编辑</el-button>
+            <el-popconfirm title="确认删除吗？" @confirm="handleDrop(scope.row)">
+              <template #reference>
+                <el-button type="danger" size="mini">删除</el-button>
+              </template>
+            </el-popconfirm>
           </template>
         </el-table-column>
       </el-table>
@@ -33,9 +37,9 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[10, 20, 30]"
+          :page-sizes="[7, 10, 20, 30]"
           :page-size="this.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="sizes, prev, pager, next, jumper"
           :total="this.total"
           style="margin: 10px"
       >
@@ -98,7 +102,7 @@ export default {
       form: {},
       searchText: "",
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 7,
       total: 10,
       tableData: [{
         username: 'username',
@@ -144,7 +148,7 @@ export default {
         console.log(res);
         if (res.status === 0) {
           this.tableData = res.data.userList
-          this.total = res.data.userList.length
+          this.total = res.data.total
           let i = 0, length = this.tableData.length
           for (; i < length; i++) {
             this.tableData[i].genderStr = this.genderInt2Str(this.tableData[i].gender)

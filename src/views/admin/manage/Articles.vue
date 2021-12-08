@@ -26,7 +26,11 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template #default="scope">
-            <el-button @click="handleDrop(scope.row)" type="text" size="small">删除</el-button>
+            <el-popconfirm title="确认删除吗？此操作将不可撤回" @confirm="handleDrop(scope.row)">
+              <template #reference>
+                <el-button type="danger" size="mini">删除</el-button>
+              </template>
+            </el-popconfirm>
           </template>
         </el-table-column>
       </el-table>
@@ -37,9 +41,9 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[10, 20, 30]"
+          :page-sizes="[7, 10, 20, 30]"
           :page-size="this.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="sizes, prev, pager, next, jumper"
           :total="this.total"
           style="margin: 10px"
       >
@@ -60,8 +64,8 @@ export default {
     return {
       form: {},
       currentPage: 1,
-      pageSize: 10,
-      total: 10,
+      pageSize: 7,
+      total: 0,
       keyword: "",
       articleList: [
         {
@@ -71,6 +75,8 @@ export default {
           postDate: "2021-00-00",
         }
       ],
+      deleteAlert: "line1 \ " +
+          "line2"
     }
   },
   computed: {
@@ -93,7 +99,7 @@ export default {
         console.log(res);
         if (res.status === 0) {
           this.articleList = res.data.articleList
-          this.total = this.articleList.length
+          this.total = res.data.total
           let i = 0
           let length = this.articleList.length
           for (; i < length; i++) {
