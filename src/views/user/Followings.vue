@@ -15,6 +15,9 @@ export default {
   data() {
     return {
       followings: [
+
+      ],
+      fakeData: [
         {
           username: "233",
           nickname: "nickname007",

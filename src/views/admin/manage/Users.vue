@@ -226,6 +226,6 @@ export default {
 }
 
 .table-container {
-  width: 800px;
+  /*width: 800px;*/
 }
 </style>
