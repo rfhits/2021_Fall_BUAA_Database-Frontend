@@ -34,6 +34,7 @@ export default {
 }
 
 .router-container {
+  width: 70%;
 
 }
 </style>

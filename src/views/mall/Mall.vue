@@ -52,6 +52,7 @@ export default {
 .root {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin: 5px;
   padding: 40px;
   border: 1px solid #999;

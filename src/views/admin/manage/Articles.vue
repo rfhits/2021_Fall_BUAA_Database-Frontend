@@ -124,7 +124,7 @@ export default {
     },
     handleDrop(row) {
       let dropForm = {
-        "articleId": row.id
+        "articleId": row.articleId
       }
       request.post("/admin/manage/delete-article/", dropForm).then(res => {
         if (res.status === 0) {
@@ -156,6 +156,6 @@ export default {
 }
 
 .table-container {
-  width: 800px;
+  /*width: 800px;*/
 }
 </style>
