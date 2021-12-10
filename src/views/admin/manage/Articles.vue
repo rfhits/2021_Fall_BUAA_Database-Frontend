@@ -41,7 +41,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[7, 10, 20, 30]"
+          :page-sizes="[10, 20, 30]"
           :page-size="this.pageSize"
           layout="sizes, prev, pager, next, jumper"
           :total="this.total"
@@ -64,19 +64,20 @@ export default {
     return {
       form: {},
       currentPage: 1,
-      pageSize: 7,
+      pageSize: 10,
       total: 0,
       keyword: "",
       articleList: [
+
+      ],
+      fakeData: [
         {
           id: '233',
           title: 'title',
           username: 'username',
           postDate: "2021-00-00",
         }
-      ],
-      deleteAlert: "line1 \ " +
-          "line2"
+      ]
     }
   },
   computed: {

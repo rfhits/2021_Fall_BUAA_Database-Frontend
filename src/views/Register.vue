@@ -22,7 +22,7 @@
           <el-input v-model="registerForm.checkPass" type="password" autocomplete="off" placeholder="确认密码"/>
 
           <div style="display: flex; justify-content: space-between">
-            <el-button @click="resetForm('registerForm')">
+            <el-button @click="resetRegisterForm">
               重置
             </el-button>
             <el-button type="primary" @click="nextStep()">
@@ -208,6 +208,11 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    resetRegisterForm() {
+      this.registerForm.username = ""
+      this.registerForm.pass=""
+      this.registerForm.checkPass=""
     },
 
     beforeUpload(file, fileList) {

@@ -20,7 +20,7 @@ export default {
 <style scoped>
 .page-container {
   background-color: white;
-  width: 770px;
+  /*width: 770px;*/
   height: 508px;
   display: flex;
   flex-direction: column;

@@ -16,6 +16,9 @@ export default {
     return {
       keyword: "",
       userList: [
+
+      ],
+      fakeData:[
         {
           username: "233",
           nickname: "nickname007",

@@ -19,7 +19,7 @@
               id="gtcbml"
               theme="light"
               mode="horizontal"
-              :default-selected-keys="[head_index]"
+              :selectedKeys="[head_index]"
               :style="{ lineHeight: '50px', borderBottom: 'none' }"
           >
             <a-menu-item
@@ -63,6 +63,7 @@
         <div v-if=this.$store.state.loggedIn>
           <a-popover
               trigger="click"
+              placement="bottom"
           >
             <template #content>
               <el-link icon="el-icon-s-home" @click="goToPage('/home')">首页</el-link>
@@ -166,19 +167,37 @@ export default {
   computed: {
     username() {
       return this.$store.state.user.username
+    },
+    atMall() {
+      if (this.$route.name === "SearchGood") return true
+
+      if (this.$route.path.indexOf("/mall") !== -1) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   methods: {
     onSearch(value) {
-      if (value == null || value == "") {
+      if (value == null || value === "") {
         value = "Fate";
       }
-      this.$router.push({
-        path: '/search/article/',
-        query: {
-          keyword: value
-        }
-      });
+      if (this.atMall) {
+        this.$router.push({
+          path: '/search/good/',
+          query: {
+            keyword: value
+          }
+        })
+      } else {
+        this.$router.push({
+          path: '/search/article/',
+          query: {
+            keyword: value
+          }
+        });
+      }
     },
     hide() {
       this.$router.push('/home');
@@ -211,7 +230,6 @@ export default {
   },
 }
 </script>
-
 
 <style scoped>
 @font-face {

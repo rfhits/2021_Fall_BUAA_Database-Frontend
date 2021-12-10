@@ -84,7 +84,7 @@ export default {
       infoForm: {
         nickname: "",
         genderIndex: '',
-        gender: this.$store.state.user.gender
+        gender: ""
       },
     }
   },
@@ -111,6 +111,7 @@ export default {
         _this.uploadB64 = imageUrl;
       });
     },
+
     saveNewAvatar() {
       request.post("/user/change-avatar/", {
         "user": {
@@ -157,7 +158,8 @@ export default {
   },
   created() {
     this.infoForm.nickname = this.$store.state.user.nickname;
-    this.genderIndex = this.$store.state.user.gender;
+    this.infoForm.gender = '' + this.$store.state.user.gender;
+
   }
 }
 </script>

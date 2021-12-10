@@ -26,12 +26,15 @@ export default {
 <style scoped>
 .root {
   background-color: rgb(240, 241, 245);
+  height: 100%;
 }
 
 .router-view-container {
-  width: 800px;
-  margin: 0px auto;
-  padding: 20px auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   background-color: rgb(240, 241, 245);
 }
 </style>

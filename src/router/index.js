@@ -86,6 +86,11 @@ const routes = [
                 path: '/search/topic/',
                 name: 'SearchTopic',
                 component: () => import('@/views/search/Topic')
+            },
+            {
+                path: '/search/good/',
+                name: 'SearchGood',
+                component: () => import('@/views/search/Good')
             }
         ]
     },

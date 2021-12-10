@@ -1,5 +1,8 @@
 <template>
-  <div class="root">
+  <div v-if="this.goodList.length === 0" class="good_no-data">
+    <NoData :message="'很抱歉，没有找到符合条件的商品'"></NoData>
+  </div>
+  <div v-else class="root">
     <GoodCard v-for="good in this.goodList" :card-data="good" :width="'22.3%'"></GoodCard>
   </div>
 </template>
@@ -7,10 +10,11 @@
 <script>
 import request from "@/api/request";
 import GoodCard from "@/components/GoodCard";
+import NoData from "@/components/UserNoData";
 
 export default {
-  name: "Mall",
-  components: {GoodCard},
+  name: "Good",
+  components: {NoData, GoodCard},
   data() {
     return {
       goodList: [
@@ -25,11 +29,16 @@ export default {
       ],
     }
   },
+  computed: {
+    routeKeyword() {
+      return this.$route.query.keyword
+    }
+  },
   methods: {
     load() {
-      request.get('good/search/', {
+      request.get('/good/search/', {
         params: {
-          keyword: ""
+          keyword: this.routeKeyword
         }
       }).then(res => {
         if (res.status === 0) {
@@ -61,5 +70,10 @@ export default {
 
 .root * {
   margin: 15px;
+}
+
+.good_no-data {
+  width: 90%;
+  height: 100%;
 }
 </style>

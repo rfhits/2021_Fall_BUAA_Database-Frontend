@@ -1,5 +1,5 @@
 <template>
-  <div class="root" style="background-color: #f0f1f5; display: block">
+  <div class="root">
     <div class="user-card-container">
       <el-card :body-style="{display: 'flex', alignItems: 'center'}">
         <div class="avatar_container">
@@ -182,6 +182,13 @@ export default {
 </script>
 
 <style scoped>
+.root {
+  background-color: #f0f1f5;
+  display: flex;
+  flex-direction: column;
+  /*height: 100%;*/
+}
+
 .user-card-container {
   width: 1000px;
   margin: 0 auto;
@@ -202,8 +209,11 @@ export default {
 }
 
 .action-container {
-  width: 1000px;
-  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f1f5;
 }
 
 .sidebar-container {

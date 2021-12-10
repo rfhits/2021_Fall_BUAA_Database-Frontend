@@ -1,46 +1,45 @@
 <template>
 
-    <el-menu
-        router
-        :default-active=this.$route.path
-        class="el-menu-vertical-demo"
-        style="width: 180px; position: fixed"
-    >
+  <el-menu
+      router
+      :default-active=this.$route.path
+      class="el-menu-vertical-demo"
+  >
 
-      <el-menu-item :index=usersUrl>
-        <div class="menu-item-content">
-          <UserOutlined/>
-          <span>用户</span>
-        </div>
+    <el-menu-item :index=usersUrl>
+      <div class="menu-item-content">
+        <UserOutlined/>
+        <span>用户</span>
+      </div>
 
-      </el-menu-item>
+    </el-menu-item>
 
-      <el-menu-item index="/admin/manage/articles">
-        <div class="menu-item-content">
-          <ProfileOutlined/>
-          <span>文章</span>
-        </div>
+    <el-menu-item index="/admin/manage/articles">
+      <div class="menu-item-content">
+        <ProfileOutlined/>
+        <span>文章</span>
+      </div>
 
-      </el-menu-item>
+    </el-menu-item>
 
-      <el-menu-item index="/admin/manage/goods">
-        <div class="menu-item-content">
-          <ShoppingCartOutlined/>
-          <span>商品</span>
-        </div>
+    <el-menu-item index="/admin/manage/goods">
+      <div class="menu-item-content">
+        <ShoppingCartOutlined/>
+        <span>商品</span>
+      </div>
 
-      </el-menu-item>
+    </el-menu-item>
 
-      <el-menu-item @click="logout()" index="">
-        <div class="menu-item-content">
-          <LogoutOutlined/>
-          <span>退出登录</span>
+    <el-menu-item @click="logout()" index="">
+      <div class="menu-item-content">
+        <LogoutOutlined/>
+        <span>退出登录</span>
 
-        </div>
+      </div>
 
-      </el-menu-item>
+    </el-menu-item>
 
-    </el-menu>
+  </el-menu>
 
 </template>
 
@@ -85,9 +84,12 @@ export default {
 </script>
 
 <style scoped>
-.sidebar-container {
-  border-radius: 5px;
-  background-color: red;
+.el-menu-vertical-demo {
+  width: 180px;
+  position: fixed;
+  border-color: white;
+  background-color: rgb(250, 250, 250);
+  border-radius: 5px
 }
 
 .menu-item-content {

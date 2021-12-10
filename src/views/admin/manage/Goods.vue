@@ -2,7 +2,7 @@
   <div class="root">
     <div class="op_on_table">
       <div class="search-op">
-        <el-input v-model="keyword" placeholder="搜索商品"  @keyup.enter.native="load()"></el-input>
+        <el-input v-model="keyword" placeholder="搜索商品" @keyup.enter.native="load()"></el-input>
         <el-button type="primary" style="margin-left: 20px" @click="load()">搜索</el-button>
       </div>
       <el-button type="primary" style="margin-right: 20px" @click="showAddForm">新增商品</el-button>
@@ -33,7 +33,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[7, 10, 20, 30]"
+          :page-sizes="[10, 20, 30]"
           :page-size="this.pageSize"
           layout="sizes, prev, pager, next, jumper"
           :total="this.total"
@@ -134,7 +134,7 @@ export default {
         content: "",
       },
       currentPage: 1,
-      pageSize: 7,
+      pageSize: 10,
       total: 10,
       tableData: [
         {

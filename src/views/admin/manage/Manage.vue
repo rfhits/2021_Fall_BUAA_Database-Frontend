@@ -22,15 +22,14 @@ export default {
 <style scoped>
 .root {
   display: flex;
-  background-color: #f0f1f5;
-
+  height: 100%;
 }
 .sidebar-container {
   margin-top: 10%;
   margin-right: 70px;
   border-radius: 5px;
   width: 200px;
-  border-color: #999;
+
 }
 
 .router-container {

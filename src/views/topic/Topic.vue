@@ -3,11 +3,11 @@
     <div v-if=this.loading>
       <Loading></Loading>
     </div>
-    <div v-else style="display: flex; flex-direction: column; align-items: center">
+    <div v-else class="articles">
       <ArticleCard v-for="article in articleList" :card-data="article" :width="'800px'"></ArticleCard>
       <ArticleNoData :width="'800px'"></ArticleNoData>
     </div>
-    <Footer></Footer>
+
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
       }).then(res => {
         if (res.status === 0) {
           this.articleList = res.data.articleList
-          this.loading=false
+          this.loading = false
         } else {
           alert('get articles failed')
         }
@@ -56,13 +56,14 @@ export default {
 .root {
   background-color: rgb(240, 241, 245);
   padding-top: 40px;
+  height: 100%;
 }
 
 .articles {
-  width: 900px;
-  margin: 0px auto;
-  padding: 20px 0;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(240, 241, 245);
 }
 
 </style>

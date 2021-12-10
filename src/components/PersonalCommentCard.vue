@@ -11,7 +11,7 @@ data: {
   <el-card :style="{width: 'this.cardWidth'}">
     <div class="comment-time" style="color: #999">
       <ClockCircleOutlined />
-      {{ cardData.date }}
+      {{ this.formattedData }}
     </div>
 
     <div class="content">
@@ -35,6 +35,7 @@ data: {
 <script>
 import {LikeOutlined, ClockCircleOutlined} from '@ant-design/icons-vue'
 import request from "../api/request";
+import {formatDate} from "@/api/utils";
 
 export default {
   name: "PersonalCommentCard",
@@ -46,6 +47,20 @@ export default {
     cardData: {type: Object, required: true},
     cardWidth: {type: String, required: true}
   },
+
+  computed: {
+    likeColor() {
+      if (this.cardData.liked) {
+        return "#05c4ff"
+      } else {
+        return "#999"
+      }
+    },
+    formattedData() {
+      return formatDate(this.cardData.date)
+    }
+  },
+
   methods: {
     goToPage() {
       this.$router.push("/user/" + this.cardData.username)
@@ -75,15 +90,6 @@ export default {
         this.cardData.likes += 1;
       }
     }
-  },
-  computed: {
-    likeColor() {
-      if (this.cardData.liked) {
-        return "#05c4ff"
-      } else {
-        return "#999"
-      }
-    },
   }
 }
 </script>

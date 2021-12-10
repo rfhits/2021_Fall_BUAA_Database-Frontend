@@ -1,12 +1,13 @@
 <template>
-  <div style="display: block">
+  <div style="display: block; height: 100%">
     <div v-if="headerVisiable" class="header-container">
-      <Header></Header>
+      <Header
+        :head_index="this.headerIndex"
+      ></Header>
     </div>
-    <div v-if="headerVisiable" style="height: 70px; background-color: rgb(243, 243, 244)" ></div>
+    <div v-if="headerVisiable" style="height: 70px; background-color: rgb(243, 243, 244)"></div>
     <router-view :key="$route.fullPath"/>
   </div>
-
 </template>
 
 <script>
@@ -29,9 +30,14 @@ export default {
   computed: {
     headerVisiable() {
       let visiable = true
-      if (this.$route.path.indexOf("/admin/") !== -1) return false
+      if (this.$route.path.indexOf("/admin") !== -1) return false
       if (this.$route.path.indexOf("login") !== -1) return false
       return visiable
+    },
+    headerIndex() {
+      if (this.$route.path.indexOf("/home") !== -1) return "1"
+      if (this.$route.path.indexOf("/topic") !== -1) return "2"
+      if (this.$route.path.indexOf("/mall") !== -1) return "3"
     }
   }
 }
@@ -44,5 +50,11 @@ export default {
   position: fixed;
   z-index: 3;
   top: 0;
+}
+
+html,body,#app{
+
+  height: 100%;
+
 }
 </style>

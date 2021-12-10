@@ -11,9 +11,9 @@
     <NoData v-if="this.articleList.length === 0"
             :message="'换个关键词试试吧'"
     >
-
     </NoData>
   </div>
+
 </template>
 
 <script>
@@ -21,10 +21,12 @@ import request from "@/api/request";
 import ArticleCard from '@/components/ArticleCard'
 import NoData from "@/components/UserNoData";
 import ArticleNoData from "@/components/ArticleNoData";
+import Footer from "@/components/Footer";
 
 export default {
   name: "Article",
   components: {
+    Footer,
     ArticleNoData,
     NoData,
     ArticleCard
@@ -69,7 +71,7 @@ export default {
 <style scoped>
 
 .article-cards {
-
+  width: 800px;
 }
 
 </style>

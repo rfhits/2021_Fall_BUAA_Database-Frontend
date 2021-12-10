@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div class="footer_root">
     <h4 style="text-align: center; color: #999">我可是有底线的</h4>
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-.root {
-  background-color: black;
+.footer_root {
+
 }
 </style>

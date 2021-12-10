@@ -5,6 +5,7 @@ export default createStore({
   state: {
     loggedIn: false,
     searchItem: "",
+    csrftoken: "",
     user: {
       nickname: "DefaultNickname",
       username: 'DefaultUsername',
@@ -17,6 +18,7 @@ export default createStore({
       state.loggedIn = true;
       state.user.username = data.username;
       state.user.nickname = data.nickname;
+      state.user.gender = data.gender
       state.user.avatarUrl = data.avatarUrl;
     },
     logout(state) {
