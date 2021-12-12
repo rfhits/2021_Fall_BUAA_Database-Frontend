@@ -70,7 +70,6 @@
                style="font-size: 13px; margin-left: 60px; margin-bottom: 5px"
           >
             <el-link :href="articleIdToLink(article.articleId)"
-                     target="_blank"
             >
               {{ shortenArticleTitle(article.title) }}
             </el-link>
