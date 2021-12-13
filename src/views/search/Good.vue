@@ -18,6 +18,9 @@ export default {
   data() {
     return {
       goodList: [
+
+      ],
+      fakeData: [
         {
           id: 233,
           name: '233',
@@ -26,7 +29,7 @@ export default {
           content: "加载中",
           imgUrl: 'https://webstatic.mihoyo.com/upload/op-public/2021/08/02/11393d35f0be591824df8312276f08c5_570823078454353351.jpeg'
         }
-      ],
+      ]
     }
   },
   computed: {
