@@ -1,34 +1,29 @@
-# 社区前端
+# 原神社区前端
 
-## 实现富文本编辑
+2021秋北京航空航天大学郎波老师班级数据库大作业的前端部分。
 
-有如下难点：
+基于vue开发的社区前端
 
-1. 图片上传
-2. 自定义工具栏
-3. 展示文章
+## 依赖
 
-### 参考资料
+npm 7.24
 
-决定使用 tinymce，教程：
+vue 3.0
 
-[Golang全栈项目 （第二部）前端部分-2.11 自定义封装tinymce富文本编](https://www.bilibili.com/video/BV1Uz4y1f76J)
+## 使用
 
-[前端展示部分 3.5—完成文章详情页面](https://www.bilibili.com/video/BV1Eo4y1Z7c9)
+安装依赖
 
-图片上传：
+```bash
+npm ci
+```
 
-[以base64上传图片](https://www.cnblogs.com/grow-up-up/p/13390145.html)
+运行
 
-[blob中的参数](https://www.freesion.com/article/5025714415/)
+```bash
+npm run serve
+```
 
-### 样例
+## 参考
 
-1. [米游社的展示](https://bbs.mihoyo.com/ys/article/11509350?create=1)
-2. [米游社的编辑](https://bbs.mihoyo.com/ys/newArticle/0/1)
-
-## 路由传参
-
-https://blog.csdn.net/mf_717714/article/details/81945218
-
-https://blog.csdn.net/m0_46217225/article/details/119808510?spm=1001.2014.3001.5501
+关于这门课，我的看法都在这里了：[]()

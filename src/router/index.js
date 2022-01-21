@@ -17,17 +17,11 @@ import Followers from "@/views/user/Followers"
 import Followings from "@/views/user/Followings"
 import ChangePassword from "@/views/user/ChangePassword"
 import EditInfo from "@/views/user/EditInfo"
-import DevLjj from "@/DevLjj"
 import Topic from '@/views/topic/Topic'
 import Mall from '@/views/mall/Mall'
 
 
 const routes = [
-    {
-        path: '/dev-ljj',
-        name: "DevLjj",
-        component: DevLjj
-    },
     {
         path: '/comment-card',
         name: "cc",
