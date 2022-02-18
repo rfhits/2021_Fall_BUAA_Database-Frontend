@@ -26,4 +26,4 @@ npm run serve
 
 ## 参考
 
-关于这门课，我的看法都在这里了：[]()
+关于这门课，我的看法在[这里](https://www.cnblogs.com/ticlab/p/15831969.html)。
